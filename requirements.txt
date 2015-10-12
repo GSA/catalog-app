@@ -1,0 +1,4 @@
+-r ckan-requirements.txt
+-r ckanext-harvester-requirements.txt
+-r ckanext-saml2-requirements.txt
+-r ckanext-spatial-requirements.txt
