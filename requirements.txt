@@ -5,7 +5,7 @@
 -e git+https://github.com/ckan/ckanext-harvest@stable#egg=ckanext-harvest
 
 # ckanext-spatial extension
--e git+https://github.com/ckan/ckanext-spatial@stable#egg=ckan-spatial
+-e git+https://github.com/ckan/ckanext-spatial@stable#egg=ckanext-spatial
 
 # ckanext-saml2 extension
 -e git+https://github.com/GSA/ckanext-saml2@master#egg=ckanext-saml2
