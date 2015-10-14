@@ -1,5 +1,0 @@
-# ckanext-saml2 extension
--e git+https://github.com/GSA/ckanext-saml2@master#egg=ckanext-saml2
-
-# ckanext-saml2 extension requirements
--e git+https://github.com/tobes/pysaml2.git@fixes#egg=pysaml2
