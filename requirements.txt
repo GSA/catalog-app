@@ -1,4 +1,11 @@
--r ckan-requirements.txt
--r ckanext-harvester-requirements.txt
--r ckanext-saml2-requirements.txt
--r ckanext-spatial-requirements.txt
+#ckan core 
+-e git+https://github.com/GSA/ckan.git@ckan-2.3#egg=ckan
+
+# ckanext-harvester extension
+-e git+https://github.com/ckan/ckanext-harvest@stable#egg=ckanext-harvest
+
+# ckanext-spatial extension
+-e git+https://github.com/ckan/ckanext-spatial@stable#egg=ckan-spatial
+
+# ckanext-saml2 extension
+-e git+https://github.com/GSA/ckanext-saml2@master#egg=ckanext-saml2
