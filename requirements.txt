@@ -11,4 +11,4 @@
 -e git+https://github.com/GSA/ckanext-saml2@master#egg=ckanext-saml2
 
 # ckanext-datajson extension
---build /usr/lib/ckan git+https://github.com/GSA/ckanext-datajson@2.3-upgrade#egg=ckanext-datajson
+--build /usr/lib/ckan/src git+https://github.com/GSA/ckanext-datajson@2.3-upgrade#egg=ckanext-datajson
