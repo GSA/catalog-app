@@ -9,6 +9,3 @@ git+https://github.com/GSA/ckanext-spatial@2.3-upgrade#egg=ckanext-spatial
 
 # ckanext-saml2 extension
 git+https://github.com/GSA/ckanext-saml2@master#egg=ckanext-saml2
-
-# ckanext-datajson extension
-git+https://github.com/GSA/ckanext-datajson@2.3-upgrade#egg=ckanext-datajson
