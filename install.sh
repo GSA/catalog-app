@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 VIRTUAL_ENV=/usr/lib/ckan
 
