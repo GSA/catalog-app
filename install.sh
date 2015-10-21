@@ -14,4 +14,5 @@ pip install -r requirements.txt --build=$VIRTUAL_ENV/src/
 
 cat requirements.txt | grep -o "egg=.*" | cut -f2- -d'=' | xargs -I % \
     sh -c 'pip install -r $VIRTUAL_ENV/src/%/requirements.txt ; \
-    python $VIRTUAL_ENV/src/%/setup.py develop;' 
+    cd $VIRTUAL_ENV/src/%/;
+    $VIRTUAL_ENV/bin/python setup.py develop;'
