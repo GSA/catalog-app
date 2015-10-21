@@ -11,6 +11,6 @@ virtualenv $VIRTUAL_ENV --no-site-packages
 # install ckan core + ckan extensions
 pip install -r requirements.txt --build=$VIRTUAL_ENV/src/
 
-# `pip install -r requirements.txt` + run `python setup.py` on each extension
-cat requirements.txt | grep -o "egg=.*" | cut -f2- -d'=' | xargs -I {} pip install -r $VIRTUAL_ENV/src/{}/requirements.txt
-cat requirements.txt | grep -o "egg=.*" | cut -f2- -d'=' | xargs -I {} python $VIRTUAL_ENV/src/{}/setup.py develop
+< requirements.txt | grep -o "egg=.*" | cut -f2- -d'=' | xargs -I % \
+    sh -c 'pip install -r $VIRTUAL_ENV/src/%/requirements.txt ; \
+    python $VIRTUAL_ENV/src/%/setup.py develop;' 
