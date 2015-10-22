@@ -9,3 +9,9 @@ git+https://github.com/GSA/ckanext-spatial@2.3-upgrade#egg=ckanext-spatial
 
 # ckanext-saml2 extension
 git+https://github.com/GSA/ckanext-saml2@master#egg=ckanext-saml2
+
+# ckanext-qa extension
+git+https://github.com/GSA/ckanext-qa@2.3-upgrade#egg=ckanext-qa
+
+# ckanext-archiver extension
+-e git+https://github.com/GSA/ckanext-archiver@2.3-upgrade#egg=ckanext-archiver
