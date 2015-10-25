@@ -42,27 +42,15 @@ RUN apt-get -q -y update && apt-get -q -y install \
 COPY docker/common/usr/bin/ckan /usr/bin/ckan
 
 # Install pip
-RUN easy_install $PIP_URL
+RUN easy_install $PIP_URL && \
+	virtualenv $CKAN_HOME --no-site-packages
 
-
-# Install CKAN app
-COPY install.sh /tmp/
-COPY requirements.txt /tmp/
-RUN cd /tmp && \
-	sh install.sh && \
-        mkdir -p $CKAN_CONFIG
-COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG 
-COPY config/environments/$CKAN_ENV/saml2/who.ini $CKAN_CONFIG
-
-# fix saml2
-RUN $CKAN_HOME/bin/pip install repoze.who==2.0
 
 # Configure apache
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
 COPY docker/apache/apache.wsgi $CKAN_CONFIG
 COPY docker/apache/ckan.conf /etc/apache2/sites-enabled/
 RUN a2enmod rewrite headers 
-#&& service apache2 restart
 
 # Install SOLR
 RUN cd /tmp && \
@@ -72,7 +60,8 @@ RUN cd /tmp && \
 	cp solr-4.2.1.war /var/lib/tomcat6/webapps/solr.war && \
 	mkdir -p /home/solr && \
 	cp -R /tmp/solr-4.2.1/example/solr/* /home/solr && \
-	mv /home/solr/collection1 /home/solr/ckan
+	mv /home/solr/collection1 /home/solr/ckan && \
+	rm -rf /tmp/solr-4.2.1.tgz
 
 ENV CATALINA_BASE=/var/lib/tomcat6
 RUN /usr/share/tomcat6/bin/catalina.sh start && sleep 10
@@ -85,14 +74,41 @@ RUN chown -R tomcat6 /home/solr
 RUN  $CKAN_HOME/bin/pip install supervisor
 COPY docker/harvest/etc/cron.daily/remove_old_sessions /etc/cron.daily/remove_old_sessions
 COPY docker/harvest/etc/supervisord.conf /etc/supervisord.conf
-COPY docker/harvest/etc/cron.d/ckan-harvest /etc/cron.d/ckan-harvest
-COPY docker/harvest/etc/cron.d/supervisor /etc/cron.d/supervisor
+COPY docker/harvest/etc/cron.d/* /etc/cron.d/
 COPY docker/supervisor/supervisord.conf /etc/supervisord.conf
 COPY docker/harvest/etc/init/supervisor.conf /etc/init/supervisor.conf
 RUN ln -s $CKAN_HOME/bin/supervisorctl /usr/bin/supervisorctl
 
 # CKAN db script
-COPY docker/scripts/db.sh /tmp/
+USER postgres
+RUN /etc/init.d/postgresql start && \
+	psql -c "CREATE USER ckan WITH PASSWORD 'pass' SUPERUSER;" && \
+	psql -c "CREATE DATABASE ckan OWNER ckan;" && \
+	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/postgis.sql && \
+	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/spatial_ref_sys.sql && \
+	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/rtpostgis.sql && \
+	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/topology.sql && \
+	psql -d ckan -c "GRANT SELECT, UPDATE, INSERT, DELETE ON spatial_ref_sys TO ckan;"
+        
+USER root
+
+# Install CKAN app
+COPY install.sh /tmp/
+COPY requirements.txt /tmp/
+
+RUN cd /tmp && \
+	sh install.sh && \
+        mkdir -p $CKAN_CONFIG && \
+	$CKAN_HOME/bin/pip install repoze.who==2.0
+
+COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG 
+COPY config/environments/$CKAN_ENV/saml2/who.ini $CKAN_CONFIG
+
+# Initialize Database
+RUN service apache2 start && \
+    /usr/share/tomcat6/bin/catalina.sh start && \
+    /etc/init.d/postgresql start && \
+    ckan db init 
 
 EXPOSE 80
 
