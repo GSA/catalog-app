@@ -1,17 +1,17 @@
 #ckan core 
-git+https://github.com/GSA/ckan.git@2.3-upgrade#egg=ckan
+-e git+https://github.com/GSA/ckan.git@2.3-upgrade#egg=ckan
 
 # ckanext-harvester extension
-git+https://github.com/GSA/ckanext-harvest@2.3-upgrade#egg=ckanext-harvest
+-e git+https://github.com/GSA/ckanext-harvest@2.3-upgrade#egg=ckanext-harvest
 
 # ckanext-spatial extension
-git+https://github.com/GSA/ckanext-spatial@2.3-upgrade#egg=ckanext-spatial
+-e git+https://github.com/GSA/ckanext-spatial@2.3-upgrade#egg=ckanext-spatial
 
 # ckanext-saml2 extension
-git+https://github.com/GSA/ckanext-saml2@master#egg=ckanext-saml2
+-e git+https://github.com/GSA/ckanext-saml2@master#egg=ckanext-saml2
 
 # ckanext-qa extension
-git+https://github.com/GSA/ckanext-qa@2.3-upgrade#egg=ckanext-qa
+-e git+https://github.com/GSA/ckanext-qa@2.3-upgrade#egg=ckanext-qa
 
 # ckanext-archiver extension
 -e git+https://github.com/GSA/ckanext-archiver@2.3-upgrade#egg=ckanext-archiver

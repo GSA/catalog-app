@@ -10,7 +10,7 @@ virtualenv $VIRTUAL_ENV --no-site-packages
 . $VIRTUAL_ENV/bin/activate
 
 # install ckan core + ckan extensions
-pip install -r requirements.txt --build=$VIRTUAL_ENV/src/
+pip install -r requirements.txt
 
 cat requirements.txt | grep -o "egg=.*" | cut -f2- -d'=' | xargs -I % \
     sh -c 'pip install -r $VIRTUAL_ENV/src/%/requirements.txt ; \
