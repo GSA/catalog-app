@@ -15,3 +15,6 @@
 
 # ckanext-archiver extension
 -e git+https://github.com/GSA/ckanext-archiver@2.3-upgrade#egg=ckanext-archiver
+
+# ckanext-googleanalyticsbasic extension
+-e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
