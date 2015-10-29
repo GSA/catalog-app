@@ -9,7 +9,7 @@ BASE= 'http://qa-cd.reisys.io/'
 CONFIG_PATH = os.path.dirname(__file__)
 
 CONFIG = {
-    'entityid' : 'urn:mace:umu.se:samlcatalogdeploy:ckan:sp',
+    'entityid' : 'urn:mace:umu.se:samlcatalogdeployqa:ckan:sp',
     'description': 'CKAN saml2 authorizor',
     'service': {
         'sp': {
