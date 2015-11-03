@@ -24,3 +24,6 @@
 
 # ckanext-extlink extension
 -e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext-extlink
+
+# ckanext-report extension
+-e git+https://github.com/GSA/ckanext-report@2.3-upgrade#egg=ckanext-report
