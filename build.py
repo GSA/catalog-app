@@ -10,4 +10,4 @@ default_task = ["install_dependencies", "publish"]
 def initialize(project):
     project.set_property("dir_source_main_python", "ckan")
     project.depends_on_requirements("requirements.txt")
-    #project.set_property("publish_command", "sh install.sh")
+    project.set_property("publish_command", "sh install.sh")
