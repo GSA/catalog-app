@@ -7,6 +7,12 @@
 # ckanext-spatial extension
 -e git+https://github.com/GSA/ckanext-spatial@2.3-upgrade#egg=ckanext-spatial
 
+# ckanext-geodatagov extension
+-e git+https://github.com/GSA/ckanext-geodatagov@2.3-upgrade#egg=ckanext-geodatagov
+
+# ckanext-datagovtheme extension
+-e git+https://github.com/GSA/ckanext-datagovtheme@2.3-upgrade#egg=ckanext-datagovtheme
+
 # ckanext-datajson extension
 -e git+https://github.com/GSA/ckanext-datajson@2.3-upgrade#egg=ckanext-datajson
 
