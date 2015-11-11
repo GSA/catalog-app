@@ -1,0 +1,14 @@
+catalog-app:
+  build: .
+  ports:
+   - "80:80"
+  links:
+   - catalog-redis
+   - catalog-db
+   - catalog-solr
+catalog-redis:
+  image: redis
+catalog-db:
+  build: docker/db
+catalog-solr:
+  build: docker/solr
