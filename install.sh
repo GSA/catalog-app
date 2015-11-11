@@ -13,6 +13,11 @@ virtualenv $VIRTUAL_ENV --no-site-packages
 pip install -r requirements.txt
 
 cat requirements.txt | grep -o "egg=.*" | cut -f2- -d'=' | xargs -I % \
-    sh -c 'pip install -r $VIRTUAL_ENV/src/%/requirements.txt ; \
+    sh -c 'pip install -r $VIRTUAL_ENV/src/%/requirements.txt --exists-action i || \
+    pip install -r $VIRTUAL_ENV/src/%/pip-requirements.txt --exists-action i ; \
     cd $VIRTUAL_ENV/src/%/;
     $VIRTUAL_ENV/bin/python setup.py develop;'
+
+# set folder permission before we move the whole thing to right location
+mkdir -p /usr/lib/ckan/src/ckanext-datagovtheme/ckanext/datagovtheme/dynamic_menu
+chmod  -R a+rw /usr/lib/ckan/src/ckanext-datagovtheme/ckanext/datagovtheme/dynamic_menu
