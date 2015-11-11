@@ -25,36 +25,27 @@ RUN apt-get -q -y update && apt-get -q -y install \
 	libxml2-dev \
 	libxslt1-dev \
 	lib32z1-dev \
-	libpq-dev \
-        tomcat6 \
-	wget
+	libpq-dev
         #memcached \
         #m2crypto \
         #xmlsec1 \
         #swig
 
 # copy ckan script to /usr/bin/
-COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
+COPY docker/harvester/common/usr/bin/ckan /usr/bin/ckan
 
 # Install pip
 RUN easy_install $PIP_URL && \
 	virtualenv $CKAN_HOME --no-site-packages
 
+# Install supervisor
+RUN  $CKAN_HOME/bin/pip install supervisor
 
 # Configure apache
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
 COPY docker/webserver/apache/apache.wsgi $CKAN_CONFIG
 COPY docker/webserver/apache/ckan.conf /etc/apache2/sites-enabled/
 RUN a2enmod rewrite headers 
-
-# CKAN harvester
-RUN  $CKAN_HOME/bin/pip install supervisor
-COPY docker/webserver/harvest/etc/cron.daily/remove_old_sessions /etc/cron.daily/remove_old_sessions
-COPY docker/webserver/harvest/etc/supervisord.conf /etc/supervisord.conf
-COPY docker/webserver/harvest/etc/cron.d/* /etc/cron.d/
-COPY docker/webserver/supervisor/supervisord.conf /etc/supervisord.conf
-COPY docker/webserver/harvest/etc/init/supervisor.conf /etc/init/supervisor.conf
-RUN ln -s $CKAN_HOME/bin/supervisorctl /usr/bin/supervisorctl
 
 # Install CKAN app
 COPY install.sh /tmp/
@@ -67,9 +58,6 @@ RUN cd /tmp && \
 
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG 
 COPY config/environments/$CKAN_ENV/saml2/who.ini $CKAN_CONFIG
-
-# Initialize Database
-#RUN service apache2 start && ckan db init 
 
 EXPOSE 80
 

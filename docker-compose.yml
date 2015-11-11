@@ -1,4 +1,4 @@
-catalog-app:
+catalog-web:
   build: .
   ports:
    - "80:80"
@@ -12,3 +12,9 @@ catalog-db:
   build: docker/db
 catalog-solr:
   build: docker/solr
+catalog-harvester:
+  build: docker/harvester
+  links:
+   - catalog-redis
+   - catalog-db
+   - catalog-solr
