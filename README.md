@@ -1,8 +1,5 @@
 # catalog-app
 catalog.data.gov app
 
-
-###Instalation:
-- switch to your python environment
-- `pip install -r requirements.txt`
-- Install each extension from the previous step manually (`pip install [pip-]requiremets.txt`)
+###Installation:
+- run install.sh on a vm provisioned with catalog-deploy (this will install the latest version of the app)
