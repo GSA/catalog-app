@@ -16,7 +16,10 @@ RUN /etc/init.d/postgresql start && \
 	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/spatial_ref_sys.sql && \
 	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/rtpostgis.sql && \
 	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/topology.sql && \
-	psql -d ckan -c "GRANT SELECT, UPDATE, INSERT, DELETE ON spatial_ref_sys TO ckan;"
+	psql -d ckan -c "GRANT SELECT, UPDATE, INSERT, DELETE ON spatial_ref_sys TO ckan;" && \
+	psql -c "SELECT 1 FROM pg_database WHERE datname = 'pycsw';" && \
+	psql -c "CREATE DATABASE pycsw OWNER ckan;" && \
+	psql -d pycsw -c "CREATE EXTENSION postgis;"
 
 # Adjust PostgreSQL configuration so that remote connections to the
 # database are possible.
