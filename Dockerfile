@@ -66,7 +66,7 @@ RUN git clone https://github.com/geopython/pycsw.git /usr/lib/ckan/src/pycsw && 
 	../../bin/python setup.py install && \
 	$CKAN_HOME/bin/pip install pyproj==1.9.3 && \
 	$CKAN_HOME/bin/pip install geolinks==0.0.1
-COPY docker/pycsw/etc/ckan/pycsw-all.cfg /etc/ckan/pycsw-all.cfg
+COPY config/environments/$CKAN_ENV/pycsw-all.cfg /etc/ckan/pycsw-all.cfg
 COPY docker/pycsw/etc/ckan/pycsw-collection.cfg etc/ckan/pycsw-collection.cfg
 COPY docker/pycsw/etc/ckan/pycsw.wsgi /etc/ckan/pycsw.wsgi	
 COPY docker/pycsw/etc/cron.d/ckan-pycsw /etc/cron.d/ckan-pycsw
