@@ -1,0 +1,6 @@
+catalog-app:
+  image: reisys/catalog-app:latest
+catalog-db:
+  image: reisys/catalog-db:latest
+catalog-solr:
+  image: reisys/catalog-solr:latest
