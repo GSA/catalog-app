@@ -1,5 +1,7 @@
 catalog-app:
   image: reisys/catalog-app:latest
+  environment:
+    CKAN_SITE_URL: http://dev-cd.reisys.com
 catalog-db:
   image: reisys/catalog-db:latest
 catalog-solr:
