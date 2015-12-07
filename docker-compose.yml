@@ -1,14 +1,20 @@
-catalog-app:
+app:
   build: .
   ports:
    - "80:80"
+  environment:
+    CKAN_SITE_URL: catalog.dev
+    DB_ENV_POSTGRESQL_USER: ckan
+    DB_ENV_POSTGRESQL_PASS: pass
+    DB_ENV_POSTGRESQL_DB: ckan
+    DB_ENV_POSTGRESQL_PYCSW_DB: pycsw
   links:
-   - catalog-redis
-   - catalog-db
-   - catalog-solr
-catalog-redis:
+   - redis
+   - db
+   - solr
+redis:
   image: redis
-catalog-db:
+db:
   build: docker/db
-catalog-solr:
+solr:
   build: docker/solr

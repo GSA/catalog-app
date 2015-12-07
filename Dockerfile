@@ -73,22 +73,25 @@ COPY docker/pycsw/etc/cron.d/ckan-pycsw /etc/cron.d/ckan-pycsw
 COPY docker/pycsw/usr/lib/ckan/bin/pycsw-db-admin.py /usr/lib/ckan/bin/pycsw-db-admin.py
 	 
 
-# Install CKAN app
+# Install & Configure CKAN app
 COPY install.sh /tmp/
 COPY requirements.txt /tmp/
+COPY docker/webserver/config/ckan_config.sh $CKAN_HOME/bin/
+COPY docker/webserver/config/pycsw_config.sh $CKAN_HOME/bin/
 
 RUN cd /tmp && \
 	sh install.sh && \
         mkdir -p $CKAN_CONFIG && \
 	$CKAN_HOME/bin/pip install repoze.who==2.0
 
+# Config CKAN app
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG 
 COPY config/environments/$CKAN_ENV/saml2/who.ini $CKAN_CONFIG
+COPY docker/webserver/entrypoint.sh /entrypoint.sh
 
-# Initialize pycsw db
-# RUN cd /usr/lib/ckan/src/ckanext-spatial/ && \
-# 	 ../../bin/paster ckan-pycsw setup -p /etc/ckan/pycsw-all.cfg
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 80
 
-CMD ["/usr/lib/ckan/bin/supervisord"]
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
