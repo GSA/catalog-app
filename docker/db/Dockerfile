@@ -10,15 +10,15 @@ RUN apt-get -q -y update && apt-get -q -y install \
 USER postgres
 
 RUN /etc/init.d/postgresql start && \
-	psql -c "CREATE USER ckan WITH PASSWORD 'pass' SUPERUSER;" && \
-	psql -c "CREATE DATABASE ckan OWNER ckan;" && \
+	psql -c "CREATE USER $DB_ENV_POSTGRESQL_USER WITH PASSWORD '$DB_ENV_POSTGRESQL_PASS' SUPERUSER;" && \
+	psql -c "CREATE DATABASE $DB_ENV_POSTGRESQL_DB OWNER $DB_ENV_POSTGRESQL_USER;" && \
 	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/postgis.sql && \
 	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/spatial_ref_sys.sql && \
 	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/rtpostgis.sql && \
 	psql -d ckan -f /usr/share/postgresql/9.3/contrib/postgis-2.1/topology.sql && \
 	psql -d ckan -c "GRANT SELECT, UPDATE, INSERT, DELETE ON spatial_ref_sys TO ckan;" && \
-	psql -c "SELECT 1 FROM pg_database WHERE datname = 'pycsw';" && \
-	psql -c "CREATE DATABASE pycsw OWNER ckan;" && \
+	psql -c "SELECT 1 FROM pg_database WHERE datname = '$DB_ENV_POSTGRESQL_PYCSW_DB';" && \
+	psql -c "CREATE DATABASE $DB_ENV_POSTGRESQL_PYCSW_DB OWNER $DB_ENV_POSTGRESQL_USER;" && \
 	psql -d pycsw -c "CREATE EXTENSION postgis;"
 
 # Adjust PostgreSQL configuration so that remote connections to the
