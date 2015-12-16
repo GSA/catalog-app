@@ -1,5 +1,10 @@
 FROM ubuntu:14.04
 
+ENV DB_ENV_POSTGRESQL_USER: ckan
+ENV DB_ENV_POSTGRESQL_PASS: pass
+ENV DB_ENV_POSTGRESQL_DB: ckan
+ENV DB_ENV_POSTGRESQL_PYCSW_DB: pycsw
+
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \
 	postgresql-client \
