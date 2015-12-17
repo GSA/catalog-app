@@ -1,0 +1,30 @@
+---
+name: catalog-app
+full_name: catalog.data.gov
+type: app
+owner_type: project
+status: active
+stage: beta
+testable: true
+description: >
+  Docker Build for catalog.data.gov
+stack:
+- Docker
+- Python
+- Java
+licenses:
+  .about.yml:
+    name: CC0
+    url: https://github.com/GSA/catalog-app/blob/master/LICENSE.md
+tasks: https://github.com/GSA/catalog-app/issues
+contact:
+- url: mailto:john.jediny@gsa.gov
+  text: John Jediny
+- url: mailto:philip.ashlock@gsa.gov
+  text: Phil Ashlock
+team:
+- github: jjediny
+- github: philipashlock
+- github: dano-reisys
+- github: FuhuXia
+- github: alex-perfilov-reisys
