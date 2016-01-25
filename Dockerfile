@@ -51,7 +51,7 @@ RUN a2enmod rewrite headers
 # CKAN harvester
 RUN  $CKAN_HOME/bin/pip install supervisor
 COPY docker/webserver/harvest/etc/cron.daily/remove_old_sessions /etc/cron.daily/remove_old_sessions
-COPY docker/webserver/harvest/etc/supervisord.conf /etc/supervisord.conf
+COPY docker/webserver/supervisor/supervisord.conf /etc/supervisord.conf
 COPY docker/webserver/harvest/etc/cron.d/* /etc/cron.d/
 COPY docker/webserver/supervisor/supervisord.conf /etc/supervisord.conf
 COPY docker/webserver/harvest/etc/init/supervisor.conf /etc/init/supervisor.conf
@@ -66,6 +66,7 @@ RUN git clone https://github.com/geopython/pycsw.git /usr/lib/ckan/src/pycsw && 
 	../../bin/python setup.py install && \
 	$CKAN_HOME/bin/pip install pyproj==1.9.3 && \
 	$CKAN_HOME/bin/pip install geolinks==0.0.1
+
 COPY config/environments/$CKAN_ENV/pycsw-all.cfg /etc/ckan/pycsw-all.cfg
 COPY docker/pycsw/etc/ckan/pycsw-collection.cfg etc/ckan/pycsw-collection.cfg
 COPY docker/pycsw/etc/ckan/pycsw.wsgi /etc/ckan/pycsw.wsgi	

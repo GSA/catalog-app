@@ -7,6 +7,8 @@
 : ${SOLR_URL:=}
 # Email to which errors should be sent (optional, default: none)
 : ${ERROR_EMAIL:=}
+# SITE_URL default
+: ${CKAN_SITE_URL:=}
 
 set -eu
 
@@ -26,9 +28,9 @@ write_config () {
 }
 
 link_postgres_url () {
-  local user=$DB_ENV_POSTGRESQL_USER
-  local pass=$DB_ENV_POSTGRESQL_PASS
-  local db=$DB_ENV_POSTGRESQL_DB
+  local user=$POSTGRES_USER
+  local pass=$POSTGRES_PASSWORD
+  local db=$POSTGRES_DB
   local host=$DB_PORT_5432_TCP_ADDR
   local port=$DB_PORT_5432_TCP_PORT
   echo "postgresql://${user}:${pass}@${host}:${port}/${db}"
