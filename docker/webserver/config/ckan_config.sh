@@ -28,9 +28,9 @@ write_config () {
 }
 
 link_postgres_url () {
-  local user=$POSTGRES_USER
-  local pass=$POSTGRES_PASSWORD
-  local db=$POSTGRES_DB
+  local user=$DB_ENV_DB_CKAN_USER
+  local pass=$DB_ENV_DB_CKAN_PASSWORD
+  local db=$DB_ENV_DB_CKAN_DB
   local host=$DB_PORT_5432_TCP_ADDR
   local port=$DB_PORT_5432_TCP_PORT
   echo "postgresql://${user}:${pass}@${host}:${port}/${db}"

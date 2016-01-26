@@ -1,13 +1,9 @@
 app:
   build: .
-  #image: reisys/catalog-app:latest
   ports:
    - "80:80"
   environment:
     CKAN_SITE_URL: http://catalog.dev
-    POSTGRES_USER: ckan
-    POSTGRES_PASSWORD: pass
-    POSTGRES_DB: ckan
   volumes:
    - .src:/test
   links:
@@ -16,43 +12,29 @@ app:
    - solr
 harvester-fetch-consumer:
   build: .
-  #image: reisys/catalog-app:latest
-  environment:
-    POSTGRES_USER: ckan
-    POSTGRES_PASSWORD: pass
-    POSTGRES_DB: ckan
   links:
+   - app
    - redis
    - db
    - solr
   command: fetch-consumer
 harvester-gather-consumer:
   build: .
-  #image: reisys/catalog-app:latest
-  environment:
-    POSTGRES_USER: ckan
-    POSTGRES_PASSWORD: pass
-    POSTGRES_DB: ckan
   links:
+   - app
    - redis
    - db
    - solr
   command: gather-consumer
-ckan-db-init:
-  build: .
-  #image: reisys/catalog-app:latest
-  environment:
-    POSTGRES_USER: ckan
-    POSTGRES_PASSWORD: pass
-    POSTGRES_DB: ckan
-  links:
-   - redis
-   - db
-   - solr
-  command: ckan-db-init
 redis:
   image: redis
 db:
   build: docker/db
+  environment:
+    POSTGRES_USER: postgres
+    DB_CKAN_USER: ckan
+    DB_CKAN_PASSWORD: pass
+    DB_CKAN_DB: ckan
+    DB_PYCSW_DB: pycsw
 solr:
   build: docker/solr

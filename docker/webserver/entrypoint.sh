@@ -1,31 +1,35 @@
 #!/bin/bash
-#set -e
+
+# wait for all services to start-up
+sh -c "while ! nc -w 1 -z $DB_PORT_5432_TCP_ADDR $DB_PORT_5432_TCP_PORT; do sleep 1; done"
+sh -c "while ! nc -w 1 -z $SOLR_PORT_8080_TCP_ADDR $SOLR_PORT_8080_TCP_PORT; do sleep 1; done"
+sh -c "while ! nc -w 1 -z $REDIS_PORT_6379_TCP_ADDR $REDIS_PORT_6379_TCP_PORT; do sleep 1; done"
 
 # configure /etc/ckan/production.ini
 /bin/sh /usr/lib/ckan/bin/ckan_config.sh
 
 
 if [ -z "$1" ]; then
-    #sh -c "while nc -w 1 -z ckan-db-init 5555; do sleep 1; done"
-    exec /usr/lib/ckan/bin/supervisord 
-elif [ "$1" = 'fetch-consumer' ]; then
-    # workaround, this process needs an initialized db before it can be run
-    # it will fail at start up, but should be up and running after a 1 sec sleep
-    until ckan --plugin=ckanext-harvest harvester fetch_consumer #> /var/log/fetch-consumer.log
-    do
-        sleep 1
-    
-    done
-elif [ "$1" = 'gather-consumer' ]; then 
-    # workaround, this process needs an initialized db before it can be run
-    # it will fail at start up, but should be up and running after a 1 sec sleep
-    until ckan --plugin=ckanext-harvest harvester gather_consumer #> /var/log/gather-consumer.log
-    do
-        sleep 1
-    done
-    
-elif [ "$1" = 'ckan-db-init' ]; then 
+    # initialize DB
     ckan db init
+
+    # start supervisor deamon
+    exec /usr/lib/ckan/bin/supervisord 
+
+elif [ "$1" = 'fetch-consumer' ]; then
+    # wait for the app to start-up 
+    sh -c "while ! nc -w 1 -z app 80; do sleep 1; done"
+
+    #ckan harvester initdb
+    ckan --plugin=ckanext-harvest harvester fetch_consumer
+
+elif [ "$1" = 'gather-consumer' ]; then 
+    # wait for the app to start-up 
+    sh -c "while ! nc -w 1 -z app 80; do sleep 1; done"
+
+    #ckan harvester initdb
+    ckan --plugin=ckanext-harvest harvester gather_consumer
+    
 fi
 
 # set-up pycsw
