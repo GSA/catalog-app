@@ -29,7 +29,9 @@ elif [ "$1" = 'gather-consumer' ]; then
 
     #ckan harvester initdb
     ckan --plugin=ckanext-harvest harvester gather_consumer
-    
+else 
+    # execute any other command
+    exec $@
 fi
 
 # set-up pycsw
