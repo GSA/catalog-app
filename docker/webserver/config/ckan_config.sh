@@ -37,9 +37,9 @@ link_postgres_url () {
 }
 
 link_solr_url () {
-  local host=$SOLR_PORT_8080_TCP_ADDR
-  local port=$SOLR_PORT_8080_TCP_PORT
-  echo "http://${host}:${port}/solr"
+  local host=$SOLR_PORT_8983_TCP_ADDR
+  local port=$SOLR_PORT_8983_TCP_PORT
+  echo "http://${host}:${port}/solr/ckan"
 }
 
 # If we don't already have a config file, bootstrap
