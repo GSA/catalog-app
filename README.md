@@ -6,7 +6,7 @@ catalog.data.gov app
 
 ###Docker:
 - prerequisites: docker client, docker machine, docker compose (i.e: docker toolbox `https://www.docker.com/docker-toolbox`)
-- run `docker-compose up` to spin up the catalog-app stack (catalog-solr, catalog-db, catalog-redis, catalog-app)
+- run `docker-compose up` to spin up the catalog-app stack (solr, db, redis, app, harvester-fetch, harvester-gather, fgdc2iso)
 
 ## License and Contributing
 We're so glad you're thinking about re-using and/or contributing to Data.gov!
