@@ -10,6 +10,7 @@ app:
    - redis
    - db
    - solr
+   - fgdc2iso
 harvester-fetch-consumer:
   build: .
   links:
@@ -17,6 +18,7 @@ harvester-fetch-consumer:
    - redis
    - db
    - solr
+   - fgdc2iso
   command: fetch-consumer
 harvester-gather-consumer:
   build: .
@@ -25,6 +27,7 @@ harvester-gather-consumer:
    - redis
    - db
    - solr
+   - fgdc2iso
   command: gather-consumer
 redis:
   image: redis
@@ -38,5 +41,5 @@ db:
     DB_PYCSW_DB: pycsw
 solr:
   build: docker/solr
-  ports: 
-   - "8983:8983"
+fgdc2iso:
+  build: docker/fgdc2iso

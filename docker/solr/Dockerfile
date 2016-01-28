@@ -1,4 +1,4 @@
-FROM solr:latest
+FROM solr:5.4
 
 COPY schema.xml /opt/solr/server/solr/configsets/basic_configs/conf
 

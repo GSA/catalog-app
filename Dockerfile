@@ -55,24 +55,8 @@ COPY docker/webserver/supervisor/supervisord.conf /etc/supervisord.conf
 COPY docker/webserver/harvest/etc/cron.d/* /etc/cron.d/
 COPY docker/webserver/supervisor/supervisord.conf /etc/supervisord.conf
 COPY docker/webserver/harvest/etc/init/supervisor.conf /etc/init/supervisor.conf
-COPY docker/webserver/harvest/var/lib/tomcat6/webapps/fgdc2iso.war /var/lib/tomcat6/webapps/fgdc2iso.war
+
 RUN ln -s $CKAN_HOME/bin/supervisorctl /usr/bin/supervisorctl
-
-# Install pycsw
-RUN git clone https://github.com/geopython/pycsw.git /usr/lib/ckan/src/pycsw && \
-        cd /usr/lib/ckan/src/pycsw && \
-	git checkout tags/1.10.3 && \
-	../../bin/python setup.py build && \
-	../../bin/python setup.py install && \
-	$CKAN_HOME/bin/pip install pyproj==1.9.3 && \
-	$CKAN_HOME/bin/pip install geolinks==0.0.1
-
-COPY config/environments/$CKAN_ENV/pycsw-all.cfg /etc/ckan/pycsw-all.cfg
-COPY docker/pycsw/etc/ckan/pycsw-collection.cfg etc/ckan/pycsw-collection.cfg
-COPY docker/pycsw/etc/ckan/pycsw.wsgi /etc/ckan/pycsw.wsgi	
-COPY docker/pycsw/etc/cron.d/ckan-pycsw /etc/cron.d/ckan-pycsw
-COPY docker/pycsw/usr/lib/ckan/bin/pycsw-db-admin.py /usr/lib/ckan/bin/pycsw-db-admin.py
-	 
 
 # Install & Configure CKAN app
 COPY install.sh /tmp/
