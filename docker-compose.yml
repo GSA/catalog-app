@@ -11,6 +11,7 @@ app:
    - db
    - solr
    - fgdc2iso
+   - pycsw
 harvester-fetch-consumer:
   build: .
   links:
@@ -43,3 +44,5 @@ solr:
   build: docker/solr
 fgdc2iso:
   build: docker/fgdc2iso
+pycsw:
+  build: docker/pycsw

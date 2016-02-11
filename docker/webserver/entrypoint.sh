@@ -14,25 +14,25 @@ if [ -z "$1" ]; then
     ckan db init
 
     # start supervisor deamon
-    exec /usr/lib/ckan/bin/supervisord 
+    exec /usr/lib/ckan/bin/supervisord
 
 elif [ "$1" = 'fetch-consumer' ]; then
-    # wait for the app to start-up 
+    # wait for the app to start-up
     sh -c "while ! nc -w 1 -z $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT; do sleep 1; done"
 
     #ckan harvester initdb
     ckan --plugin=ckanext-harvest harvester fetch_consumer
 
-elif [ "$1" = 'gather-consumer' ]; then 
-    # wait for the app to start-up 
+elif [ "$1" = 'gather-consumer' ]; then
+    # wait for the app to start-up
     sh -c "while ! nc -w 1 -z $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT; do sleep 1; done"
 
     #ckan harvester initdb
     ckan --plugin=ckanext-harvest harvester gather_consumer
-else 
+else
     # execute any other command
     exec $@
 fi
 
 # set-up pycsw
-#/usr/lib/ckan/bin/paster --plugin=ckanext-spatial ckan-pycsw setup -p /etc/ckan/pycsw-all.cfg
+/usr/lib/ckan/bin/paster --plugin=ckanext-spatial ckan-pycsw setup -p /etc/ckan/pycsw-all.cfg
