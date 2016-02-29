@@ -3,16 +3,17 @@ app:
   ports:
    - "80:80"
   environment:
-    CKAN_SITE_URL: http://catalog.dev
+    CKAN_SITE_URL: http://localhost
   volumes:
-   - .src:/test
-   - /usr/lib
+   - /usr/lib/ckan
+   - /var/www
+   - /etc/ckan/
+   - /usr/sbin/cron
   links:
    - redis
    - db
    - solr
    - fgdc2iso
-   - pycsw
 harvester-fetch-consumer:
   build: .
   links:
@@ -21,7 +22,6 @@ harvester-fetch-consumer:
    - db
    - solr
    - fgdc2iso
-   - pycsw
   command: fetch-consumer
 harvester-gather-consumer:
   build: .
@@ -31,7 +31,6 @@ harvester-gather-consumer:
    - db
    - solr
    - fgdc2iso
-   - pycsw   
   command: gather-consumer
 redis:
   image: redis

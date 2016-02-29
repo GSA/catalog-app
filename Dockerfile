@@ -1,10 +1,8 @@
 FROM ubuntu:14.04
 
-ENV HOME /root
 ENV CKAN_HOME /usr/lib/ckan
 ENV CKAN_CONFIG /etc/ckan/
-ENV CKAN_ENV docker
-ENV PIP_URL https://pypi.python.org/packages/source/p/pip/pip-1.3.1.tar.gz 
+ENV PIP_URL https://pypi.python.org/packages/source/p/pip/pip-1.3.1.tar.gz
 
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \

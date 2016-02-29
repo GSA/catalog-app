@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-CONFIG="${CKAN_CONFIG}/pycsw-all.cfg"
+CONFIG="${CKAN_CONFIG}/default.cfg"
 
 abort () {
   echo "$@" >&2

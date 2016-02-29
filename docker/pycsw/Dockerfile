@@ -1,6 +1,9 @@
 # Ubuntu 14.04 Trusty Tahyr
 FROM ubuntu:trusty
 
+ENV PYCSW_WEB /var/www/pycsw
+ENV PYCSW_CONFIG /etc/ckan
+
 # Install basic dependencies
 RUN apt-get update -y && apt-get install -y \
     software-properties-common \
@@ -20,7 +23,7 @@ RUN apt-get update -y && apt-get install -y \
     libgeos++-dev
 
 # install PyCSW
-ADD ./default.cfg /tmp/
+ADD /etc/ckan/default.cfg /tmp/
 ADD ./install_pycsw.sh /tmp/
 RUN sh /tmp/install_pycsw.sh
 
