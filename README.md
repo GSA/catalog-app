@@ -1,14 +1,15 @@
 # catalog-app
 Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN is used by Data.gov @ http://catalog.data.gov
 
-**This repository is beta, and is under continous development**
+**This repository is beta, and is under continuous development**
 
 >NOTE: Instructions below use {{ example }} to denote where to replace content with your own.
 
 ## Installation:
-The application is deployed using [docker-compose](https://docs.docker.com/compose/overview/), please follow the [offical documentation to install and setup](https://docs.docker.com/compose/install/).
+The application is deployed using [docker-compose](https://docs.docker.com/compose/overview/), please follow the [official documentation to install and setup](https://docs.docker.com/compose/install/).
 
-System Requirements
+**System Requirements:**
+>Docker needs access to a minimum of 2 CPU and 4 GB of Memory, if you are using [Docker Toolbox](https://www.docker.com/products/docker-toolbox) or [Docker Machine](https://docs.docker.com/machine/) you will need to first completely power down the [virtualbox](https://www.virtualbox.org/) image (not pause or suspend). Once this is done go to the images settings and under "Hardware" move the slider from 1 to 2 CPU. Failure to do this will cause docker to hang @ `[installing ca-certificates](https://github.com/GSA/catalog-app/issues/11)`.
 
 ### Quick Start
 After docker-compose installs check to make sure docker daemon running: `sudo service docker status` if not `sudo service docker start`
@@ -31,7 +32,7 @@ If you do not wish to run docker as root user (i.e. `sudo`), you can add your UN
 
 ### Getting Started
 This first thing you will need to do is create a new CKAN sysadmin so you can create datasets/organizations:
-`ckan sysadmin add {{ name }}` for example `docker exec -it {{ container }} /bin/bash` -> `ckan sysadmin add admin` it will then prompt you to enter/confirm a new password. **You can now login to through your web browser where the site will likely be running on your localhost. At the very bottom of the site click 'login' and enter the newly minted credentials you just created!**
+`ckan sysadmin add {{ name }}` for example `docker exec -it {{ container }} /bin/bash` then `ckan sysadmin add admin` it should then prompt you to enter/confirm a new password. **You can now login to through your web browser where the site will likely be running @ http://localhost or http://127.0.0.1. At the very bottom of the site click 'login' and enter the newly minted credentials you just created!**
 
 To use CKAN's harvester you first need to create an "organization", once created click the "admin" button. You should now see "Harvest Sources" next to Datasets and Members. Click "Add Harvest Source", this CKAN already packages a number of harvesters ready to use include data.json and spatial harvesters.
 
@@ -39,7 +40,7 @@ Currently supported harvest sources include:
 * CKAN
 * CSW Server
 * Web Accessible Folder (WAF)
-* Single spatial metadata document 
+* Single spatial metadata document
 * Geoportal Server
 * Web Accessible Folder (WAF) Homogeneous Collection
 * Z39.50
@@ -51,6 +52,9 @@ For testing you can try out the data.json harvester by pointing it at any US Fed
 Enter the URL to the appropriate endpoint to the "Source type" used, enter a title, select frequency of harvest (update interval), Set private or public and the organization. Click "Save"
 
 >NOTE: The harvester won't do anything until you click "Reharvest" to start the harvester. Feel free to refresh the page periodically and watch the datasets get registered :)
+
+>You can speed up the harvest process with this command `docker-compose scale harvester-fetch-consumer=3` which adds 3 new harvester containers to distribute the workload.
+
 
 ## Other Useful Commands
 Once running you can use either/both [docker commands](https://docs.docker.com/engine/reference/commandline/cli/) or [docker-compose commands](https://docs.docker.com/compose/reference/) to manage running containers. This needs to be performed atleast once to create a CKAN sysadmin. *If you are running docker as root you may need to ADD `sudo` before these commands*
@@ -80,7 +84,7 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 * `docker-compose run app {{command}}`
 
 ## CKAN/catalog-app commands
-**This commands are run from *within* the catalogapp container using either `docker exec it` or `docker-compose run` as described above**
+**This commands are run from *within* the catalog-app container using either `docker exec it` or `docker-compose run` as described above**
 
 `ckan --plugin=ckanext-harvest harvester run`
 >Start any pending harvesting jobs
@@ -98,7 +102,7 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 >CKAN keeps deleted package in the DB. This clean command makes sure they are really gone.
 
 `ckan tracking update`
->This needs to be run periodically in order to run analysis on raw data and generate summarised page view tracking data that ckan/solr can use.
+>This needs to be run periodically in order to run analysis on raw data and generate summarized page view tracking data that ckan/solr can use.
 
 `ckan --plugin=ckanext-report report generate`
 >This generates /report/broken-links page showing broken link statistics for dataset resources by organization.
