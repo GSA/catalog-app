@@ -20,7 +20,7 @@ RUN apt-get update -y && apt-get install -y \
     libgeos++-dev
 
 # install PyCSW
-ADD ./etc/ckan/pycsw-all.cfg /tmp/
+ADD ./default.cfg /tmp/
 ADD ./install_pycsw.sh /tmp/
 RUN sh /tmp/install_pycsw.sh
 

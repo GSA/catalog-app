@@ -6,6 +6,7 @@ app:
     CKAN_SITE_URL: http://catalog.dev
   volumes:
    - .src:/test
+   - /usr/lib
   links:
    - redis
    - db
@@ -20,6 +21,7 @@ harvester-fetch-consumer:
    - db
    - solr
    - fgdc2iso
+   - pycsw
   command: fetch-consumer
 harvester-gather-consumer:
   build: .
@@ -29,6 +31,7 @@ harvester-gather-consumer:
    - db
    - solr
    - fgdc2iso
+   - pycsw   
   command: gather-consumer
 redis:
   image: redis
