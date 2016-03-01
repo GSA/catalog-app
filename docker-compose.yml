@@ -46,5 +46,5 @@ solr:
   build: docker/solr
 fgdc2iso:
   build: docker/fgdc2iso
-pycsw:
-  build: docker/pycsw
+#pycsw:
+#  build: docker/pycsw
