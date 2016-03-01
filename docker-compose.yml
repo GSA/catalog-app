@@ -3,7 +3,7 @@ app:
   ports:
    - "80:80"
   environment:
-    CKAN_SITE_URL: http://localhost
+    CKAN_SITE_URL: http://catalog.dev
   volumes:
    - /usr/lib/ckan
    - /var/www
@@ -45,5 +45,5 @@ solr:
   build: docker/solr
 fgdc2iso:
   build: docker/fgdc2iso
-#pycsw:
-#  build: docker/pycsw
+pycsw:
+  build: docker/pycsw
