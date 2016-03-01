@@ -8,7 +8,6 @@ app:
    - /usr/lib/ckan
    - /var/www
    - /etc/ckan/
-   - /usr/sbin/cron
   links:
    - redis
    - db
