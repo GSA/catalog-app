@@ -35,4 +35,4 @@ else
 fi
 
 # set-up pycsw
-/usr/lib/ckan/bin/paster --plugin=ckanext-spatial ckan-pycsw setup -p /etc/ckan/pycsw-all.cfg
+#/usr/lib/ckan/bin/paster --plugin=ckanext-spatial ckan-pycsw setup -p /etc/ckan/pycsw-all.cfg

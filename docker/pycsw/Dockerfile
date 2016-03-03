@@ -5,7 +5,6 @@ ENV PYCSW_WEB /etc/ckan
 ENV PYCSW_CONFIG /etc/ckan/default
 ENV PYCSW_CRON /usr/sbin/cron
 ENV PYCSW_BASEURL http://catalog.data.gov
-ENV
 
 # Install basic dependencies
 RUN apt-get update -y && apt-get install -y \
@@ -26,7 +25,7 @@ RUN apt-get update -y && apt-get install -y \
     libgeos++-dev
 
 # install PyCSW
-ADD /etc/ckan/default.cfg /tmp/
+ADD ./pycsw-all.cfg /tmp/
 ADD ./install_pycsw.sh /tmp/
 ADD /web/pycsw.wsgi /tmp/
 RUN sh /tmp/install_pycsw.sh
