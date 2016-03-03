@@ -77,6 +77,10 @@ COPY docker/webserver/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
+VOLUME /usr/lib/ckan
+VOLUME /var/www
+VOLUME /etc/ckan
+
 EXPOSE 80
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

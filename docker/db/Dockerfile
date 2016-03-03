@@ -8,7 +8,7 @@ RUN apt-get -q -y update && apt-get -q -y install \
 
 COPY prepare_db.sh /docker-entrypoint-initdb.d
 
-VOLUME /var/lib/postgresql
+VOLUME /var/lib/postgresql/data
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
