@@ -6,6 +6,9 @@ app:
     CKAN_SITE_URL: http://catalog.dev
   volumes:
    - .src:/test
+   - /usr/lib/ckan
+   - /var/www
+   - /etc/ckan
   links:
    - redis
    - db
@@ -44,3 +47,7 @@ solr:
   build: docker/solr
 fgdc2iso:
   build: docker/fgdc2iso
+pycsw:
+  build: docker/pycsw
+datavolume:
+  build: docker/datavolume

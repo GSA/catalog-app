@@ -18,7 +18,7 @@ if [ "$1" = 'app' ]; then
     ckan db init
 
     # start supervisor deamon
-    exec /usr/lib/ckan/bin/supervisord 
+    exec /usr/lib/ckan/bin/supervisord
 
 elif [ "$1" = 'fetch-consumer' ]; then
     
@@ -39,7 +39,7 @@ elif [ "$1" = 'gather-consumer' ]; then
 
     #ckan harvester initdb
     ckan --plugin=ckanext-harvest harvester gather_consumer
-else 
+else
     # execute any other command
     exec $@
 fi

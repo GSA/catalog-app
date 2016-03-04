@@ -4,7 +4,7 @@ ENV HOME /root
 ENV CKAN_HOME /usr/lib/ckan
 ENV CKAN_CONFIG /etc/ckan/
 ENV CKAN_ENV docker
-ENV PIP_URL https://pypi.python.org/packages/source/p/pip/pip-1.3.1.tar.gz 
+ENV PIP_URL https://pypi.python.org/packages/source/p/pip/pip-1.3.1.tar.gz
 
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \
@@ -46,7 +46,7 @@ RUN easy_install $PIP_URL && \
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
 COPY docker/webserver/apache/apache.wsgi $CKAN_CONFIG
 COPY docker/webserver/apache/ckan.conf /etc/apache2/sites-enabled/
-RUN a2enmod rewrite headers 
+RUN a2enmod rewrite headers
 
 # CKAN harvester
 RUN  $CKAN_HOME/bin/pip install supervisor
@@ -70,12 +70,16 @@ RUN cd /tmp && \
 	$CKAN_HOME/bin/pip install repoze.who==2.0
 
 # Config CKAN app
-COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG 
+COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG
 COPY config/environments/$CKAN_ENV/saml2/who.ini $CKAN_CONFIG
 COPY docker/webserver/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+
+VOLUME /usr/lib/ckan
+VOLUME /var/www
+VOLUME /etc/ckan
 
 EXPOSE 80
 
