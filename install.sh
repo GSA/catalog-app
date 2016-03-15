@@ -3,11 +3,12 @@ set -e
 
 VIRTUAL_ENV=/usr/lib/ckan
 
-# create virtual_env
+# create virtual_env & upgrade pip
 virtualenv $VIRTUAL_ENV
+$VIRTUAL_ENV/bin/pip install -U pip
 
 # install ckan core + ckan extensions
-$VIRTUAL_ENV/bin/pip install -r requirements.txt
+$VIRTUAL_ENV/bin/pip install -r requirements-freeze.txt
 
 EXTENSIONS=$(cat requirements.txt | grep -o "egg=.*" | cut -f2- -d'=')
 

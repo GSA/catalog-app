@@ -37,10 +37,9 @@ RUN apt-get -q -y update && apt-get -q -y install \
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
 
-# Install pip
+# Install & Upgrade pip
 RUN easy_install $PIP_URL && \
 	virtualenv $CKAN_HOME --no-site-packages
-
 
 # Configure apache
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
@@ -60,6 +59,7 @@ RUN ln -s $CKAN_HOME/bin/supervisorctl /usr/bin/supervisorctl
 
 # Install & Configure CKAN app
 COPY install.sh /tmp/
+COPY requirements-freeze.txt /tmp/
 COPY requirements.txt /tmp/
 COPY docker/webserver/config/ckan_config.sh $CKAN_HOME/bin/
 COPY docker/webserver/config/pycsw_config.sh $CKAN_HOME/bin/
@@ -67,7 +67,7 @@ COPY docker/webserver/config/pycsw_config.sh $CKAN_HOME/bin/
 RUN cd /tmp && \
 	sh install.sh && \
         mkdir -p $CKAN_CONFIG && \
-	$CKAN_HOME/bin/pip install repoze.who==2.0
+        $CKAN_HOME/bin/pip install repoze.who==2.0
 
 # Config CKAN app
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG
@@ -76,10 +76,6 @@ COPY docker/webserver/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-
-VOLUME /usr/lib/ckan
-VOLUME /var/www
-VOLUME /etc/ckan
 
 EXPOSE 80
 
