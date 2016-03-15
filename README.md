@@ -1,3 +1,4 @@
+---
 name: catalog-app
 full_name: catalog.data.gov
 type: app
