@@ -44,7 +44,7 @@ solr:
   build: docker/solr
 fgdc2iso:
   build: docker/fgdc2iso
-#pycsw:
-#  build: docker/pycsw
-#datavolume:
-#  build: docker/datavolume
+pycsw:
+  build: docker/pycsw
+datavolume:
+  build: docker/datavolume
