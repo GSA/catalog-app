@@ -5,12 +5,13 @@ app:
   environment:
     CKAN_SITE_URL: http://catalog.dev
   volumes:
-   - .src:/test
+   - ./src:/usr/lib/ckan/src
   links:
    - redis
    - db
    - solr
    - fgdc2iso
+  command: app --wait-for-dependencies
 harvester-fetch-consumer:
   build: .
   links:
@@ -19,7 +20,7 @@ harvester-fetch-consumer:
    - db
    - solr
    - fgdc2iso
-  command: fetch-consumer
+  command: fetch-consumer --wait-for-dependencies
 harvester-gather-consumer:
   build: .
   links:
@@ -28,7 +29,7 @@ harvester-gather-consumer:
    - db
    - solr
    - fgdc2iso
-  command: gather-consumer
+  command: gather-consumer --wait-for-dependencies
 redis:
   image: redis
 db:
