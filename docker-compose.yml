@@ -4,8 +4,6 @@ app:
    - "80:80"
   environment:
     CKAN_SITE_URL: http://catalog.dev
-  volumes:
-   - ./src:/usr/lib/ckan/src
   links:
    - redis
    - db
