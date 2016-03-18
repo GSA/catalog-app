@@ -6,9 +6,6 @@ app:
     CKAN_SITE_URL: http://catalog.dev
   volumes:
    - .src:/test
-   - /usr/lib/ckan
-   - /var/www
-   - /etc/ckan
   links:
    - redis
    - db
