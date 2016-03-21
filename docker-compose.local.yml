@@ -1,0 +1,3 @@
+app:
+  volumes:
+   - ./src:/usr/lib/ckan/src
