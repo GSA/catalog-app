@@ -162,6 +162,38 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 `ckan --plugin=ckanext-geodatagov geodatagov export-csv`
 >This keeps records of all datasets that are tagged with Topic and Topic Categories, and generates /csv/topic_datasets.csv
 
+
+
+## Developing on OSX
+
+###Prerequisites:
+1. Install **brew**: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+2. Install **docker tool box**: `brew cask install dockertoolbox`
+3. Create a **docker machine**: `docker-machine create --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "2048" default` 
+
+###Source Code Folder (**src**): 
+**Note:** follow these steps only if your src folder is empty or you need the latest code
+
+1. Start the app, from root folder run: `docker-compose up`
+2. Move app source files to your local src folder (`{app_path_on_your_machine}/src`): `docker cp catalogapp_app_1:/usr/lib/ckan/src .`
+3. Stop the app: `docker-compose down`
+
+###Workflow:
+1. Start the app in local mode (this will mount the `src` folder from your local machine to the app's container `/usr/lib/ckan/src` folder)
+`docker-compose -f docker-compose.yml -f docker-compose.local.yml up`
+2. Make changes to the source code(`src` folder) and commit it to github (the extensions used by the app are in `requirements.txt`)
+3. Restart apache to see your changes in action:
+`docker exec -it {app_container_name} service apache2 restart`
+4. In order for the catalog-app to see commits made to repositories in requirements.txt run the following command and commit the new `requirements-freeze.txt`: `docker exec -it {app_container_name} /usr/lib/ckan/bin/pip freeze > requirements-freeze.txt` 
+
+see: `https://blog.engineyard.com/2014/composer-its-all-about-the-lock-file`
+the same concepts apply to pip
+
+###Troubleshooting:
+1. "Cannot connect to the Docker daemon. Is the docker daemon running on this host?"
+run: `eval $(docker-machine env)`
+
+
 ## License and Contributing
 We're so glad you're thinking about re-using and/or contributing to Data.gov!
 
