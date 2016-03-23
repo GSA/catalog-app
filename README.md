@@ -40,7 +40,7 @@ Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN i
 The application is deployed using [docker-compose](https://docs.docker.com/compose/overview/), please follow the [official documentation to install and setup](https://docs.docker.com/compose/install/).
 
 **System Requirements:**
->Docker needs access to a minimum of 2 CPU and 4 GB of Memory, if you are using [Docker Toolbox](https://www.docker.com/products/docker-toolbox) or [Docker Machine](https://docs.docker.com/machine/) you will need to first completely power down the [virtualbox](https://www.virtualbox.org/) image (not pause or suspend). Once this is done go to the images settings and under "Hardware" move the slider from 1 to 2 CPU. Failure to do this will cause docker to hang @ `[installing ca-certificates](https://github.com/GSA/catalog-app/issues/11)`.
+>Docker needs access to a minimum of 2 CPU and 4 GB of Memory, if you are using [Docker Toolbox](https://www.docker.com/products/docker-toolbox) or [Docker Machine](https://docs.docker.com/machine/) you will need to first completely power down the [virtualbox](https://www.virtualbox.org/) image (not pause or suspend). Once this is done go to the images settings and under "Hardware" move the slider from 1 to 2 CPU. Failure to do this will cause docker to hang @ [installing ca-certificates](https://github.com/GSA/catalog-app/issues/11).
 
 ### Quick Start
 After docker-compose installs check to make sure docker daemon running: `sudo service docker status` if not `sudo service docker start`
