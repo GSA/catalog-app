@@ -16,6 +16,7 @@ if [ "$1" = 'app' ]; then
 
     # initialize DB
     ckan db init
+    ckan --plugin=ckanext-harvest harvester initdb
 
     # start supervisor deamon
     exec /usr/lib/ckan/bin/supervisord
