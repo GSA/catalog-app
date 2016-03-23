@@ -1,10 +1,8 @@
 FROM ubuntu:14.04
 
-ENV HOME /root
 ENV CKAN_HOME /usr/lib/ckan
 ENV CKAN_CONFIG /etc/ckan/
 ENV CKAN_ENV docker
-ENV PIP_URL https://pypi.python.org/packages/source/p/pip/pip-1.3.1.tar.gz
 
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \
@@ -37,9 +35,10 @@ RUN apt-get -q -y update && apt-get -q -y install \
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
 
-# Install & Upgrade pip
-RUN easy_install $PIP_URL && \
-	virtualenv $CKAN_HOME --no-site-packages
+# Upgrade pip & install virtualenv
+RUN pip install -U pip && \
+    pip install virtualenv && \
+    virtualenv $CKAN_HOME --no-site-packages
 
 # Configure apache
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
@@ -51,28 +50,24 @@ RUN a2enmod rewrite headers
 RUN  $CKAN_HOME/bin/pip install supervisor
 COPY docker/webserver/harvest/etc/cron.daily/remove_old_sessions /etc/cron.daily/remove_old_sessions
 COPY docker/webserver/supervisor/supervisord.conf /etc/supervisord.conf
-COPY docker/webserver/harvest/etc/cron.d/* /etc/cron.d/
-COPY docker/webserver/supervisor/supervisord.conf /etc/supervisord.conf
 COPY docker/webserver/harvest/etc/init/supervisor.conf /etc/init/supervisor.conf
-
 RUN ln -s $CKAN_HOME/bin/supervisorctl /usr/bin/supervisorctl
 
 # Install & Configure CKAN app
 COPY install.sh /tmp/
 COPY requirements-freeze.txt /tmp/
-COPY requirements.txt /tmp/
 COPY docker/webserver/config/ckan_config.sh $CKAN_HOME/bin/
 COPY docker/webserver/config/pycsw_config.sh $CKAN_HOME/bin/
 
 RUN cd /tmp && \
-	sh install.sh && \
-        mkdir -p $CKAN_CONFIG && \
-        $CKAN_HOME/bin/pip install repoze.who==2.0
+    sh install.sh && \
+    mkdir -p $CKAN_CONFIG && \
+    $CKAN_HOME/bin/pip install repoze.who==2.0
 
 # Config CKAN app
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG
-COPY config/environments/$CKAN_ENV/saml2/who.ini $CKAN_CONFIG
 COPY docker/webserver/entrypoint.sh /entrypoint.sh
+RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
 
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
