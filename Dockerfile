@@ -61,8 +61,7 @@ COPY docker/webserver/config/pycsw_config.sh $CKAN_HOME/bin/
 
 RUN cd /tmp && \
     sh install.sh && \
-    mkdir -p $CKAN_CONFIG && \
-    $CKAN_HOME/bin/pip install repoze.who==2.0
+    mkdir -p $CKAN_CONFIG
 
 # Config CKAN app
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG
