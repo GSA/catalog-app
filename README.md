@@ -40,7 +40,7 @@ Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN i
 The application is deployed using [docker-compose](https://docs.docker.com/compose/overview/), please follow the [official documentation to install and setup](https://docs.docker.com/compose/install/).
 
 **System Requirements:**
->Docker needs access to a minimum of 2 CPU and 4 GB of Memory, if you are using [Docker Toolbox](https://www.docker.com/products/docker-toolbox) or [Docker Machine](https://docs.docker.com/machine/) you will need to first completely power down the [virtualbox](https://www.virtualbox.org/) image (not pause or suspend). Once this is done go to the images settings and under "Hardware" move the slider from 1 to 2 CPU. Failure to do this will cause docker to hang @ `[installing ca-certificates](https://github.com/GSA/catalog-app/issues/11)`.
+>Docker needs access to a minimum of 2 CPU and 4 GB of Memory, if you are using [Docker Toolbox](https://www.docker.com/products/docker-toolbox) or [Docker Machine](https://docs.docker.com/machine/) you will need to first completely power down the [virtualbox](https://www.virtualbox.org/) image (not pause or suspend). Once this is done go to the images settings and under "Hardware" move the slider from 1 to 2 CPU. Failure to do this will cause docker to hang @ [installing ca-certificates](https://github.com/GSA/catalog-app/issues/11).
 
 ### Quick Start
 After docker-compose installs check to make sure docker daemon running: `sudo service docker status` if not `sudo service docker start`
@@ -161,6 +161,38 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 
 `ckan --plugin=ckanext-geodatagov geodatagov export-csv`
 >This keeps records of all datasets that are tagged with Topic and Topic Categories, and generates /csv/topic_datasets.csv
+
+
+
+## Developing on OSX
+
+###Prerequisites:
+1. Install **brew**: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+2. Install **docker tool box**: `brew cask install dockertoolbox`
+3. Create a **docker machine**: `docker-machine create --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "2048" default` 
+
+###Source Code Folder (**src**): 
+**Note:** follow these steps only if your src folder is empty or you need the latest code
+
+1. Start the app, from root folder run: `docker-compose up`
+2. Move app source files to your local src folder (`{app_path_on_your_machine}/src`): `docker cp catalogapp_app_1:/usr/lib/ckan/src .`
+3. Stop the app: `docker-compose down`
+
+###Workflow:
+1. Start the app in local mode (this will mount the `src` folder from your local machine to the app's container `/usr/lib/ckan/src` folder)
+`docker-compose -f docker-compose.yml -f docker-compose.local.yml up`
+2. Make changes to the source code(`src` folder) and commit it to github (the extensions used by the app are in `requirements.txt`)
+3. Restart apache to see your changes in action:
+`docker exec -it {app_container_name} service apache2 restart`
+4. In order for the catalog-app to see commits made to repositories in requirements.txt run the following command and commit the new `requirements-freeze.txt`: `docker exec -it {app_container_name} /usr/lib/ckan/bin/pip freeze > requirements-freeze.txt` 
+
+see: `https://blog.engineyard.com/2014/composer-its-all-about-the-lock-file`
+the same concepts apply to pip
+
+###Troubleshooting:
+1. "Cannot connect to the Docker daemon. Is the docker daemon running on this host?"
+run: `eval $(docker-machine env)`
+
 
 ## License and Contributing
 We're so glad you're thinking about re-using and/or contributing to Data.gov!
