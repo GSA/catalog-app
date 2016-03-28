@@ -20,7 +20,3 @@ for extension in $EXTENSIONS; do
     	$VIRTUAL_ENV/bin/pip install -r $VIRTUAL_ENV/src/$extension/pip-requirements.txt
     fi
 done
-
-# set folder permission before we move the whole thing to right location
-mkdir -p /usr/lib/ckan/src/ckanext-datagovtheme/ckanext/datagovtheme/dynamic_menu
-chmod  -R a+rw /usr/lib/ckan/src/ckanext-datagovtheme/ckanext/datagovtheme/dynamic_menu
