@@ -1,19 +1,17 @@
 app:
-  build: .
+  image: datagov/catalog
   ports:
    - "80:80"
   environment:
-    CKAN_SITE_URL: http://catalog.dev
+    CKAN_SITE_URL: 52.207.218.22
   links:
    - redis
    - db
    - solr
    - fgdc2iso
   command: app --wait-for-dependencies
-  volumes:
-   - /var/tmp/ckan/csv:/var/tmp/ckan/csv
 harvester-fetch-consumer:
-  build: .
+  image: datagov/catalog
   links:
    - app
    - redis
@@ -22,7 +20,7 @@ harvester-fetch-consumer:
    - fgdc2iso
   command: fetch-consumer --wait-for-dependencies
 harvester-gather-consumer:
-  build: .
+  image: datagov/catalog
   links:
    - app
    - redis
@@ -33,7 +31,7 @@ harvester-gather-consumer:
 redis:
   image: redis
 db:
-  build: docker/db
+  image: datagov/catalog-db
   environment:
     POSTGRES_USER: postgres
     DB_CKAN_USER: ckan
@@ -41,10 +39,6 @@ db:
     DB_CKAN_DB: ckan
     DB_PYCSW_DB: pycsw
 solr:
-  build: docker/solr
+  image: datagov/catalog-solr
 fgdc2iso:
-  build: docker/fgdc2iso
-#pycsw:
-#  build: docker/pycsw
-#datavolume:
-#  build: docker/datavolume
+  image: datagov/catalog-fgdc2iso

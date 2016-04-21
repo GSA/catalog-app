@@ -36,8 +36,8 @@ RUN apt-get -q -y update && apt-get -q -y install \
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
 
 # Upgrade pip & install virtualenv
-RUN pip install -U pip && \
-    pip install virtualenv && \
+#RUN pip install -U pip && \
+RUN pip install virtualenv && \
     virtualenv $CKAN_HOME --no-site-packages
 
 # Configure apache
@@ -54,23 +54,28 @@ COPY docker/webserver/harvest/etc/init/supervisor.conf /etc/init/supervisor.conf
 RUN ln -s $CKAN_HOME/bin/supervisorctl /usr/bin/supervisorctl
 
 # Install & Configure CKAN app
-COPY install.sh /tmp/
-COPY requirements-freeze.txt /tmp/
+COPY install.sh /
+COPY requirements-freeze.txt /
+COPY requirements.txt /
 COPY docker/webserver/config/ckan_config.sh $CKAN_HOME/bin/
 COPY docker/webserver/config/pycsw_config.sh $CKAN_HOME/bin/
 
-RUN cd /tmp && \
-    sh install.sh && \
-    mkdir -p $CKAN_CONFIG
 
 # Config CKAN app
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG
 COPY docker/webserver/entrypoint.sh /entrypoint.sh
-RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
+RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini && \
+    mkdir -p /var/tmp/ckan/dynamic_menu && \
+    chmod -R 777 /var/tmp/ckan/dynamic_menu
+
+# Install ckan app
+RUN cd / && \
+    sh install.sh && \
+    mkdir -p $CKAN_CONFIG
 
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 80
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*

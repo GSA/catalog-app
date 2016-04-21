@@ -1,4 +1,3 @@
-#
 amqplib==1.0.2
 anyjson==0.3.3
 Babel==0.9.6
@@ -13,7 +12,7 @@ chardet==2.3.0
 -e git+https://github.com/GSA/ckanext-geodatagov@ac94cfb9732fe0b06c0d86c398ce9e1814ed8eef#egg=ckanext_geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@a79e14af40739ff03335db84923c1142e204c596#egg=ckanext_googleanalyticsbasic
 -e git+https://github.com/GSA/ckanext-harvest@809d6888aa1e7baa614ed16611df64b2f6ae604f#egg=ckanext_harvest
--e git+https://github.com/GSA/ckanext-qa@4cd8d4cf9279b4100669bae27dc62f2e54c6a233#egg=ckanext_qa
+-e git+https://github.com/GSA/ckanext-qa@b9d0da912012c9b8ec83f32e96ae691459e47fc3#egg=ckanext_qa
 -e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
 -e git+https://github.com/GSA/ckanext-saml2@d3e11dd7223acb72a0353f5e624978aab654cb28#egg=ckanext_saml2
 -e git+https://github.com/GSA/ckanext-spatial@e6b476775a81e33ad12ba34c20d95e57040962cd#egg=ckanext_spatial
