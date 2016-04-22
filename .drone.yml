@@ -1,13 +1,12 @@
 build:
-  image: golang
+  image: docker
+  environment:
+    - DOCKER_HUB_USERNAME=$$DOCKER_HUB_USERNAME
+    - DOCKER_HUB_PASSWORD=$$DOCKER_HUB_PASSWORD
+    - DOCKER_HUB_EMAIL=$$DOCKER_HUB_EMAIL
   commands:
-    - go get
-    - go build
-    - go test
-
-publish:
-  docker:
-    email: olarudan@gmail.com
-    repo: datagov/catalog
-    tag: $$BUILD_NUMBER
-    file: Dockerfile
+    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD -e $DOCKER_HUB_EMAIL
+    - docker build -t datagov/catalog:2.3.$$BUILD_NUMBER .
+    - docker push datagov/catalog:2.3.$$BUILD_NUMBER
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
