@@ -1,0 +1,13 @@
+build:
+  image: golang
+  commands:
+    - go get
+    - go build
+    - go test
+
+publish:
+  docker:
+    email: olarudan@gmail.com
+    repo: datagov/catalog
+    tag: $$BUILD_NUMBER
+    file: Dockerfile
