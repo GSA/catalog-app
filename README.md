@@ -30,6 +30,8 @@ team:
 - github: alex-perfilov-reisys
 ---
 # catalog-app
+<a href="http://drone.danolaru.com/GSA/catalog-app"><img src="http://drone.danolaru.com/api/badges/GSA/catalog-app/status.svg" /></a>
+
 Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN is used by Data.gov @ http://catalog.data.gov
 
 **This repository is beta, and is under continuous development**
