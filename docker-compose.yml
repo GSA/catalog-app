@@ -33,7 +33,7 @@ harvester-gather-consumer:
 redis:
   image: redis
 db:
-  build: docker/db
+  image: datagov/catalog-db
   environment:
     POSTGRES_USER: postgres
     DB_CKAN_USER: ckan
@@ -41,8 +41,8 @@ db:
     DB_CKAN_DB: ckan
     DB_PYCSW_DB: pycsw
 solr:
-  build: docker/solr
+  image: datagov/catalog-solr
 fgdc2iso:
-  build: docker/fgdc2iso
+  image: datagov/catalog-fgdc2iso
   environment:
     SIGNATURE:
