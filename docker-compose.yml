@@ -46,6 +46,12 @@ fgdc2iso:
   image: datagov/catalog-fgdc2iso
   environment:
     SIGNATURE:
+pycsw:
+  image: datagov/catalog-pycsw
+  links:
+   - app
+   - db
+  command: /entrypoint.sh --wait-for-dependencies
 scheduler:
   image: datagov/catalog-scheduler
   links:
