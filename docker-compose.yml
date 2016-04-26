@@ -48,5 +48,10 @@ fgdc2iso:
     SIGNATURE:
 scheduler:
   image: datagov/catalog-scheduler
+  links:
+   - redis
+   - db
+   - solr
+   - fgdc2iso
   volumes:
   - /var/run/docker.sock:/var/run/docker.sock 
