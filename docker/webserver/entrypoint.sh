@@ -19,7 +19,7 @@ if [ "$1" = 'app' ]; then
     ckan --plugin=ckanext-harvest harvester initdb
 
     # start supervisor deamon
-    exec /usr/lib/ckan/bin/supervisord
+    /bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
 
 elif [ "$1" = 'fetch-consumer' ]; then
     

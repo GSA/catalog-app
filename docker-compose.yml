@@ -46,3 +46,7 @@ fgdc2iso:
   image: datagov/catalog-fgdc2iso
   environment:
     SIGNATURE:
+scheduler:
+  image: datagov/catalog-scheduler
+  volumes:
+  - /var/run/docker.sock:/var/run/docker.sock 
