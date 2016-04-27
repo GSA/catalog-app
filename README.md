@@ -30,7 +30,8 @@ team:
 - github: alex-perfilov-reisys
 ---
 # catalog-app
-<a href="http://drone.danolaru.com/GSA/catalog-app"><img src="http://drone.danolaru.com/api/badges/GSA/catalog-app/status.svg" /></a>
+[![Build Status](http://drone.datagov.us/api/badges/GSA/catalog-app/status.svg)](http://drone.datagov.us/GSA/catalog-app)
+[![codecov](https://codecov.io/gh/GSA/catalog-app/branch/master/graph/badge.svg)](https://codecov.io/gh/GSA/catalog-app)
 
 Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN is used by Data.gov @ http://catalog.data.gov
 
@@ -171,9 +172,9 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 ###Prerequisites:
 1. Install **brew**: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 2. Install **docker tool box**: `brew cask install dockertoolbox`
-3. Create a **docker machine**: `docker-machine create --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "2048" default` 
+3. Create a **docker machine**: `docker-machine create --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "2048" default`
 
-###Source Code Folder (**src**): 
+###Source Code Folder (**src**):
 **Note:** follow these steps only if your src folder is empty or you need the latest code
 
 1. Start the app, from root folder run: `docker-compose up`
@@ -186,7 +187,7 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 2. Make changes to the source code(`src` folder) and commit it to github (the extensions used by the app are in `requirements.txt`)
 3. Restart apache to see your changes in action:
 `docker exec -it {app_container_name} service apache2 restart`
-4. In order for the catalog-app to see commits made to repositories in requirements.txt run the following command and commit the new `requirements-freeze.txt`: `docker exec -it {app_container_name} /usr/lib/ckan/bin/pip freeze > requirements-freeze.txt` 
+4. In order for the catalog-app to see commits made to repositories in requirements.txt run the following command and commit the new `requirements-freeze.txt`: `docker exec -it {app_container_name} /usr/lib/ckan/bin/pip freeze > requirements-freeze.txt`
 
 see: `https://blog.engineyard.com/2014/composer-its-all-about-the-lock-file`
 the same concepts apply to pip
