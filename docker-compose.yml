@@ -57,6 +57,7 @@ nginx:
     links:
       - app
       - pycsw
+    command: /entrypoint.sh --wait-for-dependencies
 scheduler:
   image: datagov/catalog-scheduler
   links:
