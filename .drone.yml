@@ -17,10 +17,9 @@ deploy:
     user: ubuntu
     port: 22
     commands:
+      - rm -rf catalog-app
       - git clone https://github.com/GSA/catalog-app.git
       - cd catalog-app
       - git checkout drone
       - docker-compose down
       - docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-      - cd ../
-      - rm -rf catalog-app
