@@ -21,4 +21,6 @@ deploy:
       - cd catalog-app
       - git checkout drone
       - docker-compose down
-      - docker-compose up -f docker-compose.yml -f docker-compose.dev.yml
+      - docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+      - cd ../
+      - rm -rf catalog-app
