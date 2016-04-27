@@ -61,8 +61,6 @@ RUN cd / && \
 
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-RUN echo 'test'
-RUN echo 'another thing'
 
 EXPOSE 80
 
