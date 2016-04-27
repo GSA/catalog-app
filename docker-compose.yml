@@ -1,7 +1,5 @@
 app:
   build: .
-  ports:
-   - "80:80"
   environment:
     CKAN_SITE_URL: http://catalog.dev
   links:
@@ -52,6 +50,13 @@ pycsw:
    - app
    - db
   command: /entrypoint.sh --wait-for-dependencies
+nginx:
+    image: datagov/catalog-nginx
+    ports:
+      - "80:80"
+    links:
+      - app
+      - pycsw
 scheduler:
   image: datagov/catalog-scheduler
   links:
