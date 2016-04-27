@@ -13,7 +13,7 @@ build:
 
 deploy:
   ssh:
-    host: catalog.dev.datagov.us
+    host: 10.0.1.32
     user: ubuntu
     port: 22
     commands:
