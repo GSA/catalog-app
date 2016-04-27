@@ -10,3 +10,15 @@ build:
     - docker push datagov/catalog:2.3.$$BUILD_NUMBER
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+
+deploy:
+  ssh:
+    host: catalog.dev.datagov.us
+    user: ubuntu
+    port: 22
+    commands:
+      - git clone https://github.com/GSA/catalog-app.git
+      - cd catalog-app
+      - git checkout drone
+      - docker-compose down
+      - docker-compose up -f docker-compose.yml -f docker-compose.dev.yml
