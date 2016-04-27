@@ -21,5 +21,4 @@ deploy:
       - git clone https://github.com/GSA/catalog-app.git
       - cd catalog-app
       - git checkout drone
-      - docker-compose down
-      - docker-compose -d -f docker-compose.yml -f docker-compose.dev.yml up
+      - docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
