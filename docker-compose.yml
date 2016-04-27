@@ -3,35 +3,35 @@ app:
   environment:
     CKAN_SITE_URL: http://catalog.dev
   links:
-   - redis
-   - db
-   - solr
-   - fgdc2iso
+    - redis
+    - db
+    - solr
+    - fgdc2iso
   command: app --wait-for-dependencies
   volumes:
-   - /var/tmp/ckan/csv:/var/tmp/ckan/csv
+    - /var/tmp/ckan/csv:/var/tmp/ckan/csv
 harvester-fetch-consumer:
   build: .
   links:
-   - app
-   - redis
-   - db
-   - solr
-   - fgdc2iso
+    - app
+    - redis
+    - db
+    - solr
+    - fgdc2iso
   command: fetch-consumer --wait-for-dependencies
 harvester-gather-consumer:
   build: .
   links:
-   - app
-   - redis
-   - db
-   - solr
-   - fgdc2iso
+    - app
+    - redis
+    - db
+    - solr
+    - fgdc2iso
   command: gather-consumer --wait-for-dependencies
 redis:
   image: redis
 db:
-  image: datagov/catalog-db
+  image: datagov/catalog-db:latest
   environment:
     POSTGRES_USER: postgres
     DB_CKAN_USER: ckan
@@ -39,31 +39,35 @@ db:
     DB_CKAN_DB: ckan
     DB_PYCSW_DB: pycsw
 solr:
-  image: datagov/catalog-solr
+  image: datagov/catalog-solr:latest
 fgdc2iso:
-  image: datagov/catalog-fgdc2iso
+  image: datagov/catalog-fgdc2iso:latest
   environment:
     SIGNATURE:
 pycsw:
-  image: datagov/catalog-pycsw
+  image: datagov/catalog-pycsw:latest
   links:
-   - app
-   - db
+    - app
+    - db
   command: /entrypoint.sh --wait-for-dependencies
 nginx:
-    image: datagov/catalog-nginx
-    ports:
-      - "80:80"
-    links:
-      - app
-      - pycsw
-    command: service nginx start  
-scheduler:
-  image: datagov/catalog-scheduler
+  image: datagov/catalog-nginx:latest
+  ports:
+    - "80:80"
   links:
-   - redis
-   - db
-   - solr
-   - fgdc2iso
+    - app
+    - pycsw
+  command: /entrypoint.sh --wait-for-dependencies
+scheduler:
+  image: datagov/catalog-scheduler:latest
+  links:
+    - redis
+    - db
+    - solr
+    - fgdc2iso
   volumes:
+<<<<<<< HEAD
   - /var/run/docker.sock:/var/run/docker.sock
+=======
+    - /var/run/docker.sock:/var/run/docker.sock
+>>>>>>> 8983def35e3abc377d782c320082eb67bb545030

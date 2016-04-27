@@ -50,9 +50,8 @@ COPY docker/webserver/config/ckan_config.sh $CKAN_HOME/bin/
 # Config CKAN app
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG
 COPY docker/webserver/entrypoint.sh /entrypoint.sh
-RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini && \
-    mkdir -p /var/tmp/ckan/dynamic_menu && \
-    chmod -R 777 /var/tmp/ckan/dynamic_menu
+RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
+RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 
 # Install ckan app
 RUN cd / && \
