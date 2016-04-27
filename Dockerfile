@@ -62,6 +62,6 @@ RUN cd / && \
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE 80
+EXPOSE 8080
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
