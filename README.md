@@ -33,6 +33,15 @@ team:
 [![Build Status](http://drone.datagov.us/api/badges/GSA/catalog-app/status.svg)](http://drone.datagov.us/GSA/catalog-app)
 [![codecov](https://codecov.io/gh/GSA/catalog-app/branch/master/graph/badge.svg)](https://codecov.io/gh/GSA/catalog-app)
 
+This is the main Dockerfile for the "Catalog" other repos include:
+* https://github.com/GSA/catalog-nginx
+* https://github.com/GSA/catalog-pycsw
+* https://github.com/GSA/catalog-solr
+* https://github.com/GSA/catalog-db
+* https://github.com/GSA/catalog-fgdc2iso
+* https://github.com/GSA/catalog-pycsw
+* https://github.com/GSA/catalog-scheduler
+
 Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN is used by Data.gov @ http://catalog.data.gov
 
 **This repository is beta, and is under continuous development**
