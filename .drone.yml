@@ -8,6 +8,8 @@ build:
     - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD -e $DOCKER_HUB_EMAIL
     - docker build -t datagov/catalog-app:2.3.$$BUILD_NUMBER .
     - docker push datagov/catalog-app:2.3.$$BUILD_NUMBER
+    - docker build -t datagov/catalog-app:latest .
+    - docker push datagov/catalog-app:latest
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
 
