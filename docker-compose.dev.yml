@@ -1,8 +1,4 @@
 app:
-  image: reisys/catalog-app:latest
+  image: datagov/catalog-app:latest
   environment:
-    CKAN_SITE_URL: http://dev-cd.reisys.io
-db:
-  image: reisys/catalog-db:latest
-solr:
-  image: reisys/catalog-solr:latest
+    CKAN_SITE_URL: http://catalog.dev.datagov.us
