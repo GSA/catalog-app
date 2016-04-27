@@ -31,6 +31,7 @@ team:
 ---
 # catalog-app
 [![Build Status](http://drone.datagov.us/api/badges/GSA/catalog-app/status.svg)](http://drone.datagov.us/GSA/catalog-app)
+
 [![codecov](https://codecov.io/gh/GSA/catalog-app/branch/master/graph/badge.svg)](https://codecov.io/gh/GSA/catalog-app)
 
 This is the main Dockerfile for the "Catalog" other repos include:

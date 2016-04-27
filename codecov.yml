@@ -1,2 +1,4 @@
 codecov:
-  token: 739b5318-e194-4896-9909-088a248a
+  token: 739b5318-e194-4896-9909-088a248ae03b
+  branch: master
+  bot: null

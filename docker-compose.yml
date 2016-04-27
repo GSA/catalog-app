@@ -66,8 +66,4 @@ scheduler:
     - solr
     - fgdc2iso
   volumes:
-<<<<<<< HEAD
   - /var/run/docker.sock:/var/run/docker.sock
-=======
-    - /var/run/docker.sock:/var/run/docker.sock
->>>>>>> 8983def35e3abc377d782c320082eb67bb545030
