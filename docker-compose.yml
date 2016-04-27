@@ -31,7 +31,7 @@ harvester-gather-consumer:
 redis:
   image: redis
 db:
-  image: datagov/catalog-db
+  image: datagov/catalog-db:latest
   environment:
     POSTGRES_USER: postgres
     DB_CKAN_USER: ckan
@@ -39,26 +39,26 @@ db:
     DB_CKAN_DB: ckan
     DB_PYCSW_DB: pycsw
 solr:
-  image: datagov/catalog-solr
+  image: datagov/catalog-solr:latest
 fgdc2iso:
-  image: datagov/catalog-fgdc2iso
+  image: datagov/catalog-fgdc2iso:latest
   environment:
     SIGNATURE:
 pycsw:
-  image: datagov/catalog-pycsw
+  image: datagov/catalog-pycsw:latest
   links:
    - app
    - db
   command: /entrypoint.sh --wait-for-dependencies
 nginx:
-    image: datagov/catalog-nginx
+    image: datagov/catalog-nginx:latest
     ports:
       - "80:80"
     links:
       - app
       - pycsw
 scheduler:
-  image: datagov/catalog-scheduler
+  image: datagov/catalog-scheduler:latest
   links:
    - redis
    - db
