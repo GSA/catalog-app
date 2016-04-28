@@ -6,3 +6,10 @@ harvester-fetch-consumer:
   image: datagov/catalog-app:latest
 harvester-gather-consumer:
   image: datagov/catalog-app:latest
+db:
+  environment:
+    DB_PORT_5432_TCP_ADDR:
+    POSTGRES_USER:
+    DB_CKAN_USER:
+    DB_CKAN_PASSWORD:
+    DB_CKAN_DB:
