@@ -49,7 +49,7 @@ pycsw:
   links:
     - app
     - db
-  command: /entrypoint.sh --wait-for-dependencies
+  command: start-pycsw --wait-for-dependencies
 nginx:
   image: datagov/catalog-nginx:latest
   ports:
@@ -61,6 +61,7 @@ nginx:
 scheduler:
   image: datagov/catalog-scheduler:latest
   links:
+    - app
     - redis
     - db
     - solr
