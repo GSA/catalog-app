@@ -5,7 +5,7 @@ VIRTUAL_ENV=/usr/lib/ckan
 
 # create virtual_env & upgrade pip
 virtualenv $VIRTUAL_ENV
-$VIRTUAL_ENV/bin/pip install -U pip
+$VIRTUAL_ENV/bin/pip install -U pip==8.1.1
 
 # install ckan core + ckan extensions
 $VIRTUAL_ENV/bin/pip install -r requirements-freeze.txt

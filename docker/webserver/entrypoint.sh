@@ -18,6 +18,9 @@ if [ "$1" = 'app' ]; then
     ckan db init
     ckan --plugin=ckanext-harvest harvester initdb
 
+    # Initialize the database tables needed by ckanext-report
+    ckan --plugin=ckanext-report report generate
+
     # start supervisor deamon
     /bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
 
