@@ -197,7 +197,8 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 2. Make changes to the source code(`src` folder) and commit it to github (the extensions used by the app are in `requirements.txt`)
 3. Restart apache to see your changes in action:
 `docker exec -it {app_container_name} service apache2 restart`
-4. In order for the catalog-app to see commits made to repositories in requirements.txt run the following command and commit the new `requirements-freeze.txt`: `docker exec -it {app_container_name} /usr/lib/ckan/bin/pip freeze > requirements-freeze.txt`
+4. Optional: to get the latest code from ckan extensions part of requirements.txt run the following command: `docker-compose exec app /usr/lib/ckan/bin/pip install -r requirements.txt`
+5. In order for the catalog-app to see commits made to repositories in requirements.txt run the following command and commit the new `requirements-freeze.txt`: `docker-compose exec app /usr/lib/ckan/bin/pip -q freeze > requirements-freeze.txt`
 
 see: `https://blog.engineyard.com/2014/composer-its-all-about-the-lock-file`
 the same concepts apply to pip
