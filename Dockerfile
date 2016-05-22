@@ -31,9 +31,17 @@ RUN apt-get -q -y update && apt-get -q -y install \
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
 
+# Get python 2.7.10 for virtualenv
+RUN wget http://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
+RUN tar -zxvf Python-2.7.10.tgz
+RUN mkdir /root/.localpython
+RUN cd Python-2.7.10 && \
+    ./configure --prefix=/root/.localpython --enable-unicode=ucs4 && \
+    make && make install
+
 # Upgrade pip & install virtualenv
 RUN pip install virtualenv && \
-    virtualenv $CKAN_HOME --no-site-packages
+    virtualenv $CKAN_HOME --no-site-packages -p /root/.localpython/bin/python2.7
 
 # Configure apache
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf

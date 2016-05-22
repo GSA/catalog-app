@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/lib/ckan/bin/python
 import os
 import hashlib
 hashlib.md5 = hashlib.sha1
