@@ -4,7 +4,7 @@ set -e
 VIRTUAL_ENV=/usr/lib/ckan
 
 # create virtual_env & upgrade pip
-virtualenv $VIRTUAL_ENV
+virtualenv $VIRTUAL_ENV -p /root/.localpython/bin/python2.7
 $VIRTUAL_ENV/bin/pip install -U pip==8.1.1
 
 # install ckan core + ckan extensions
