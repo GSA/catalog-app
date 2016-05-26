@@ -40,7 +40,6 @@ This is the main Dockerfile for the "Catalog" other repos include:
 * https://github.com/GSA/catalog-solr
 * https://github.com/GSA/catalog-db
 * https://github.com/GSA/catalog-fgdc2iso
-* https://github.com/GSA/catalog-pycsw
 * https://github.com/GSA/catalog-scheduler
 
 Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN is used by Data.gov @ http://catalog.data.gov
@@ -72,7 +71,7 @@ If you do not wish to run docker as root user (i.e. `sudo`), you can add your UN
   * harvester-fetch
   * harvester-gather
   * fgdc2iso
-* [pyCSW *(in progress)*](http://pycsw.org)
+* [pycsw *(in progress)*](http://pycsw.org)
 
 ### Getting Started
 This first thing you will need to do is create a new CKAN sysadmin so you can create datasets/organizations:
