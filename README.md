@@ -35,12 +35,16 @@ team:
 [![codecov](https://codecov.io/gh/GSA/catalog-app/branch/master/graph/badge.svg)](https://codecov.io/gh/GSA/catalog-app)
 
 This is the main Dockerfile for the "Catalog" other repos include:
-* https://github.com/GSA/catalog-nginx
-* https://github.com/GSA/catalog-pycsw
-* https://github.com/GSA/catalog-solr
-* https://github.com/GSA/catalog-db
-* https://github.com/GSA/catalog-fgdc2iso
-* https://github.com/GSA/catalog-scheduler
+
+| Containers | Build Status |
+| --- | --- |
+| [**catalog-app**](https://github.com/GSA/catalog-app)|<a href="http://drone.datagov.us/GSA/catalog-app"><img src="http://drone.datagov.us/api/badges/GSA/catalog-app/status.svg" /></a>|
+| [catalog-nginx](https://github.com/GSA/catalog-nginx)|<a href="http://drone.datagov.us/GSA/catalog-nginx"><img src="http://drone.datagov.us/api/badges/GSA/catalog-nginx/status.svg" /></a>|
+|[catalog-pycsw](https://github.com/GSA/catalog-pycsw)|<a href="http://drone.datagov.us/GSA/catalog-pycsw"><img src="http://drone.datagov.us/api/badges/GSA/catalog-pycsw/status.svg" /></a>|
+|[catalog-solr](https://github.com/GSA/catalog-solr)|<a href="http://drone.datagov.us/GSA/catalog-solr"><img src="http://drone.datagov.us/api/badges/GSA/catalog-solr/status.svg" /></a>|
+|[catalog-db](https://github.com/GSA/catalog-db)|<a href="http://drone.datagov.us/GSA/catalog-db"><img src="http://drone.datagov.us/api/badges/GSA/catalog-db/status.svg" /></a>|
+|[catalog-fgdc2iso](https://github.com/GSA/catalog-fgdc2iso)|<a href="http://drone.datagov.us/GSA/catalog-fgdc2iso"><img src="http://drone.datagov.us/api/badges/GSA/catalog-fgdc2iso/status.svg" /></a>| 
+|[catalog-scheduler](https://github.com/GSA/catalog-scheduler)|<a href="http://drone.datagov.us/GSA/catalog-scheduler"><img src="http://drone.datagov.us/api/badges/GSA/catalog-scheduler/status.svg" /></a>|
 
 Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN is used by Data.gov @ http://catalog.data.gov
 
