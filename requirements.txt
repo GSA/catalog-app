@@ -16,9 +16,6 @@
 # ckanext-datajson extension
 -e git+https://github.com/GSA/ckanext-datajson@2.3-upgrade#egg=ckanext-datajson
 
-# ckanext-saml2 extension
--e git+https://github.com/GSA/ckanext-saml2@master#egg=ckanext-saml2
-
 # ckanext-qa extension
 -e git+https://github.com/GSA/ckanext-qa@2.3-upgrade#egg=ckanext-qa
 
