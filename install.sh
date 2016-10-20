@@ -1,7 +1,11 @@
 #!/bin/sh
 set -e
 
-VIRTUAL_ENV=/usr/lib/ckan
+if [ ! -z "$1" ]; then
+    VIRTUAL_ENV=$1
+else 
+    VIRTUAL_ENV=/usr/lib/ckan
+fi
 
 # create virtual_env & upgrade pip
 if [ -f /root/.localpython/bin/python2.7 ]; then
