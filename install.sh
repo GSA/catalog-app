@@ -8,8 +8,8 @@ else
 fi
 
 # create virtual_env & upgrade pip
-if [ -f /root/.localpython/bin/python2.7 ]; then
-    virtualenv $VIRTUAL_ENV -p /root/.localpython/bin/python2.7
+if [ -f /usr/local/lib/python2.7.13/bin/python ]; then
+    virtualenv $VIRTUAL_ENV -p /usr/local/lib/python2.7.13/bin/python
 else
     virtualenv $VIRTUAL_ENV
 fi
