@@ -9,7 +9,7 @@ app:
     - fgdc2iso
   command: app --wait-for-dependencies
   volumes:
-    - /var/tmp/ckan/csv:/var/tmp/ckan/csv
+    - /tmp/ckan/csv:/tmp/ckan/csv
 harvester-fetch-consumer:
   build: .
   links:
