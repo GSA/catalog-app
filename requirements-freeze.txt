@@ -4,7 +4,7 @@ Babel==0.9.6
 Beaker==1.6.4
 celery==2.4.2
 chardet==2.3.0
--e git+https://github.com/GSA/ckan.git@c252fe2e1ce0bc7e98f82d55092cfb4d88fd07bb#egg=ckan
+-e git+https://github.com/GSA/ckan.git@6bba96029181ba112e44fa82b60daf2e20fc0ddc#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@5bea804d23e13fa46116d6307677ca83f130b910#egg=ckanext_archiver
 -e git+https://github.com/GSA/ckanext-datagovtheme@8432ddca5b17da264e3e2b3ab5e8c8737d5b52d6#egg=ckanext_datagovtheme
 -e git+https://github.com/GSA/ckanext-datajson@3205ba3f9af9c37fb0adaed3023c701c23c5cc21#egg=ckanext_datajson
