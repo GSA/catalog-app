@@ -4,17 +4,17 @@ Babel==0.9.6
 Beaker==1.6.4
 celery==2.4.2
 chardet==2.3.0
--e git+https://github.com/GSA/ckan.git@2.3-upgrade#egg=ckan
--e git+https://github.com/GSA/ckanext-archiver@2.3-upgrade#egg=ckanext_archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@2.3-upgrade#egg=ckanext_datagovtheme
--e git+https://github.com/GSA/ckanext-datajson@2.3-upgrade#egg=ckanext_datajson
+-e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
+-e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext_archiver
+-e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext_datagovtheme
+-e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext_datajson
 -e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext_extlink
--e git+https://github.com/GSA/ckanext-geodatagov@2.3-upgrade#egg=ckanext_geodatagov
+-e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext_geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext_googleanalyticsbasic
--e git+https://github.com/GSA/ckanext-harvest@2.3-upgrade#egg=ckanext_harvest
--e git+https://github.com/GSA/ckanext-qa@2.3-upgrade#egg=ckanext_qa
--e git+https://github.com/GSA/ckanext-report@2.3-upgrade#egg=ckanext_report
--e git+https://github.com/GSA/ckanext-spatial@2.3-upgrade#egg=ckanext_spatial
+-e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext_harvest
+-e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext_qa
+-e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext_report
+-e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext_spatial
 -e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext_ga_report
 decorator==3.4.0
 fanstatic==0.12
