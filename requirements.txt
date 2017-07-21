@@ -1,32 +1,11 @@
-#ckan core 
--e git+https://github.com/GSA/ckan.git@2.3-upgrade#egg=ckan
-
-# ckanext-harvester extension
--e git+https://github.com/GSA/ckanext-harvest@2.3-upgrade#egg=ckanext-harvest
-
-# ckanext-spatial extension
--e git+https://github.com/GSA/ckanext-spatial@2.3-upgrade#egg=ckanext-spatial
-
-# ckanext-geodatagov extension
--e git+https://github.com/GSA/ckanext-geodatagov@2.3-upgrade#egg=ckanext-geodatagov
-
-# ckanext-datagovtheme extension
--e git+https://github.com/GSA/ckanext-datagovtheme@2.3-upgrade#egg=ckanext-datagovtheme
-
-# ckanext-datajson extension
--e git+https://github.com/GSA/ckanext-datajson@2.3-upgrade#egg=ckanext-datajson
-
-# ckanext-qa extension
--e git+https://github.com/GSA/ckanext-qa@2.3-upgrade#egg=ckanext-qa
-
-# ckanext-archiver extension
--e git+https://github.com/GSA/ckanext-archiver@2.3-upgrade#egg=ckanext-archiver
-
-# ckanext-googleanalyticsbasic extension
--e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
-
-# ckanext-extlink extension
--e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext-extlink
-
-# ckanext-report extension
--e git+https://github.com/GSA/ckanext-report@2.3-upgrade#egg=ckanext-report
+-e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
+-e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext_archiver
+-e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext_datagovtheme
+-e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext_datajson
+-e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext_extlink
+-e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext_geodatagov
+-e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext_googleanalyticsbasic
+-e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext_harvest
+-e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext_qa
+-e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext_report
+-e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext_spatial
