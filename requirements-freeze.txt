@@ -4,17 +4,17 @@ Babel==0.9.6
 Beaker==1.6.4
 celery==2.4.2
 chardet==2.3.0
--e git+https://github.com/GSA/ckan.git@c252fe2e1ce0bc7e98f82d55092cfb4d88fd07bb#egg=ckan
+-e git+https://github.com/GSA/ckan.git@6bba96029181ba112e44fa82b60daf2e20fc0ddc#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@5bea804d23e13fa46116d6307677ca83f130b910#egg=ckanext_archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@8432ddca5b17da264e3e2b3ab5e8c8737d5b52d6#egg=ckanext_datagovtheme
+-e git+https://github.com/GSA/ckanext-datagovtheme@8f33e143476f71159c0d3c0e7954ef387ae66013#egg=ckanext_datagovtheme
 -e git+https://github.com/GSA/ckanext-datajson@3205ba3f9af9c37fb0adaed3023c701c23c5cc21#egg=ckanext_datajson
 -e git+https://github.com/GSA/ckanext-extlink@69629853f6c7aa4f94c105c5efd76380d70f0843#egg=ckanext_extlink
--e git+https://github.com/GSA/ckanext-geodatagov@fec43c3e6e4e07c87e0068ea0732e96336cb3a1e#egg=ckanext_geodatagov
+-e git+https://github.com/GSA/ckanext-geodatagov@7acffb28584ce33535c75d5d3ad8e6fb2d10db92#egg=ckanext_geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@0b90194d77938e59ecb7d6937c201bd6815447f8#egg=ckanext_googleanalyticsbasic
--e git+https://github.com/GSA/ckanext-harvest@96a21e6f3aac8a3f8a871586f347e9e00e7003cc#egg=ckanext_harvest
+-e git+https://github.com/GSA/ckanext-harvest@3e2a9606e13a0416daa02122ae9c8691210e976d#egg=ckanext_harvest
 -e git+https://github.com/GSA/ckanext-qa@93ea0aaaf985c7177a6bdebf1ddd4b3ce2c3c288#egg=ckanext_qa
 -e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
--e git+https://github.com/GSA/ckanext-spatial@3330dba59c458b546a17aea1e7ce8c76ec19afd2#egg=ckanext_spatial
+-e git+https://github.com/GSA/ckanext-spatial@2a25f8d60c31add77e155c4136f2c0d4e3b86385#egg=ckanext_spatial
 decorator==3.4.0
 fanstatic==0.12
 Flask==0.8
