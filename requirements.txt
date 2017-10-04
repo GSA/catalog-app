@@ -38,6 +38,9 @@ chardet==2.3.0
 # ckanext-report extension
 -e git+https://github.com/GSA/ckanext-report@2.3-upgrade#egg=ckanext-report
 
+# ckanext-ga-report extension
+-e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-report
+
 decorator==3.4.0
 fanstatic==0.12
 Flask==0.8
