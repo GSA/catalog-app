@@ -19,6 +19,9 @@ chardet==2.3.0
 -e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext_spatial
 -e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-report
 
+# ckanext-ga-report extension
+-e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-report
+
 decorator==3.4.0
 fanstatic==0.12
 Flask==0.8
