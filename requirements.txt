@@ -7,17 +7,17 @@ chardet==2.3.0
 
 #ckan core and extensions
 -e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
--e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext_archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext_datagovtheme
--e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext_datajson
--e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext_extlink
--e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext_geodatagov
--e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext_googleanalyticsbasic
--e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext_harvest
--e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext_qa
--e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext_report
+-e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext-archiver
+-e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext-datagovtheme
+-e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext-datajson
+-e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext-extlink
+-e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext-geodatagov
+-e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
+-e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext-harvest
+-e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext-qa
+-e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext-report
 -e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext-spatial
--e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext_ga_report
+-e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-ga-report
 
 decorator==3.4.0
 fanstatic==0.12
