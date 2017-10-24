@@ -5,14 +5,14 @@ Beaker==1.6.4
 celery==2.4.2
 chardet==2.3.0
 -e git+https://github.com/GSA/ckan.git@6bba96029181ba112e44fa82b60daf2e20fc0ddc#egg=ckan
--e git+https://github.com/GSA/ckanext-archiver@5bea804d23e13fa46116d6307677ca83f130b910#egg=ckanext_archiver
+-e git+https://github.com/GSA/ckanext-archiver@b523d58f71ecfe5c761d302d8f7a3132e537ad5e#egg=ckanext_archiver
 -e git+https://github.com/GSA/ckanext-datagovtheme@81c6e444003f635217e27915b1f37c9d25bc2cc6#egg=ckanext_datagovtheme
 -e git+https://github.com/GSA/ckanext-datajson@3205ba3f9af9c37fb0adaed3023c701c23c5cc21#egg=ckanext_datajson
 -e git+https://github.com/GSA/ckanext-extlink@69629853f6c7aa4f94c105c5efd76380d70f0843#egg=ckanext_extlink
 -e git+https://github.com/GSA/ckanext-geodatagov@7acffb28584ce33535c75d5d3ad8e6fb2d10db92#egg=ckanext_geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@0b90194d77938e59ecb7d6937c201bd6815447f8#egg=ckanext_googleanalyticsbasic
 -e git+https://github.com/GSA/ckanext-harvest@3e2a9606e13a0416daa02122ae9c8691210e976d#egg=ckanext_harvest
--e git+https://github.com/GSA/ckanext-qa@93ea0aaaf985c7177a6bdebf1ddd4b3ce2c3c288#egg=ckanext_qa
+-e git+https://github.com/GSA/ckanext-qa@0b2a0c6c38c468b441990d7b59b5107f59ae405d#egg=ckanext_qa
 -e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
 -e git+https://github.com/GSA/ckanext-spatial@2a25f8d60c31add77e155c4136f2c0d4e3b86385#egg=ckanext_spatial
 -e git+https://github.com/GSA/ckanext-ga-report@40561cd57b9197cf96aa8e585c1419604cc627de#egg=ckanext_ga_report
