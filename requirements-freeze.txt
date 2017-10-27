@@ -6,7 +6,7 @@ celery==2.4.2
 chardet==2.3.0
 -e git+https://github.com/GSA/ckan.git@6bba96029181ba112e44fa82b60daf2e20fc0ddc#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@be6cfa02c716efdfa40bee29227a8d9603624e58#egg=ckanext_archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@81c6e444003f635217e27915b1f37c9d25bc2cc6#egg=ckanext_datagovtheme
+-e git+https://github.com/GSA/ckanext-datagovtheme@35a44a5814e9cd55fb55a53281a82dee550abea0#egg=ckanext_datagovtheme
 -e git+https://github.com/GSA/ckanext-datajson@3205ba3f9af9c37fb0adaed3023c701c23c5cc21#egg=ckanext_datajson
 -e git+https://github.com/GSA/ckanext-extlink@69629853f6c7aa4f94c105c5efd76380d70f0843#egg=ckanext_extlink
 -e git+https://github.com/GSA/ckanext-geodatagov@7acffb28584ce33535c75d5d3ad8e6fb2d10db92#egg=ckanext_geodatagov
