@@ -12,7 +12,7 @@ chardet==2.3.0
 -e git+https://github.com/GSA/ckanext-geodatagov@7acffb28584ce33535c75d5d3ad8e6fb2d10db92#egg=ckanext_geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@0b90194d77938e59ecb7d6937c201bd6815447f8#egg=ckanext_googleanalyticsbasic
 -e git+https://github.com/GSA/ckanext-harvest@3e2a9606e13a0416daa02122ae9c8691210e976d#egg=ckanext_harvest
--e git+https://github.com/GSA/ckanext-qa@9e3a0e3097f19675aa4e0d8fe6969a5510c0a78b#egg=ckanext_qa
+-e git+https://github.com/GSA/ckanext-qa@d1bb9fd913ebd3ee5d08a13b1497888648917422#egg=ckanext_qa
 -e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
 -e git+https://github.com/GSA/ckanext-spatial@2a25f8d60c31add77e155c4136f2c0d4e3b86385#egg=ckanext_spatial
 -e git+https://github.com/GSA/ckanext-ga-report@40561cd57b9197cf96aa8e585c1419604cc627de#egg=ckanext_ga_report
