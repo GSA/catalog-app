@@ -1,29 +1,33 @@
+amqp==1.0.13
 amqplib==1.0.2
 anyjson==0.3.3
 Babel==0.9.6
 Beaker==1.6.4
 celery==2.4.2
 chardet==2.3.0
--e git+https://github.com/GSA/ckan.git@6bba96029181ba112e44fa82b60daf2e20fc0ddc#egg=ckan
--e git+https://github.com/GSA/ckanext-archiver@bb53eb6175256e4140905effd399000bc5ba0bce#egg=ckanext_archiver
+-e git+https://github.com/GSA/ckan.git@3d3424fc2d43909adb88878775ef99e114e97ae1#egg=ckan
+-e git+https://github.com/GSA/ckanext-archiver@bb4d85b5db628cd2a6d576c3fde79ddc0d9b5952#egg=ckanext_archiver
 -e git+https://github.com/GSA/ckanext-datagovtheme@35a44a5814e9cd55fb55a53281a82dee550abea0#egg=ckanext_datagovtheme
 -e git+https://github.com/GSA/ckanext-datajson@3205ba3f9af9c37fb0adaed3023c701c23c5cc21#egg=ckanext_datajson
 -e git+https://github.com/GSA/ckanext-extlink@69629853f6c7aa4f94c105c5efd76380d70f0843#egg=ckanext_extlink
--e git+https://github.com/GSA/ckanext-geodatagov@7acffb28584ce33535c75d5d3ad8e6fb2d10db92#egg=ckanext_geodatagov
+-e git+https://github.com/GSA/ckanext-ga-report@ae0a10c9accbe045b3ebd218c825685006532c4c#egg=ckanext_ga_report
+-e git+https://github.com/GSA/ckanext-geodatagov@80b72945926134f0d9d3fb59741284332672cac4#egg=ckanext_geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@0b90194d77938e59ecb7d6937c201bd6815447f8#egg=ckanext_googleanalyticsbasic
--e git+https://github.com/GSA/ckanext-harvest@3e2a9606e13a0416daa02122ae9c8691210e976d#egg=ckanext_harvest
+-e git+https://github.com/GSA/ckanext-harvest@23c646128b2c8b6f1cc6b7dac733d057dd6274c5#egg=ckanext_harvest
 -e git+https://github.com/GSA/ckanext-qa@2b3353cb3a36e021de448b7d280165a3dbfcf728#egg=ckanext_qa
 -e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
 -e git+https://github.com/GSA/ckanext-spatial@2a25f8d60c31add77e155c4136f2c0d4e3b86385#egg=ckanext_spatial
--e git+https://github.com/GSA/ckanext-ga-report@ae0a10c9accbe045b3ebd218c825685006532c4c#egg=ckanext_ga_report
 decorator==3.4.0
 fanstatic==0.12
 Flask==0.8
 FormEncode==1.2.6
+gdata==2.0.18
 Genshi==0.6
 GeoAlchemy==0.7.2
 GeoAlchemy2==0.2.6
+google-api-python-client==1.4.1
 html5lib==0.9999999
+httplib2==0.10.3
 Jinja2==2.6
 json-table-schema==0.2.1
 jsonschema==2.4.0
@@ -36,7 +40,9 @@ MarkupSafe==0.18
 meld3==1.0.2
 messytables==0.15.0
 nose==1.3.0
+oauth2client==1.4.12
 ofs==0.4.1
+-e git+https://github.com/GSA/OWSLib.git@71a43028777bc982d993876d925699af830e2839#egg=OWSLib
 Pairtree===0.7.1-T
 passlib==1.6.2
 Paste==1.7.5.1
@@ -45,7 +51,10 @@ PasteScript==1.7.5
 pbr==0.8.2
 pika==0.9.8
 ply==3.4
+progressbar==2.3
 psycopg2==2.4.5
+pyasn1==0.3.7
+pyasn1-modules==0.1.5
 Pygments==1.6
 Pylons==0.9.7
 pyparsing==1.5.6
@@ -63,6 +72,7 @@ repoze.who-friendlyform==1.0.8
 requests==1.1.0
 rfc3987==1.3.5
 Routes==1.13
+rsa==3.4.2
 Shapely==1.3.1
 simplejson==3.3.1
 six==1.7.3
@@ -73,6 +83,7 @@ sqlparse==0.1.11
 supervisor==3.2.2
 Tempita==0.5.2
 unicodecsv==0.9.4
+uritemplate==3.0.0
 vdm==0.13
 WebError==0.10.3
 WebHelpers==1.3
