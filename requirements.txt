@@ -2,6 +2,7 @@ amqplib==1.0.2
 anyjson==0.3.3
 Babel==0.9.6
 Beaker==1.6.4
+boto==2.48.0
 celery==2.4.2
 chardet==2.3.0
 
