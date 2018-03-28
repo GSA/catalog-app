@@ -2,20 +2,22 @@ amqplib==1.0.2
 anyjson==0.3.3
 Babel==0.9.6
 Beaker==1.6.4
+boto==2.48.0
 celery==2.4.2
 chardet==2.3.0
--e git+https://github.com/GSA/ckan.git@14b78073c6c72190134ff893dcf73ab225953458#egg=ckan
--e git+https://github.com/GSA/ckanext-archiver@bb4d85b5db628cd2a6d576c3fde79ddc0d9b5952#egg=ckanext_archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@3c7b14a9d74dbed6043aa02a186915067ad0b293#egg=ckanext_datagovtheme
--e git+https://github.com/GSA/ckanext-datajson@3205ba3f9af9c37fb0adaed3023c701c23c5cc21#egg=ckanext_datajson
--e git+https://github.com/GSA/ckanext-extlink@69629853f6c7aa4f94c105c5efd76380d70f0843#egg=ckanext_extlink
--e git+https://github.com/GSA/ckanext-geodatagov@80b72945926134f0d9d3fb59741284332672cac4#egg=ckanext_geodatagov
--e git+https://github.com/GSA/ckanext-googleanalyticsbasic@0b90194d77938e59ecb7d6937c201bd6815447f8#egg=ckanext_googleanalyticsbasic
--e git+https://github.com/GSA/ckanext-harvest@23c646128b2c8b6f1cc6b7dac733d057dd6274c5#egg=ckanext_harvest
--e git+https://github.com/GSA/ckanext-qa@2b3353cb3a36e021de448b7d280165a3dbfcf728#egg=ckanext_qa
--e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
--e git+https://github.com/GSA/ckanext-spatial@2a25f8d60c31add77e155c4136f2c0d4e3b86385#egg=ckanext_spatial
--e git+https://github.com/GSA/ckanext-ga-report@7d32eac6db1bc68dd8f3f96f14c6fd3aeec902a9#egg=ckanext_ga_report
+-e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
+-e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext_archiver
+-e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext_datagovtheme
+-e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext_datajson
+-e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext_extlink
+-e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext_geodatagov
+-e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext_googleanalyticsbasic
+-e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext_harvest
+-e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext_qa
+-e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext_report
+-e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext_spatial
+-e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext_ga_report
+-e git+https://github.com/GSA/PyZ3950.@master#datagov#egg=PyZ3950
 decorator==3.4.0
 fanstatic==0.12
 Flask==0.8
@@ -55,7 +57,6 @@ python-memcached==1.48
 pytz==2016.1
 pyutilib.component.core==4.5.3
 PyYAML==3.11
--e git+https://github.com/asl2/PyZ3950.git@c2282c73182cef2beca0f65b1eb7699c9b24512e#egg=PyZ3950
 redis==2.10.1
 repoze.lru==0.6
 repoze.who==2.0
