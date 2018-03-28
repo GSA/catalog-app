@@ -19,7 +19,7 @@ chardet==2.3.0
 -e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext-report
 -e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext-spatial
 -e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-ga-report
--e git+https://github.com/GSA/PyZ3950.@master#datagov#egg=PyZ3950
+-e git+https://github.com/GSA/PyZ3950@master#datagov#egg=PyZ3950
 
 decorator==3.4.0
 fanstatic==0.12
