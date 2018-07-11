@@ -1,15 +1,20 @@
+solr:
+  container_name: solr
+  build: docker/catalog-solr/
 app:
   build: .
   environment:
-    CKAN_SITE_URL: http://catalog.dev
+    CKAN_SITE_URL: http://localhost:5000
   links:
     - redis
     - db
     - solr
     - fgdc2iso
-  command: app --wait-for-dependencies
+  # command: app --wait-for-dependencies
   volumes:
     - /tmp/ckan/csv:/tmp/ckan/csv
+  ports:
+    - "5000:5000"
 harvester-fetch-consumer:
   build: .
   links:
@@ -38,8 +43,7 @@ db:
     DB_CKAN_PASSWORD: pass
     DB_CKAN_DB: ckan
     DB_PYCSW_DB: pycsw
-solr:
-  image: datagov/catalog-solr:latest
+
 fgdc2iso:
   image: datagov/catalog-fgdc2iso:latest
   environment:
@@ -50,18 +54,18 @@ pycsw:
     - app
     - db
   command: start-pycsw --wait-for-dependencies
-nginx:
-  image: datagov/catalog-nginx:latest
-  ports:
-    - "80:80"
-  links:
-    - app
-    - pycsw
-  command: /entrypoint.sh --wait-for-dependencies
+# nginx:
+#   build: docker/catalog-nginx/
+#   ports:
+#     - "80:80"
+#   links:
+#     - app
+#     - pycsw
+#   command: /entrypoint.sh --wait-for-dependencies
 scheduler:
   image: datagov/catalog-scheduler:latest
   links:
-    - app
+    # - app
     - redis
     - db
     - solr
