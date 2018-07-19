@@ -25,25 +25,26 @@ if [ "$1" = 'app' ]; then
     /bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
 
 elif [ "$1" = 'fetch-consumer' ]; then
-    
-    # wait for the app to start-up 
-    if [ "$2" = '--wait-for-dependencies' ]; then
-        sh -c "while ! nc -w 1 -z $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT; do sleep 1; done"
-    fi
+
+    # wait for the app to start-up
+    # if [ "$2" = '--wait-for-dependencies' ]; then
+    #     # sh -c "while ! nc -w 1 -z $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT; do echo 'Waiting for app...'; sleep 2; done"
+    # fi
 
     #ckan harvester initdb
     ckan --plugin=ckanext-harvest harvester fetch_consumer
 
-elif [ "$1" = 'gather-consumer' ]; then 
+elif [ "$1" = 'gather-consumer' ]; then
 
-    # wait for the app to start-up 
-    if [ "$2" = '--wait-for-dependencies' ]; then
-        sh -c "while ! nc -w 1 -z $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT; do sleep 1; done"
-    fi
+    # wait for the app to start-up
+    # if [ "$2" = '--wait-for-dependencies' ]; then
+    #     sh -c "while ! nc -w 1 -z $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT; do sleep 1; done"
+    # fi
 
     #ckan harvester initdb
     ckan --plugin=ckanext-harvest harvester gather_consumer
 else
+
     # execute any other command
     exec $@
 fi

@@ -68,6 +68,10 @@ RUN cd / && \
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE 80
+# EXPOSE 80
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+
+EXPOSE 5000
+
+CMD ["/usr/lib/ckan/bin/paster","serve","/etc/ckan/production.ini"]
