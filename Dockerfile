@@ -14,6 +14,7 @@ RUN apt-get -q -y update && apt-get -q -y install \
 	git \
 	python-dev \
 	ruby-dev \
+	netcat-traditional \
 	postgresql-client \
 	bison \
 	apache2 \

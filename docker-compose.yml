@@ -1,6 +1,5 @@
 solr:
-  container_name: solr
-  build: docker/catalog-solr/
+  image: datagov/catalog-solr:latest
 app:
   build: .
   environment:
@@ -10,7 +9,7 @@ app:
     - db
     - solr
     - fgdc2iso
-  # command: app --wait-for-dependencies
+  command: app --wait-for-dependencies
   volumes:
     - /tmp/ckan/csv:/tmp/ckan/csv
   ports:
@@ -54,18 +53,18 @@ pycsw:
     - app
     - db
   command: start-pycsw --wait-for-dependencies
-# nginx:
-#   build: docker/catalog-nginx/
-#   ports:
-#     - "80:80"
-#   links:
-#     - app
-#     - pycsw
-#   command: /entrypoint.sh --wait-for-dependencies
+nginx:
+  image: datagov/catalog-nginx:latest
+  ports:
+    - "80:80"
+  links:
+    - app
+    - pycsw
+  command: /entrypoint.sh --wait-for-dependencies
 scheduler:
   image: datagov/catalog-scheduler:latest
   links:
-    # - app
+    - app
     - redis
     - db
     - solr
