@@ -24,8 +24,7 @@ if [ "$1" = 'app' ]; then
     ckan --plugin=ckanext-qa qa init
     ckan --plugin=ckanext-report report initdb
 
-    # start supervisor deamon
-    /bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
+    exec /usr/lib/ckan/bin/paster serve /etc/ckan/production.ini
 
 elif [ "$1" = 'fetch-consumer' ]; then
     
