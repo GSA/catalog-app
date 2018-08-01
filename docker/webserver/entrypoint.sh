@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -o errexit
+set -o pipefail
 
 # configure /etc/ckan/production.ini
 /bin/sh /usr/lib/ckan/bin/ckan_config.sh
@@ -17,9 +19,10 @@ if [ "$1" = 'app' ]; then
     # initialize DB
     ckan db init
     ckan --plugin=ckanext-harvest harvester initdb
-
-    # Initialize the database tables needed by ckanext-report
-    ckan --plugin=ckanext-report report generate
+    ckan --plugin=ckanext-ga-report initdb
+    ckan --plugin=ckanext-archiver archiver init
+    ckan --plugin=ckanext-qa qa init
+    ckan --plugin=ckanext-report report initdb
 
     # start supervisor deamon
     /bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
