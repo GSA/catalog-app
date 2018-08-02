@@ -34,6 +34,8 @@ team:
 
 [![codecov](https://codecov.io/gh/GSA/catalog-app/branch/master/graph/badge.svg)](https://codecov.io/gh/GSA/catalog-app)
 
+[![CircleCI](https://circleci.com/gh/GSA/catalog-app.svg?style=svg)](https://circleci.com/gh/GSA/catalog-app)
+
 This is the main Dockerfile for the "Catalog" other repos include:
 
 | Containers | Build Status |
@@ -218,6 +220,14 @@ the same concepts apply to pip
 run:
 
     eval $(docker-machine env)
+
+
+## Tests
+
+Tests are run from a special `test` docker container defined in
+`docker-compose.test.yml`.
+
+    $ make test
 
 
 ## License and Contributing
