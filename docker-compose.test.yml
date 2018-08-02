@@ -1,0 +1,8 @@
+# extends docker-compose.yml
+# run with docker-compose -f docker-compose.yml,docker-compose.test.yml
+
+test:
+  build: .
+  dockerfile: Dockerfile.test
+  links:
+    - app
