@@ -221,6 +221,10 @@ run:
 
     eval $(docker-machine env)
 
+ Failed to clone repo during docker build
+    
+    https://github.com/docker/distribution/issues/785#issuecomment-207192283
+    In Ubuntu 16.04 the solution is `echo 1 > /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal`
 
 ## Tests
 
