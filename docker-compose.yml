@@ -33,7 +33,7 @@ harvester-gather-consumer:
     - fgdc2iso
   command: gather-consumer --wait-for-dependencies
 redis:
-  image: redis
+  build: ./docker/redis
 db:
   image: datagov/catalog-db:latest
   environment:
