@@ -30,7 +30,10 @@ RUN apt-get -q -y update && apt-get -q -y install \
 	libpq-dev \
         tomcat6 \
         default-jdk \
-	wget
+	wget \
+        swig \
+        xmlsec1 \
+        memcached
 
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan

@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+python_home=/usr/local/lib/python2.7.10
+export LD_LIBRARY_PATH="$python_home/lib"
+
 if [ ! -z "$1" ]; then
     VIRTUAL_ENV=$1
 else 
@@ -8,8 +11,8 @@ else
 fi
 
 # create virtual_env & upgrade pip
-if [ -f /usr/local/lib/python2.7.10/bin/python ]; then
-    virtualenv $VIRTUAL_ENV -p /usr/local/lib/python2.7.10/bin/python
+if [ -f "$python_home/bin/python" ]; then
+    virtualenv $VIRTUAL_ENV -p "$python_home/bin/python"
 else
     virtualenv $VIRTUAL_ENV
 fi
