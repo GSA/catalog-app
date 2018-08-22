@@ -6,6 +6,10 @@ ENV CKAN_ENV docker
 
 WORKDIR /opt/catalog-app
 
+# TODO compile python to /usr/local to avoid this
+# https://github.com/GSA/datagov-deploy/issues/390
+ENV LD_LIBRARY_PATH /usr/local/lib/python2.7.10/lib
+
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \
   apache2 \
@@ -37,7 +41,7 @@ COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
 RUN wget http://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
 RUN tar -zxvf Python-2.7.10.tgz
 RUN cd Python-2.7.10 && \
-    ./configure --prefix=/usr/local/lib/python2.7.10/ --enable-ipv6 --enable-unicode=ucs4 && \
+    ./configure --prefix=/usr/local/lib/python2.7.10/ --enable-ipv6 --enable-unicode=ucs4 --enable-shared && \
     make && make install
 
 # Upgrade pip & install virtualenv
@@ -47,6 +51,7 @@ RUN pip install virtualenv
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
 COPY docker/webserver/apache/apache.wsgi $CKAN_CONFIG
 COPY docker/webserver/apache/ckan.conf /etc/apache2/sites-enabled/
+COPY docker/webserver/apache/wsgi.conf /etc/apache2/mods-available/
 RUN a2enmod rewrite headers
 
 # Install & Configure CKAN app
@@ -66,10 +71,12 @@ RUN cd / && ./install.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-# EXPOSE 80
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
+# apache
+EXPOSE 80
+
+# paster
 EXPOSE 5000
 
 CMD ["app","--wait-for-dependencies"]
