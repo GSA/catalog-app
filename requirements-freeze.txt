@@ -17,6 +17,7 @@ chardet==2.3.0
 -e git+https://github.com/GSA/ckanext-harvest@2311ea86d1a6ca6c8be294a037d0cbe7d303922b#egg=ckanext_harvest
 -e git+https://github.com/GSA/ckanext-qa@2b3353cb3a36e021de448b7d280165a3dbfcf728#egg=ckanext_qa
 -e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
+-e git+https://github.com/GSA/ckanext-saml2@8415bbf470a9eb08df7fc38f050b833a1bd447dd#egg=ckanext_saml2
 -e git+https://github.com/GSA/ckanext-spatial@2a25f8d60c31add77e155c4136f2c0d4e3b86385#egg=ckanext_spatial
 decorator==3.4.0
 fanstatic==0.12
@@ -36,6 +37,7 @@ kombu==2.5.0
 kombu-sqlalchemy==1.1.0
 LEPL==5.1.3
 lxml==3.5.0
+M2Crypto==0.23.0
 Mako==0.9.0
 MarkupSafe==0.18
 meld3==1.0.2
@@ -59,6 +61,7 @@ pyasn1-modules==0.2.2
 Pygments==1.6
 Pylons==0.9.7
 pyparsing==1.5.6
+-e git+https://github.com/adborden/pysaml2.git@2916159f5366306fa059f81c89a4017319c06586#egg=pysaml2
 python-dateutil==1.5
 python-magic==0.4.12
 python-memcached==1.48

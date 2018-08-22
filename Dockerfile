@@ -24,6 +24,7 @@ RUN apt-get -q -y update && apt-get -q -y install \
   libpq-dev \
   libxml2-dev \
   libxslt1-dev \
+  memcached \
   postgresql-client \
   python-dev \
   python-pip \
@@ -31,8 +32,10 @@ RUN apt-get -q -y update && apt-get -q -y install \
   python-virtualenv \
   ruby \
   ruby-dev \
+  swig \
   tomcat6 \
-  wget
+  wget \
+  xmlsec1
 
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
