@@ -1,0 +1,3 @@
+- [ ] split out the nested pip install requirements step to an init or dev-specific script
+- [ ] update extensions to use setup.py requirements
+- [ ] map local src to virtualenv src

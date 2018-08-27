@@ -45,9 +45,8 @@ RUN cd Python-2.7.10 && \
     ./configure --prefix=/usr/local/lib/python2.7.10/ --enable-ipv6 --enable-unicode=ucs4 --enable-shared && \
     make && make install
 
-# Upgrade pip & install virtualenv
-RUN pip install virtualenv && \
-    virtualenv $CKAN_HOME --no-site-packages -p /usr/local/lib/python2.7.10/bin/python
+# Install virtualenv
+RUN pip install virtualenv
 
 # Configure apache
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
@@ -56,10 +55,10 @@ COPY docker/webserver/apache/ckan.conf /etc/apache2/sites-enabled/
 COPY docker/webserver/apache/wsgi.conf /etc/apache2/mods-available/
 RUN a2enmod rewrite headers
 
+
 # Install & Configure CKAN app
-COPY install.sh /
-COPY requirements-freeze.txt /
-COPY requirements.txt /
+COPY . /opt/catalog-app
+WORKDIR /opt/catalog-app
 COPY docker/webserver/config/ckan_config.sh $CKAN_HOME/bin/
 
 # Config CKAN app
@@ -69,9 +68,14 @@ RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
 RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 
 # Install ckan app
-RUN cd / && \
-    sh install.sh && \
+RUN ./install.sh && \
     mkdir -p $CKAN_CONFIG
+
+# saml2 configs
+COPY config/environments/$CKAN_ENV/saml2 $CKAN_CONFIG/saml2
+RUN ln -sf ${CKAN_CONFIG}saml2/who.ini $CKAN_CONFIG/who.ini
+
+#RUN /usr/lib/ckan/bin/pip install repoze.who==1.0.18
 
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
@@ -84,4 +88,5 @@ EXPOSE 80
 # paster
 EXPOSE 5000
 
-CMD ["/usr/lib/ckan/bin/paster","serve","/etc/ckan/production.ini"]
+WORKDIR /opt/catalog-app
+CMD ["app", "--wait-for-dependencies"]

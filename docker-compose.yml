@@ -12,6 +12,7 @@ app:
   command: app --wait-for-dependencies
   volumes:
     - /tmp/ckan/csv:/tmp/ckan/csv
+    - .:/opt/catalog-app
   ports:
     - "5000:5000"
     - "8080:80"

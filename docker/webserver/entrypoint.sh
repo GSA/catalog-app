@@ -3,8 +3,14 @@
 set -o errexit
 set -o pipefail
 
+# Silence ckan_config.sh when not run in a tty (better for piping output)
+if [[ ! -t 0 ]]; then
+  # Not a tty
+  fd=/dev/null
+fi
+
 # configure /etc/ckan/production.ini
-/bin/sh /usr/lib/ckan/bin/ckan_config.sh
+/bin/sh /usr/lib/ckan/bin/ckan_config.sh > $fd
 
 function wait-for-dependencies () {
   local address="$1"
@@ -54,7 +60,10 @@ elif [ "$1" = 'gather-consumer' ]; then
 
     #ckan harvester initdb
     ckan --plugin=ckanext-harvest harvester gather_consumer
-else
-    # execute any other command
-    exec $@
 fi
+
+# activate the virutal environment
+source /usr/lib/ckan/bin/activate
+
+# execute any other command
+exec "$@"
