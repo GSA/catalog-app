@@ -71,6 +71,10 @@ RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 # Install ckan app
 RUN cd / && ./install.sh
 
+# auth_tkt (and ckan) requires repoze.who 2.0. ckanext-saml, used for
+# production requires repoze.who==1.0.18
+RUN $CKAN_HOME/bin/pip install repoze.who==2.0
+
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
