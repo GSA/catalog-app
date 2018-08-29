@@ -11,8 +11,9 @@ app:
     - fgdc2iso
   command: app --wait-for-dependencies
   volumes:
-    - /tmp/ckan/csv:/tmp/ckan/csv
+    - .:/opt/catalog-app
     - ckan:/usr/lib/ckan
+    - /tmp/ckan/csv:/tmp/ckan/csv
   ports:
     - "5000:5000"
 harvester-fetch-consumer:
