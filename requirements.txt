@@ -15,7 +15,7 @@ chardet==2.3.0
 -e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext-geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
 -e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext-harvest
--e git+https://github.com/GSA/ckanext-saml2@adb-max#egg=ckanext-saml2
+-e git+https://github.com/GSA/ckanext-saml2@max#egg=ckanext-saml2
 -e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext-qa
 -e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext-report
 -e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext-spatial
