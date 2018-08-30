@@ -62,12 +62,16 @@ The application is deployed using [docker-compose](https://docs.docker.com/compo
 
 ### Quick Start
 After docker-compose installs check to make sure docker daemon running: `sudo service docker status` if not `sudo service docker start`
+
 ```
 git clone https://github.com/GSA/catalog-app
 cd catalog-app
-sudo docker-compose up
+docker-compose up
 ```
-If you do not wish to run docker as root user (i.e. `sudo`), you can add your UNIX user to the docker with `sudo useradd -G {{user}} docker`
+
+_Note: We assume your user is already added to the docker group (`sudo useradd
+-G ${user} docker`). Alternatively, you can run docker-compose with `sudo`._
+
 
 ### catalog-app stack:
 * solr
@@ -189,31 +193,44 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 2. Install **docker tool box**: `brew cask install dockertoolbox`
 3. Create a **docker machine**: `docker-machine create --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "2048" default`
 
+
 ### Source Code Folder (**src**):
 **Note:** follow these steps only if your src folder is empty or you need the latest code
 
-1. Start the app, from root folder run: `docker-compose up`
-2. Move app source files to your local src folder (`{app_path_on_your_machine}/src`): `docker cp catalogapp_app_1:/usr/lib/ckan/src .`
-3. Stop the app: `docker-compose down`
+1. Start the app, from root folder.
+
+    $ docker-compose up
+
+1. Copy app source files to your local src folder.
+
+    $ make copy-src
+
+1. Stop the app: `docker-compose down`
+
 
 ### Workflow:
-1. Start the app in local mode (this will mount the `src` folder from your local machine to the app's container `/usr/lib/ckan/src` folder)
-`docker-compose -f docker-compose.yml -f docker-compose.local.yml up`
-2. Make changes to the source code(`src` folder) and commit it to github (the extensions used by the app are in `requirements.txt`)
-3. Restart apache to see your changes in action:
-`docker exec -it {app_container_name} service apache2 restart`
-4. Optional: to get the latest code from ckan extensions part of requirements.txt run the following command: `docker-compose exec app /usr/lib/ckan/bin/pip install -r requirements.txt`
-5. In order for the catalog-app to see commits made to repositories in requirements.txt run the following command and commit the new `requirements-freeze.txt`: `docker-compose exec app /usr/lib/ckan/bin/pip -q freeze > requirements-freeze.txt`
 
-see: `https://blog.engineyard.com/2014/composer-its-all-about-the-lock-file`
-the same concepts apply to pip
+1. Start the app in local mode.
 
-### Manual regenerating requirements-freeze.txt
-    $ virtualenv test
-    $ cd test
-    $ source ./bin/activate
-    $ pip install -r requirements.txt
-    $ pip freeze > requirements-freeze.txt
+    $ make local
+
+1. Make changes to the source code in `src`.
+1. Restart apache to see your changes in action.
+
+    $ docker-compose exec app service apache2 restart
+
+1. Commit the changes, and push extensions to GitHub.
+1. (optional) Pull in the latest dependencies, including nested dependencies.
+
+    $ make update-dependencies
+
+1. Update the pinned requirements in `requirements-freeze.txt`.
+
+    $ make requirements
+
+see: https://blog.engineyard.com/2014/composer-its-all-about-the-lock-file
+the same concepts apply to pip.
+
 
 ### Troubleshooting:
  "Cannot connect to the Docker daemon. Is the docker daemon running on this host?"

@@ -1,30 +1,28 @@
-#!/bin/sh
-set -e
+#!/bin/bash
+#
+# Install script used in production environments. This initializes the virtual
+# environment and then installs frozen package versions from
+# requirements-freeze.txt
 
-if [ ! -z "$1" ]; then
-    VIRTUAL_ENV=$1
-else 
-    VIRTUAL_ENV=/usr/lib/ckan
-fi
+set -o errexit
+set -o pipefail
+set -o nounset
 
-# create virtual_env & upgrade pip
-if [ -f /usr/local/lib/python2.7.10/bin/python ]; then
-    virtualenv $VIRTUAL_ENV -p /usr/local/lib/python2.7.10/bin/python
-else
-    virtualenv $VIRTUAL_ENV
+python_home=/usr/local/lib/python2.7.10
+export LD_LIBRARY_PATH="$python_home/lib"
+
+venv="${1:-/usr/lib/ckan}"
+pip="$venv/bin/pip"
+
+# create virtual_env
+virtualenv_opts="--no-site-packages"
+if [ -f "$python_home/bin/python" ]; then
+    virtualenv_opts+=" -p $python_home/bin/python"
 fi
-$VIRTUAL_ENV/bin/pip install -U pip==8.1.1
+virtualenv "$venv" $virtualenv_opts
+
+# upgrade pip
+"$pip" install -U pip==8.1.1
 
 # install ckan core + ckan extensions
-$VIRTUAL_ENV/bin/pip install -r requirements-freeze.txt
-
-EXTENSIONS=$(cat requirements.txt | grep -o "egg=.*" | cut -f2- -d'=')
-
-# install/setup each extension individually
-for extension in $EXTENSIONS; do
-    if [ -f $VIRTUAL_ENV/src/$extension/requirements.txt ]; then 
-        $VIRTUAL_ENV/bin/pip install -r $VIRTUAL_ENV/src/$extension/requirements.txt
-    elif [ -f $VIRTUAL_ENV/src/$extension/pip-requirements.txt ]; then
-    	$VIRTUAL_ENV/bin/pip install -r $VIRTUAL_ENV/src/$extension/pip-requirements.txt
-    fi
-done
+"$pip" install -r requirements-freeze.txt

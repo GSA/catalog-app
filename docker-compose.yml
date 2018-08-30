@@ -11,6 +11,8 @@ app:
     - fgdc2iso
   command: app --wait-for-dependencies
   volumes:
+    - .:/opt/catalog-app
+    - ckan:/usr/lib/ckan
     - /tmp/ckan/csv:/tmp/ckan/csv
   ports:
     - "5000:5000"
