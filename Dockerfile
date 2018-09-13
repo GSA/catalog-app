@@ -6,6 +6,10 @@ ENV CKAN_ENV docker
 
 WORKDIR /opt/catalog-app
 
+# TODO compile python to /usr/local to avoid this
+# https://github.com/GSA/datagov-deploy/issues/390
+ENV LD_LIBRARY_PATH /usr/local/lib/python2.7.10/lib
+
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \
   apache2 \
@@ -20,6 +24,7 @@ RUN apt-get -q -y update && apt-get -q -y install \
   libpq-dev \
   libxml2-dev \
   libxslt1-dev \
+  memcached \
   postgresql-client \
   python-dev \
   python-pip \
@@ -27,8 +32,10 @@ RUN apt-get -q -y update && apt-get -q -y install \
   python-virtualenv \
   ruby \
   ruby-dev \
+  swig \
   tomcat6 \
-  wget
+  wget \
+  xmlsec1
 
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
@@ -37,7 +44,7 @@ COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
 RUN wget http://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
 RUN tar -zxvf Python-2.7.10.tgz
 RUN cd Python-2.7.10 && \
-    ./configure --prefix=/usr/local/lib/python2.7.10/ --enable-ipv6 --enable-unicode=ucs4 && \
+    ./configure --prefix=/usr/local/lib/python2.7.10/ --enable-ipv6 --enable-unicode=ucs4 --enable-shared && \
     make && make install
 
 # Upgrade pip & install virtualenv
@@ -47,6 +54,7 @@ RUN pip install virtualenv
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
 COPY docker/webserver/apache/apache.wsgi $CKAN_CONFIG
 COPY docker/webserver/apache/ckan.conf /etc/apache2/sites-enabled/
+COPY docker/webserver/apache/wsgi.conf /etc/apache2/mods-available/
 RUN a2enmod rewrite headers
 
 # Install & Configure CKAN app
@@ -63,13 +71,19 @@ RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 # Install ckan app
 RUN cd / && ./install.sh
 
+# auth_tkt (and ckan) requires repoze.who 2.0. ckanext-saml, used for
+# production requires repoze.who==1.0.18
+RUN $CKAN_HOME/bin/pip install repoze.who==2.0
+
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-# EXPOSE 80
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
+# apache
+EXPOSE 80
+
+# paster
 EXPOSE 5000
 
 CMD ["app","--wait-for-dependencies"]

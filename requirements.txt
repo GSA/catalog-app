@@ -15,11 +15,12 @@ chardet==2.3.0
 -e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext-geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
 -e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext-harvest
+-e git+https://github.com/GSA/ckanext-saml2@max#egg=ckanext-saml2
 -e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext-qa
 -e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext-report
 -e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext-spatial
 -e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-ga-report
--e git+https://github.com/GSA/PyZ3950@master#datagov#egg=PyZ3950
+-e git+https://github.com/GSA/PyZ3950@master#egg=PyZ3950
 
 decorator==3.4.0
 fanstatic==0.12
@@ -36,6 +37,11 @@ kombu==2.1.3
 kombu-sqlalchemy==1.1.0
 LEPL==5.1.3
 lxml==3.5.0
+
+# TODO upgrade to latest
+# match close to trusty's 0.21.1 while having an more up-to-date openssl symbols
+# https://packages.ubuntu.com/trusty/python-m2crypto
+M2Crypto==0.23.0
 Mako==0.9.0
 MarkupSafe==0.18
 meld3==1.0.2
@@ -62,7 +68,7 @@ pyutilib.component.core==4.5.3
 PyYAML==3.11
 redis==2.10.1
 repoze.lru==0.6
-repoze.who==2.0
+repoze.who==1.0.18
 repoze.who-friendlyform==1.0.8
 requests==1.1.0
 rfc3987==1.3.5

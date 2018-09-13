@@ -6,8 +6,8 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-host="$APP_PORT_5000_TCP_ADDR"
-port="$APP_PORT_5000_TCP_PORT"
+host="$APP_PORT_80_TCP_ADDR"
+port="$APP_PORT_80_TCP_PORT"
 
 function test_setup () {
   echo waiting for app to startup...

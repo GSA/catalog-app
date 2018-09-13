@@ -39,7 +39,8 @@ if [ "$1" = 'app' ]; then
     ckan --plugin=ckanext-qa qa init
     ckan --plugin=ckanext-report report initdb
 
-    exec /usr/lib/ckan/bin/paster serve /etc/ckan/production.ini
+    source /etc/apache2/envvars
+    exec /usr/sbin/apache2 -DFOREGROUND
 
 elif [ "$1" = 'fetch-consumer' ]; then
     
