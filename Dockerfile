@@ -73,7 +73,9 @@ RUN cd / && ./install.sh
 
 # auth_tkt (and ckan) requires repoze.who 2.0. ckanext-saml, used for
 # production requires repoze.who==1.0.18
-RUN $CKAN_HOME/bin/pip install repoze.who==2.0
+# installing the one-off repoze.who will upgrade Paste if no version is
+# specified. ckanext-geodatagov is not compatible with Paste>=2.0
+RUN $CKAN_HOME/bin/pip install -U repoze.who==2.0 Paste==1.7.5.1
 
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
