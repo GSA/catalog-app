@@ -46,7 +46,7 @@ elif [ "$1" = 'fetch-consumer' ]; then
     
     # wait for the app to start-up 
     if [ "$2" = '--wait-for-dependencies' ]; then
-        wait-for-dependencies $APP_PORT_5000_TCP_ADDR $APP_PORT_5000_TCP_PORT
+        wait-for-dependencies $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT
     fi
 
     #ckan harvester initdb
@@ -56,7 +56,7 @@ elif [ "$1" = 'gather-consumer' ]; then
 
     # wait for the app to start-up 
     if [ "$2" = '--wait-for-dependencies' ]; then
-        wait-for-dependencies $APP_PORT_5000_TCP_ADDR $APP_PORT_5000_TCP_PORT
+        wait-for-dependencies $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT
     fi
 
     #ckan harvester initdb
