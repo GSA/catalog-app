@@ -21,8 +21,8 @@ if [ -f "$python_home/bin/python" ]; then
 fi
 virtualenv "$venv" $virtualenv_opts
 
-# upgrade pip
-"$pip" install -U pip==8.1.1
+# upgrade pip and setuptools
+"$pip" install -U pip==8.1.1 setuptools==40.5.0
 
 # install ckan core + ckan extensions
 "$pip" install -r requirements-freeze.txt
