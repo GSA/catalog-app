@@ -5,6 +5,7 @@ Babel==0.9.6
 Beaker==1.6.4
 boto==2.48.0
 celery==2.4.2
+certifi==2018.10.15
 chardet==2.3.0
 -e git+https://github.com/GSA/ckan.git@83b66167bcf36b3d9d60e1d355a77a8d9dc7fb61#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@bb4d85b5db628cd2a6d576c3fde79ddc0d9b5952#egg=ckanext_archiver
