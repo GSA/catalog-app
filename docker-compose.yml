@@ -12,6 +12,7 @@ app:
   command: app --wait-for-dependencies
   volumes:
     - .:/opt/catalog-app
+    - ckan:/user/lib/ckan
     - /tmp/ckan/csv:/tmp/ckan/csv
   ports:
     - "5000:5000"
@@ -25,6 +26,8 @@ harvester-fetch-consumer:
     - solr
     - fgdc2iso
   command: fetch-consumer --wait-for-dependencies
+  volumes:
+    - ckan:/usr/lib/ckan
 harvester-gather-consumer:
   build: .
   links:
@@ -34,6 +37,8 @@ harvester-gather-consumer:
     - solr
     - fgdc2iso
   command: gather-consumer --wait-for-dependencies
+  volumes:
+    - ckan:/usr/lib/ckan
 redis:
   build: ./docker/redis
 db:
