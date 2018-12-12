@@ -33,34 +33,34 @@ if [ "$1" = 'app' ]; then
 
     # initialize DB
     ckan db init
-    ckan --plugin=ckanext-harvest harvester initdb
-    ckan --plugin=ckanext-ga-report initdb
-    ckan --plugin=ckanext-archiver archiver init
-    ckan --plugin=ckanext-qa qa init
-    ckan --plugin=ckanext-report report initdb
+    # ckan --plugin=ckanext-harvest harvester initdb
+    # ckan --plugin=ckanext-ga-report initdb
+    # ckan --plugin=ckanext-archiver archiver init
+    # ckan --plugin=ckanext-qa qa init
+    # ckan --plugin=ckanext-report report initdb
 
     source /etc/apache2/envvars
     exec /usr/sbin/apache2 -DFOREGROUND
 
-elif [ "$1" = 'fetch-consumer' ]; then
-    
-    # wait for the app to start-up 
-    if [ "$2" = '--wait-for-dependencies' ]; then
-        wait-for-dependencies $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT
-    fi
-
-    #ckan harvester initdb
-    ckan --plugin=ckanext-harvest harvester fetch_consumer
-
-elif [ "$1" = 'gather-consumer' ]; then 
-
-    # wait for the app to start-up 
-    if [ "$2" = '--wait-for-dependencies' ]; then
-        wait-for-dependencies $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT
-    fi
-
-    #ckan harvester initdb
-    ckan --plugin=ckanext-harvest harvester gather_consumer
+# elif [ "$1" = 'fetch-consumer' ]; then
+#
+#     # wait for the app to start-up
+#     if [ "$2" = '--wait-for-dependencies' ]; then
+#         wait-for-dependencies $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT
+#     fi
+#
+#     #ckan harvester initdb
+#     ckan --plugin=ckanext-harvest harvester fetch_consumer
+#
+# elif [ "$1" = 'gather-consumer' ]; then
+#
+#     # wait for the app to start-up
+#     if [ "$2" = '--wait-for-dependencies' ]; then
+#         wait-for-dependencies $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT
+#     fi
+#
+#     #ckan harvester initdb
+#     ckan --plugin=ckanext-harvest harvester gather_consumer
 fi
 
 # activate the virutal environment

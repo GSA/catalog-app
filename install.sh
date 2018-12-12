@@ -25,4 +25,6 @@ virtualenv "$venv" $virtualenv_opts
 "$pip" install -U pip==8.1.1 setuptools==40.5.0
 
 # install ckan core + ckan extensions
-"$pip" install -r requirements-freeze.txt
+"$pip" install -r requirements.txt
+
+"$pip" install -r $venv/src/ckan/requirements.txt

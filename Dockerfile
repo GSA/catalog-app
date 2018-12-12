@@ -13,29 +13,30 @@ ENV LD_LIBRARY_PATH /usr/local/lib/python2.7.10/lib
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \
   apache2 \
-  atool \
-  bison \
-  default-jdk \
-  git \
-  htop \
-  lib32z1-dev \
+#  atool \
+#  bison \
+#  default-jdk \
+#  git \
+   git-core \
+#  htop \
+#  lib32z1-dev \
   libapache2-mod-wsgi \
-  libgeos-c1 \
+#  libgeos-c1 \
   libpq-dev \
-  libxml2-dev \
-  libxslt1-dev \
-  memcached \
-  postgresql-client \
+#  libxml2-dev \
+#  libxslt1-dev \
+#  memcached \
+#  postgresql-client \
   python-dev \
   python-pip \
-  python-setuptools \
+#  python-setuptools \
   python-virtualenv \
-  ruby \
-  ruby-dev \
-  swig \
-  tomcat6 \
-  wget \
-  xmlsec1
+#  ruby \
+#  ruby-dev \
+#  swig \
+#  tomcat6 \
+  wget
+#  xmlsec1
 
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
@@ -59,7 +60,7 @@ RUN a2enmod rewrite headers
 
 # Install & Configure CKAN app
 COPY install.sh /
-COPY requirements-freeze.txt /
+COPY requirements.txt /
 COPY docker/webserver/config/ckan_config.sh $CKAN_HOME/bin/
 
 # Config CKAN app
