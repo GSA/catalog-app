@@ -35,6 +35,7 @@ RUN apt-get -q -y update && apt-get -q -y install \
 #  ruby-dev \
 #  swig \
 #  tomcat6 \
+  vim \
   wget
 #  xmlsec1
 

@@ -45,7 +45,7 @@ This is the main Dockerfile for the "Catalog" other repos include:
 |[catalog-pycsw](https://github.com/GSA/catalog-pycsw)|<a href="http://drone.datagov.us/GSA/catalog-pycsw"><img src="http://drone.datagov.us/api/badges/GSA/catalog-pycsw/status.svg" /></a>|
 |[catalog-solr](https://github.com/GSA/catalog-solr)|<a href="http://drone.datagov.us/GSA/catalog-solr"><img src="http://drone.datagov.us/api/badges/GSA/catalog-solr/status.svg" /></a>|
 |[catalog-db](https://github.com/GSA/catalog-db)|<a href="http://drone.datagov.us/GSA/catalog-db"><img src="http://drone.datagov.us/api/badges/GSA/catalog-db/status.svg" /></a>|
-|[catalog-fgdc2iso](https://github.com/GSA/catalog-fgdc2iso)|<a href="http://drone.datagov.us/GSA/catalog-fgdc2iso"><img src="http://drone.datagov.us/api/badges/GSA/catalog-fgdc2iso/status.svg" /></a>| 
+|[catalog-fgdc2iso](https://github.com/GSA/catalog-fgdc2iso)|<a href="http://drone.datagov.us/GSA/catalog-fgdc2iso"><img src="http://drone.datagov.us/api/badges/GSA/catalog-fgdc2iso/status.svg" /></a>|
 |[catalog-scheduler](https://github.com/GSA/catalog-scheduler)|<a href="http://drone.datagov.us/GSA/catalog-scheduler"><img src="http://drone.datagov.us/api/badges/GSA/catalog-scheduler/status.svg" /></a>|
 
 Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN is used by Data.gov @ http://catalog.data.gov
@@ -135,6 +135,21 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 >to run a one off command inside the container:
 
 * `docker-compose run app {{command}}`
+
+
+### Test setup
+To setup and run the tests for CKAN, follow the instructions here: https://docs.ckan.org/en/2.8/contributing/test.html. There are a few modifications, but the process starts the same. Open the app container via command line and activate the virtual environment (`. /usr/lib/ckan/bin/activate`) and then install the test requirements libraries (`pip install -r /usr/lib/ckan/src/ckan/dev-requirements.txt`). When setting up the DB tables, you need to extract the URL dynamically created by Docker in the production.ini file on the app container. Then, you'll need to run the following commands from the DB container:
+* `createdb -h 172.17.0.2 -U ckan -O ckan ckan_test -E utf-8`
+* `createdb -h 172.17.0.2 -U ckan -O ckan datastore_test -E utf-8`
+
+Then, the following command will need to be run on app: `paster datastore set-permissions -c test-core.ini`. Copy the output to a text editor, and change all the `ckan_default` items to be `ckan`. Open the db container in command line, and open up the psql command line by typing `psql -U ckan -h 172.17.0.2`. Then, copy and paste the output from the paster command into the psql command prompt.
+
+From here, you can have the app command line open and run the following command: `nosetests --ckan --with-pylons=test-core.ini ckan ckanext > test_output.txt 2>&1`, which will run the tests and put the output in test_output.txt. This command can take 10+ minutes to run. As of 12/12/2018 for CKAN 2.8, there are
+* 2046 successful tests
+* 73 errors
+* 14 failures
+* 3 skipped
+
 
 ## CKAN/catalog-app commands
 **This commands are run from *within* the catalog-app container using either `docker exec it` or `docker-compose run` as described above**
