@@ -85,7 +85,7 @@ _Note: We assume your user is already added to the docker group (`sudo useradd
 
 ### Getting Started
 This first thing you will need to do is create a new CKAN sysadmin so you can create datasets/organizations:
-`ckan sysadmin add {{ name }}` for example `docker exec -it {{ container }} /bin/bash` then `ckan sysadmin add admin` it should then prompt you to enter/confirm a new password. **You can now login to through your web browser where the site will likely be running @ http://localhost or http://127.0.0.1. At the very bottom of the site click 'login' and enter the newly minted credentials you just created!**
+`ckan sysadmin add {{ name }}` for example `docker exec -it {{ container }} /bin/bash` then `ckan sysadmin add admin` it should then prompt you to enter/confirm a new password. If the above commands do not work, see the other useful commands section. **You can now login to through your web browser where the site will likely be running @ http://localhost or http://127.0.0.1. At the very bottom of the site click 'login' and enter the newly minted credentials you just created!**
 
 To use CKAN's harvester you first need to create an "organization", once created click the "admin" button. You should now see "Harvest Sources" next to Datasets and Members. Click "Add Harvest Source", this CKAN already packages a number of harvesters ready to use include data.json and spatial harvesters.
 
@@ -110,7 +110,7 @@ Enter the URL to the appropriate endpoint to the "Source type" used, enter a tit
 
 
 ## Other Useful Commands
-Once running you can use either/both [docker commands](https://docs.docker.com/engine/reference/commandline/cli/) or [docker-compose commands](https://docs.docker.com/compose/reference/) to manage running containers. This needs to be performed atleast once to create a CKAN sysadmin. *If you are running docker as root you may need to ADD `sudo` before these commands*
+Once running you can use either/both [docker commands](https://docs.docker.com/engine/reference/commandline/cli/) or [docker-compose commands](https://docs.docker.com/compose/reference/) to manage running containers. This needs to be performed at least once to create a CKAN sysadmin. *If you are running docker as root you may need to ADD `sudo` before these commands*
 
 >NOTE: docker and docker-compose have different synthax for their commands - even though some commands do functionally the same thing. As a general rule use `--help` (ex. `docker --help` or `docker-compose --help` after any proposed command to see it's expected format.
 
@@ -130,11 +130,11 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 
 ### Docker-compose commands
 >to enter into the container in interactive mode as root:
-* `docker-compose run app /bin/bash`
+* `docker-compose exec app /bin/bash`
 
 >to run a one off command inside the container:
 
-* `docker-compose run app {{command}}`
+* `docker-compose exec app {{command}}`
 
 
 ### Test setup
