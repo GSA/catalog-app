@@ -136,6 +136,9 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 
 * `docker-compose exec app {{command}}`
 
+>to get the status of the docker containers:
+* `docker-compose ps`
+
 
 ### Test setup
 To setup and run the tests for CKAN, follow the instructions here: https://docs.ckan.org/en/2.8/contributing/test.html. There are a few modifications, but the process starts the same. Open the app container via command line and activate the virtual environment (`. /usr/lib/ckan/bin/activate`) and then install the test requirements libraries (`pip install -r /usr/lib/ckan/src/ckan/dev-requirements.txt`). When setting up the DB tables, you need to extract the URL dynamically created by Docker in the production.ini file on the app container. Then, you'll need to run the following commands from the DB container:
