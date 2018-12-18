@@ -20,7 +20,7 @@ chardet==2.3.0
 -e git+https://github.com/GSA/ckanext-harvest@8eaf4e1021019d01b34e8ce58aed327a24f59c96#egg=ckanext_harvest
 -e git+https://github.com/GSA/ckanext-qa@2b3353cb3a36e021de448b7d280165a3dbfcf728#egg=ckanext_qa
 -e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
--e git+https://github.com/GSA/ckanext-saml2@ie1c92e46f32e2ba1028bcbf1e2fc193d44adb822#egg=ckanext_saml2
+-e git+https://github.com/GSA/ckanext-saml2@e1c92e46f32e2ba1028bcbf1e2fc193d44adb822#egg=ckanext_saml2
 -e git+https://github.com/GSA/ckanext-spatial@2a25f8d60c31add77e155c4136f2c0d4e3b86385#egg=ckanext_spatial
 cryptography==2.4.2
 decorator==3.4.0
