@@ -84,7 +84,6 @@ RUN chmod +x /opt/catalog-app/app_configure.sh
 RUN mkdir /var/lib/ckan && mkdir /var/lib/ckan/storage
 RUN chown -R www-data /var/lib/ckan
 RUN chmod -R u+rwx /var/lib/ckan
-# ENTRYPOINT ["/entrypoint.sh"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
@@ -93,5 +92,3 @@ EXPOSE 80
 
 # paster
 EXPOSE 5000
-
-# CMD ["app","--wait-for-dependencies"]
