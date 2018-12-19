@@ -1,0 +1,5 @@
+FROM catalog-app_app
+
+WORKDIR /usr/lib/ckan/bin/
+
+RUN /usr/lib/ckan/bin/pip install -e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-ga-report

@@ -1,82 +1,91 @@
-solr:
-  # image: datagov/catalog-solr:latest
-  build: ./docker/catalog-solr
-app:
-  build: .
-  environment:
-    CKAN_SITE_URL: http://localhost:8080
-  links:
-    - redis
-    - db
-    - solr
-    # - fgdc2iso
-  command: app --wait-for-dependencies
-  volumes:
-    - .:/opt/catalog-app
-    - ckan:/user/lib/ckan
-    - /tmp/ckan/csv:/tmp/ckan/csv
-  ports:
-    - "5000:5000"
-    - "8080:80"
-# harvester-fetch-consumer:
-#   build: .
-#   links:
-#     - app
-#     - redis
-#     - db
-#     - solr
-#     - fgdc2iso
-#   command: fetch-consumer --wait-for-dependencies
-#   volumes:
-#     - ckan:/usr/lib/ckan
-# harvester-gather-consumer:
-#   build: .
-#   links:
-#     - app
-#     - redis
-#     - db
-#     - solr
-#     - fgdc2iso
-#   command: gather-consumer --wait-for-dependencies
-#   volumes:
-#     - ckan:/usr/lib/ckan
-redis:
-  build: ./docker/redis
-db:
-  image: datagov/catalog-db:latest
-  environment:
-    POSTGRES_USER: postgres
-    DB_CKAN_USER: ckan
-    DB_CKAN_PASSWORD: pass
-    DB_CKAN_DB: ckan
-    DB_PYCSW_DB: pycsw
+version: '3'
+services:
+  solr:
+    # image: datagov/catalog-solr:latest
+    build: ./docker/catalog-solr
+  app:
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+    environment:
+      CKAN_SITE_URL: http://localhost:8080
+    env_file:
+      'variables.env'
+    command: app --wait-for-dependencies
+    volumes:
+      - .:/opt/catalog-app
+      - ckan:/user/lib/ckan
+      # - /tmp/ckan/csv:/tmp/ckan/csv
+    depends_on:
+      - db
+      - solr
+      - redis
+    command: ["./docker/webserver/config/wait-for-it.sh", "db:5432", "--", "./docker/webserver/app_configure.sh", "app"]
+    ports:
+      - "5000:5000"
+      - "8080:80"
+  # harvester-fetch-consumer:
+  #   build: .
+  #   links:
+  #     - app
+  #     - redis
+  #     - db
+  #     - solr
+  #     - fgdc2iso
+  #   command: fetch-consumer --wait-for-dependencies
+  #   volumes:
+  #     - ckan:/usr/lib/ckan
+  # harvester-gather-consumer:
+  #   build: .
+  #   links:
+  #     - app
+  #     - redis
+  #     - db
+  #     - solr
+  #     - fgdc2iso
+  #   command: gather-consumer --wait-for-dependencies
+  #   volumes:
+  #     - ckan:/usr/lib/ckan
+  redis:
+    build: ./docker/redis
+  db:
+    image: datagov/catalog-db:latest
+    env_file:
+      'variables.env'
 
-# fgdc2iso:
-#   image: datagov/catalog-fgdc2iso:latest
-#   environment:
-#     SIGNATURE:
-# pycsw:
-#   image: datagov/catalog-pycsw:latest
-#   links:
-#     - app
-#     - db
-#   command: start-pycsw --wait-for-dependencies
-# nginx:
-#   image: datagov/catalog-nginx:latest
-#   ports:
-#     - "80:80"
-#   links:
-#     - app
-#     - pycsw
-#   command: /entrypoint.sh --wait-for-dependencies
-# scheduler:
-#   image: datagov/catalog-scheduler:latest
-#   links:
-#     - app
-#     - redis
-#     - db
-#     - solr
-#     - fgdc2iso
-#   volumes:
-#   - /var/run/docker.sock:/var/run/docker.sock
-#   - ./docker-compose.yml:/docker-compose.yml
+  # fgdc2iso:
+  #   image: datagov/catalog-fgdc2iso:latest
+  #   environment:
+  #     SIGNATURE:
+  # pycsw:
+  #   image: datagov/catalog-pycsw:latest
+  #   links:
+  #     - app
+  #     - db
+  #   command: start-pycsw --wait-for-dependencies
+  # nginx:
+  #   image: datagov/catalog-nginx:latest
+  #   ports:
+  #     - "80:80"
+  #   links:
+  #     - app
+  #     - pycsw
+  #   command: /entrypoint.sh --wait-for-dependencies
+  # scheduler:
+  #   image: datagov/catalog-scheduler:latest
+  #   links:
+  #     - app
+  #     - redis
+  #     - db
+  #     - solr
+  #     - fgdc2iso
+  #   volumes:
+  #   - /var/run/docker.sock:/var/run/docker.sock
+  #   - ./docker-compose.yml:/docker-compose.yml
+volumes:
+  .:
+    driver: local
+  ckan:
+    driver: local
+  # /tmp/ckan/csv:
+  #   driver: local

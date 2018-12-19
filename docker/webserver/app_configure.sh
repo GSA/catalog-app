@@ -10,26 +10,37 @@ if [[ ! -t 0 ]]; then
   fd=/dev/null
 fi
 
-# configure /etc/ckan/production.ini
-/bin/sh /usr/lib/ckan/bin/ckan_config.sh > $fd
+# Add the URL's and passwords from the various services to the CKAN app
+#  configuration file
+write_config () {
+  # Set up DB url
+  local user=$DB_CKAN_USER
+  local pass=$DB_CKAN_PASSWORD
+  local db=$DB_CKAN_DB
+  local host='db'
+  local port='5432'
+  local DATABASE_URL=postgresql://${user}:${pass}@${host}:${port}/${db}
 
-function wait-for-dependencies () {
-  local address="$1"
-  local port="$2"
-  while ! nc -w 1 -z "$address" "$port"; do
-    sleep 1;
-  done
+  "$CKAN_HOME"/bin/paster --plugin=ckan config-tool "$1" -e \
+      "sqlalchemy.url = ${DATABASE_URL}" \
+      "solr_url = http://solr:8983/solr/ckan" \
+      "ckan.redis.url = redis://:pass@redis/1"
+      # "ckan.harvest.mq.hostname = ${REDIS_PORT_6379_TCP_ADDR}" \
+      # "ckanext.geodatagov.fgdc2iso_service = ${FGDC2ISO_URL}"
 }
+
+write_config "${CKAN_CONFIG}/production.ini"
+write_config "${CKAN_HOME}/src/ckan/test-core.ini"
+
+# Specific variable settings only for production.ini
+"$CKAN_HOME"/bin/paster --plugin=ckan config-tool "${CKAN_CONFIG}/production.ini" -e \
+  "ckan.harvest.mq.hostname = ${REDIS_PORT_6379_TCP_ADDR}" \
+  "ckan.site_url = ${CKAN_SITE_URL}" \
+  "ckan.storage_path = /var/lib/ckan"
+  # "ckanext.geodatagov.fgdc2iso_service = http://$FGDC2ISO_PORT_8080_TCP_ADDR:$FGDC2ISO_PORT_8080_TCP_PORT/fgdc2iso"
 
 
 if [ "$1" = 'app' ]; then
-
-    # wait for all services to start-up
-    if [ "$2" = '--wait-for-dependencies' ]; then
-        wait-for-dependencies $DB_PORT_5432_TCP_ADDR $DB_PORT_5432_TCP_PORT
-        wait-for-dependencies $SOLR_PORT_8983_TCP_ADDR $SOLR_PORT_8983_TCP_PORT
-        wait-for-dependencies $REDIS_PORT_6379_TCP_ADDR $REDIS_PORT_6379_TCP_PORT
-    fi
 
     # initialize DB
     ckan db init
