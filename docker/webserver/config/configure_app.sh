@@ -39,19 +39,18 @@ write_config "${CKAN_HOME}/src/ckan/test-core.ini"
   "ckan.storage_path = /var/lib/ckan"
   # "ckanext.geodatagov.fgdc2iso_service = http://$FGDC2ISO_PORT_8080_TCP_ADDR:$FGDC2ISO_PORT_8080_TCP_PORT/fgdc2iso"
 
+# initialize DB
+ckan db init
+# ckan --plugin=ckanext-harvest harvester initdb
+# ckan --plugin=ckanext-ga-report initdb
+# ckan --plugin=ckanext-archiver archiver init
+# ckan --plugin=ckanext-qa qa init
+# ckan --plugin=ckanext-report report initdb
 
-if [ "$1" = 'app' ]; then
+/bin/bash $@
 
-    # initialize DB
-    ckan db init
-    # ckan --plugin=ckanext-harvest harvester initdb
-    # ckan --plugin=ckanext-ga-report initdb
-    # ckan --plugin=ckanext-archiver archiver init
-    # ckan --plugin=ckanext-qa qa init
-    # ckan --plugin=ckanext-report report initdb
-
-    source /etc/apache2/envvars
-    exec /usr/sbin/apache2 -DFOREGROUND
+source /etc/apache2/envvars
+exec /usr/sbin/apache2 -DFOREGROUND
 
 # elif [ "$1" = 'fetch-consumer' ]; then
 #
@@ -72,10 +71,6 @@ if [ "$1" = 'app' ]; then
 #
 #     #ckan harvester initdb
 #     ckan --plugin=ckanext-harvest harvester gather_consumer
-fi
 
 # activate the virutal environment
 source /usr/lib/ckan/bin/activate
-
-# execute any other command
-exec "$@"

@@ -9,6 +9,7 @@
 
 #ckan core and extensions
 -e 'git+https://github.com/ckan/ckan.git@ckan-2.8.2#egg=ckan'
+#-e git+https://github.com/datagovuk/ckanext-report.git#egg=ckanext-report
 #-e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
 #-e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext-archiver
 #-e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext-datagovtheme

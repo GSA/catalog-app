@@ -108,6 +108,12 @@ Enter the URL to the appropriate endpoint to the "Source type" used, enter a tit
 
 >You can speed up the harvest process with this command `docker-compose scale harvester-fetch-consumer=3` which adds 3 new harvester containers to distribute the workload.
 
+### Development Work
+To test an single extension against the CKAN2.8 image, a base image needs to be created using the following command: `docker build -t ckan2_8 .`. Using this, you can create a specific Dockerfile for the extension starting from this base. See Dockerfile-report for an example.
+To test this extension, simply specify the Dockerfile in the docker-compose file. For example, on line 9, replace `dockerfile: Dockerfile` with `dockerfile: Dockerfile-report`, and run the `docker up` command.
+
+The extensions are meant to be added onto, with each configurable item having the ability to implement another entrypoint script. The `configure_app.sh` script file runs the parameters given as actionable items, and each script created after this should do the same to allow for testing of different extensions in combination (see `configure_report.sh` for an example).
+
 
 ## Other Useful Commands
 Once running you can use either/both [docker commands](https://docs.docker.com/engine/reference/commandline/cli/) or [docker-compose commands](https://docs.docker.com/compose/reference/) to manage running containers. This needs to be performed at least once to create a CKAN sysadmin. *If you are running docker as root you may need to ADD `sudo` before these commands*

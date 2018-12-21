@@ -65,8 +65,8 @@ COPY requirements.txt /
 
 # Config CKAN app
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG
-ENV cachebust cachebust-123456
-COPY docker/webserver/app_configure.sh /opt/catalog-app/app_configure.sh
+COPY docker/webserver/config/configure_app.sh /configure_app.sh
+COPY docker/webserver/config/wait-for-it.sh /wait-for-it.sh
 RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
 RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 
@@ -79,11 +79,10 @@ RUN cd / && ./install.sh
 # specified. ckanext-geodatagov is not compatible with Paste>=2.0
 RUN $CKAN_HOME/bin/pip install -U repoze.who==2.0 Paste==1.7.5.1
 
-RUN chmod +x /opt/catalog-app/app_configure.sh
+RUN chmod +x /configure_app.sh && chmod +x /wait-for-it.sh
 
-RUN mkdir /var/lib/ckan && mkdir /var/lib/ckan/storage
-RUN chown -R www-data /var/lib/ckan
-RUN chmod -R u+rwx /var/lib/ckan
+RUN mkdir /var/lib/ckan && mkdir /var/lib/ckan/storage \
+  && chown -R www-data /var/lib/ckan && chmod -R u+rwx /var/lib/ckan
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
@@ -92,3 +91,5 @@ EXPOSE 80
 
 # paster
 EXPOSE 5000
+
+CMD ["/wait-for-it.sh", "db:5432", "--", "/configure_app.sh"]

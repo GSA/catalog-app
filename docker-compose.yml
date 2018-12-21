@@ -6,43 +6,30 @@ services:
   app:
     build:
       context: .
-      dockerfile: "Dockerfile"
+      dockerfile: "Dockerfile-report"
     environment:
       CKAN_SITE_URL: http://localhost:8080
     env_file:
       'variables.env'
-    command: app --wait-for-dependencies
     volumes:
       - .:/opt/catalog-app
       - ckan:/user/lib/ckan
       # - /tmp/ckan/csv:/tmp/ckan/csv
-    depends_on:
-      - db
-      - solr
-      - redis
-    command: ["./docker/webserver/config/wait-for-it.sh", "db:5432", "--", "./docker/webserver/app_configure.sh", "app"]
+    # depends_on:
+    #   - db
+    #   - solr
+    #   - redis
+    # command: ["/wait-for-it.sh", "db:5432", "--", "/configure_app.sh", "/configure_report.sh"]
     ports:
       - "5000:5000"
       - "8080:80"
   # harvester-fetch-consumer:
   #   build: .
-  #   links:
-  #     - app
-  #     - redis
-  #     - db
-  #     - solr
-  #     - fgdc2iso
   #   command: fetch-consumer --wait-for-dependencies
   #   volumes:
   #     - ckan:/usr/lib/ckan
   # harvester-gather-consumer:
   #   build: .
-  #   links:
-  #     - app
-  #     - redis
-  #     - db
-  #     - solr
-  #     - fgdc2iso
   #   command: gather-consumer --wait-for-dependencies
   #   volumes:
   #     - ckan:/usr/lib/ckan
