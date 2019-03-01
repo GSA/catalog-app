@@ -1,0 +1,23 @@
+FROM ckan2_8:latest
+
+ENV CKAN_HOME /usr/lib/ckan
+
+ARG POSTGRES_USER
+ARG DB_CKAN_USER
+ARG DB_CKAN_PASSWORD
+ARG DB_CKAN_DB
+ARG DB_PYCSW_DB
+ARG CKAN_SITE_URL
+
+WORKDIR /usr/lib/ckan/
+
+# Configure ckan app
+COPY docker/webserver/config/configure_app.sh /configure_app.sh
+RUN chmod +x /configure_app.sh && cd / && ./configure_app.sh
+
+RUN ckan-pip install -e git+https://github.com/GSA/ckanext-datagovtheme@4eea2c54bed9d1e3e679411bbc5b0730eb1a03c9#egg=ckanext_datagovtheme
+  # ckan-pip install -r $CKAN_HOME/src/ckanext-ga-report/requirements.txt
+
+COPY docker/webserver/config/configure_datagovtheme.sh /configure_datagovtheme.sh
+
+CMD ["/wait-for-it.sh", "db:5432", "--", "/start_app.sh", "/configure_datagovtheme.sh"]

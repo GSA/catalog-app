@@ -1,0 +1,23 @@
+FROM ckan2_8:latest
+
+ENV CKAN_HOME /usr/lib/ckan
+
+ARG POSTGRES_USER
+ARG DB_CKAN_USER
+ARG DB_CKAN_PASSWORD
+ARG DB_CKAN_DB
+ARG DB_PYCSW_DB
+ARG CKAN_SITE_URL
+
+WORKDIR /usr/lib/ckan/
+
+# Configure ckan app
+COPY docker/webserver/config/configure_app.sh /configure_app.sh
+RUN chmod +x /configure_app.sh && cd / && ./configure_app.sh
+
+RUN ckan-pip install -e "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial"
+  ckan-pip install -r $CKAN_HOME/src/ckanext-spatial/pip-requirements.txt
+
+COPY docker/webserver/config/configure_spatial.sh /configure_spatial.sh
+
+CMD ["/wait-for-it.sh", "db:5432", "--", "/start_app.sh", "/configure_spatial.sh"]

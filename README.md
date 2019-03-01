@@ -109,11 +109,11 @@ Enter the URL to the appropriate endpoint to the "Source type" used, enter a tit
 >You can speed up the harvest process with this command `docker-compose scale harvester-fetch-consumer=3` which adds 3 new harvester containers to distribute the workload.
 
 ### Development Work
-To test an single extension against the CKAN2.8 image, a base image needs to be created using the following command: `docker build -t ckan2_8 .`. Using this, you can create a specific Dockerfile for the extension starting from this base. See Dockerfile-report for an example.
-To test this extension, simply specify the Dockerfile in the docker-compose file. For example, on line 9, replace `dockerfile: Dockerfile` with `dockerfile: Dockerfile-report`, and run the `docker up` command.
+To test the base CKAN2.8 image, simply run the following command: `docker-compose up`. To test a single extension, you will need to create another dockerfile that overwrites/adds to the current system as needed. You can see an example at `.docker-compose.harvest.yml`. This overwrites the app system with some specific variables that will install certain CKAN extensions related to the harvester, as well as adding new docker images for the gather, fetch, and run processes. To test this extension, simply stack the docker-compose files in the command prompt, like so: `docker-compose -f docker-compose.yml -f .docker-compose.harvest.yml build app && docker-compose -f docker-compose.yml -f .docker-compose.harvest.yml up`.
 
-The extensions are meant to be added onto, with each configurable item having the ability to implement another entrypoint script. The `configure_app.sh` script file runs the parameters given as actionable items, and each script created after this should do the same to allow for testing of different extensions in combination (see `configure_report.sh` for an example).
+The extensions are meant to be self contained, with an overall run file at `asdf`. Any of these configurations could be tested individually, or stacked on top of each other to test multiple integrations of extensions.
 
+Testing a different Dockerfile extension will require clearing the ckan volume. To do this, stop all running images (hit ctr-c if they are running), run `docker-compose stop && docker-compose rm`, run `docker volume rm catalog-app_ckan -f` to force it's removal, and then `docker-compose up` to restart and reload that volume.
 
 ## Other Useful Commands
 Once running you can use either/both [docker commands](https://docs.docker.com/engine/reference/commandline/cli/) or [docker-compose commands](https://docs.docker.com/compose/reference/) to manage running containers. This needs to be performed at least once to create a CKAN sysadmin. *If you are running docker as root you may need to ADD `sudo` before these commands*
@@ -144,6 +144,12 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 
 >to get the status of the docker containers:
 * `docker-compose ps`
+
+>to clear all volumes, images, and networks:
+* `docker container stop $(docker container ls -a -q) && docker system prune -a -f --volumes`
+
+>to clear the volumes and rebuild the ckan code and extensions:
+* `docker-compose rm -f && docker volume rm catalog-app_ckan -f && docker-compose build && docker-compose up`
 
 
 ### Test setup

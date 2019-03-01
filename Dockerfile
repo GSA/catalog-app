@@ -4,6 +4,13 @@ ENV CKAN_HOME /usr/lib/ckan
 ENV CKAN_CONFIG /etc/ckan/
 ENV CKAN_ENV docker
 
+ARG POSTGRES_USER
+ARG DB_CKAN_USER
+ARG DB_CKAN_PASSWORD
+ARG DB_CKAN_DB
+ARG DB_PYCSW_DB
+ARG CKAN_SITE_URL
+
 WORKDIR /opt/catalog-app
 
 # TODO compile python to /usr/local to avoid this
@@ -65,13 +72,15 @@ COPY requirements.txt /
 
 # Config CKAN app
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG
-COPY docker/webserver/config/configure_app.sh /configure_app.sh
-COPY docker/webserver/config/wait-for-it.sh /wait-for-it.sh
 RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
 RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 
 # Install ckan app
-RUN cd / && ./install.sh
+RUN cd / && ./install.sh && ln -s $CKAN_HOME/bin/pip /usr/local/bin/ckan-pip
+
+# Configure ckan app
+COPY docker/webserver/config/configure_app.sh /configure_app.sh
+RUN chmod +x /configure_app.sh && cd / && ./configure_app.sh
 
 # auth_tkt (and ckan) requires repoze.who 2.0. ckanext-saml, used for
 # production requires repoze.who==1.0.18
@@ -79,7 +88,29 @@ RUN cd / && ./install.sh
 # specified. ckanext-geodatagov is not compatible with Paste>=2.0
 RUN $CKAN_HOME/bin/pip install -U repoze.who==2.0 Paste==1.7.5.1
 
-RUN chmod +x /configure_app.sh && chmod +x /wait-for-it.sh
+COPY docker/webserver/config/post_install_functions.sh /post_install_functions.sh
+ARG POST_INSTALL
+RUN . /post_install_functions.sh && eval "${POST_INSTALL}"
+
+ARG POST_DOCKER_BUILD
+RUN . /post_install_functions.sh && eval "${POST_DOCKER_BUILD}"
+
+ARG CKAN_INIT
+RUN echo "${CKAN_INIT}" | sed s@CKAN_CONFIG@${CKAN_CONFIG}@g > ${CKAN_CONFIG}/ckan_extra_init.sh
+
+# Add configuration files
+COPY docker/webserver/config/start_app.sh /start_app.sh
+RUN chmod +x /start_app.sh
+COPY docker/webserver/config/wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+
+# Add harvester configure and start commands
+COPY docker/webserver/config/configure_harvest.sh /configure_harvest.sh
+COPY docker/webserver/config/start_gather.sh /start_gather.sh
+COPY docker/webserver/config/start_fetch.sh /start_fetch.sh
+RUN chmod +x /start_fetch.sh && \
+  chmod +x /start_gather.sh && \
+  chmod +x /configure_harvest.sh
 
 RUN mkdir /var/lib/ckan && mkdir /var/lib/ckan/storage \
   && chown -R www-data /var/lib/ckan && chmod -R u+rwx /var/lib/ckan
@@ -92,4 +123,4 @@ EXPOSE 80
 # paster
 EXPOSE 5000
 
-CMD ["/wait-for-it.sh", "db:5432", "--", "/configure_app.sh"]
+CMD ["/wait-for-it.sh", "db:5432", "--", "/start_app.sh"]

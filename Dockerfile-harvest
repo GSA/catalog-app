@@ -1,0 +1,63 @@
+FROM ckan2_8:latest
+
+ENV CKAN_HOME /usr/lib/ckan
+
+ARG POSTGRES_USER
+ARG DB_CKAN_USER
+ARG DB_CKAN_PASSWORD
+ARG DB_CKAN_DB
+ARG DB_PYCSW_DB
+ARG CKAN_SITE_URL
+
+WORKDIR /usr/lib/ckan/
+
+# Configure ckan app
+COPY docker/webserver/config/configure_app.sh /configure_app.sh
+RUN chmod +x /configure_app.sh && cd / && ./configure_app.sh
+
+RUN mkdir /var/tmp/ckan/dynamic_menu/
+COPY docker/webserver/common/menu.json /var/tmp/ckan/dynamic_menu/menu.json
+RUN chmod 666 /var/tmp/ckan/dynamic_menu/menu.json
+
+# COPY docker/webserver/ckanext-harvest /home/ckanext-harvest
+# RUN $CKAN_HOME/bin/pip install -e /home/ckanext-harvest && \
+#   $CKAN_HOME/bin/pip install -r /home/ckanext-harvest/pip-requirements.txt
+
+RUN $CKAN_HOME/bin/pip install -e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest && \
+# RUN $CKAN_HOME/bin/pip install -e "git+https://github.com/GSA/ckanext-harvest.git#egg=ckanext-harvest" && \
+  $CKAN_HOME/bin/pip install -r $CKAN_HOME/src/ckanext-harvest/pip-requirements.txt
+
+COPY docker/webserver/ckanext-geodatagov /home/ckanext-geodatagov
+
+RUN $CKAN_HOME/bin/pip install -e /home/ckanext-geodatagov && \
+  $CKAN_HOME/bin/pip install -r /home/ckanext-geodatagov/pip-requirements.txt
+
+RUN ckan-pip install -e "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial" && \
+#   # ckan-pip install -e "git+https://github.com/GSA/ckanext-geodatagov@80b72945926134f0d9d3fb59741284332672cac4#egg=ckanext_geodatagov" && \
+#   # ckan-pip install /home/ckanext-geodatagov/ && \
+#   # ckan-pip install -r $CKAN_HOME/src/ckanext-geodatagov/pip-requirements.txt && \
+  ckan-pip install -r $CKAN_HOME/src/ckanext-spatial/pip-requirements.txt && \
+  ckan-pip install -e "git+https://github.com/ViderumGlobal/ckanext-datajson.git#egg=ckanext-datajson" && \
+  ckan-pip install -r $CKAN_HOME/src/ckanext-datajson/pip-requirements.txt
+#   ckan-pip install -e "git+https://github.com/GSA/ckanext-datagovtheme.git#egg=ckanext_datagovtheme" && \
+#   ckan-pip install -e "git+https://github.com/GSA/ckanext-extlink.git#egg=ckanext_extlink"
+
+#Add to the plugins list
+RUN $CKAN_HOME/bin/paster --plugin=ckan config-tool $CKAN_CONFIG/production.ini -e \
+  'ckan.plugins = harvest ckan_harvester' \
+  'ckan.harvest.mq.type = redis' \
+  'ckan.harvest.mq.hostname = redis' \
+  # 'ckan.harvest.mq.port = ' \
+  # 'ckan.harvest.mq.redis_db = 1' \
+  'ckan.harvest.mq.password = pass' \
+  'ckanext.geodatagov.fgdc2iso_service = http://fgdc2iso:8080/fgdc2iso'
+
+COPY docker/webserver/config/configure_harvest.sh /configure_harvest.sh
+COPY docker/webserver/config/start_gather.sh /start_gather.sh
+COPY docker/webserver/config/start_fetch.sh /start_fetch.sh
+
+RUN chmod +x /start_fetch.sh && \
+  chmod +x /start_gather.sh && \
+  chmod +x /configure_harvest.sh
+
+CMD ["/wait-for-it.sh", "db:5432", "--", "/start_app.sh", "/configure_harvest.sh"]

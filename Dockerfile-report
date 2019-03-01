@@ -4,14 +4,9 @@ ENV CKAN_HOME /usr/lib/ckan
 
 WORKDIR /usr/lib/ckan/
 
-RUN ln -s $CKAN_HOME/bin/pip /usr/local/bin/ckan-pip && \
-  ckan-pip install -e git+https://github.com/datagovuk/ckanext-report.git#egg=ckanext-report
+RUN ckan-pip install -e git+https://github.com/datagovuk/ckanext-report.git#egg=ckanext-report
   # ckan-pip install -r $CKAN_HOME/src/ckanext-ga-report/requirements.txt
 
 COPY docker/webserver/config/configure_report.sh /configure_report.sh
- # Install ckan app
- # RUN cd / && ./install.sh
-#
-# RUN cd / && ls -lh
 
 CMD ["/wait-for-it.sh", "db:5432", "--", "/configure_app.sh", "/configure_report.sh"]

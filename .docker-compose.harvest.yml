@@ -1,0 +1,122 @@
+version: '3.2'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+      args:
+        POSTGRES_USER: ${POSTGRES_USER}
+        DB_CKAN_USER: ${DB_CKAN_USER}
+        DB_CKAN_PASSWORD: ${DB_CKAN_PASSWORD}
+        DB_CKAN_DB: ${DB_CKAN_DB}
+        DB_PYCSW_DB: ${DB_PYCSW_DB}
+        CKAN_SITE_URL: ${CKAN_SITE_URL}
+        POST_INSTALL: |
+          install_standard_ckan_extension_github ckan/ckanext-spatial ckanext-spatial &&\
+          install_standard_ckan_extension_github datagovuk/ckanext-report ckanext-report &&\
+          install_standard_ckan_extension_github ckan/ckanext-harvest ckanext-harvest &&\
+          install_standard_ckan_extension_github GSA/ckanext-datajson ckanext-datajson &&\
+          install_standard_ckan_extension_github GSA/usmetadata ckanext-usmetadata &&\
+          install_standard_ckan_extension_github GSA/ckanext-datagovtheme ckanext-datagovtheme
+        POST_DOCKER_BUILD: |
+          mkdir -p /var/tmp/ckan/dynamic_menu
+        CKAN_INIT: |
+          ckan-paster --plugin=ckanext-harvest harvester initdb  -c "CKAN_CONFIG/production.ini"
+    # volumes:
+    #   - .:/opt/catalog-app
+    #   - ckan:/usr/lib/ckan
+    # ports:
+    #   - "5000:5000"
+    #   - "8080:80"
+    #   - "5555:5555"
+    #   - "2222:22"
+  harvester-fetch-consumer:
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+      args:
+        POSTGRES_USER: ${POSTGRES_USER}
+        DB_CKAN_USER: ${DB_CKAN_USER}
+        DB_CKAN_PASSWORD: ${DB_CKAN_PASSWORD}
+        DB_CKAN_DB: ${DB_CKAN_DB}
+        DB_PYCSW_DB: ${DB_PYCSW_DB}
+        CKAN_SITE_URL: ${CKAN_SITE_URL}
+        POST_INSTALL: |
+          install_standard_ckan_extension_github ckan/ckanext-spatial ckanext-spatial &&\
+          install_standard_ckan_extension_github datagovuk/ckanext-report ckanext-report &&\
+          install_standard_ckan_extension_github ckan/ckanext-harvest ckanext-harvest &&\
+          install_standard_ckan_extension_github GSA/ckanext-datajson ckanext-datajson &&\
+          install_standard_ckan_extension_github GSA/usmetadata ckanext-usmetadata &&\
+          install_standard_ckan_extension_github GSA/ckanext-datagovtheme ckanext-datagovtheme
+        POST_DOCKER_BUILD: |
+          mkdir -p /var/tmp/ckan/dynamic_menu
+        CKAN_INIT: |
+          ckan-paster --plugin=ckanext-harvest harvester initdb  -c "CKAN_CONFIG/production.ini"
+    command: ["/wait-for-it.sh", "app:80", "--timeout=30", "--", "/start_fetch.sh", "/configure_harvest.sh"]
+    volumes:
+      - ckan:/usr/lib/ckan
+    ports:
+      - "2223:22"
+  harvester-gather-consumer:
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+      args:
+        POSTGRES_USER: ${POSTGRES_USER}
+        DB_CKAN_USER: ${DB_CKAN_USER}
+        DB_CKAN_PASSWORD: ${DB_CKAN_PASSWORD}
+        DB_CKAN_DB: ${DB_CKAN_DB}
+        DB_PYCSW_DB: ${DB_PYCSW_DB}
+        CKAN_SITE_URL: ${CKAN_SITE_URL}
+        POST_INSTALL: |
+          install_standard_ckan_extension_github ckan/ckanext-spatial ckanext-spatial &&\
+          install_standard_ckan_extension_github datagovuk/ckanext-report ckanext-report &&\
+          install_standard_ckan_extension_github ckan/ckanext-harvest ckanext-harvest &&\
+          install_standard_ckan_extension_github GSA/ckanext-datajson ckanext-datajson &&\
+          install_standard_ckan_extension_github GSA/usmetadata ckanext-usmetadata &&\
+          install_standard_ckan_extension_github GSA/ckanext-datagovtheme ckanext-datagovtheme
+        POST_DOCKER_BUILD: |
+          mkdir -p /var/tmp/ckan/dynamic_menu
+        CKAN_INIT: |
+          ckan-paster --plugin=ckanext-harvest harvester initdb  -c "CKAN_CONFIG/production.ini" &&\
+          . /configure_harvest.sh
+    command: ["/wait-for-it.sh", "app:80", "--timeout=30", "--", "/start_gather.sh", "/configure_harvest.sh"]
+    volumes:
+      - ckan:/usr/lib/ckan
+    ports:
+      - "2224:22"
+  redis:
+    build: ./docker/redis
+  db:
+    image: datagov/catalog-db:latest
+    env_file: '.env'
+
+  fgdc2iso:
+    image: datagov/catalog-fgdc2iso:latest
+    environment:
+      SIGNATURE:
+  # pycsw:
+  #   image: datagov/catalog-pycsw:latest
+  #   links:
+  #     - app
+  #     - db
+  #   command: start-pycsw --wait-for-dependencies
+  # nginx:
+  #   image: datagov/catalog-nginx:latest
+  #   ports:
+  #     - "80:80"
+  #   links:
+  #     - app
+  #     - pycsw
+  #   command: /entrypoint.sh --wait-for-dependencies
+  scheduler:
+    image: datagov/catalog-scheduler:latest
+    volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock"
+    - "./docker-compose.scheduler.yml:/docker-compose.yml"
+    - "./.env:/root/.env"
+volumes:
+  .:
+    driver: local
+  ckan:
+    driver: local

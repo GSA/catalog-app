@@ -1,12 +1,9 @@
-version: '3.2'
+version: '3'
 services:
-  solr:
-    # image: datagov/catalog-solr:latest
-    build: ./docker/catalog-solr
   app:
     build:
       context: .
-      dockerfile: "Dockerfile"
+      dockerfile: "Dockerfile-harvest"
       args:
         - POSTGRES_USER=${POSTGRES_USER}
         - DB_CKAN_USER=${DB_CKAN_USER}
@@ -20,13 +17,10 @@ services:
     ports:
       - "5000:5000"
       - "8080:80"
-      - "5555:5555"
-      - "2222:22"
-  redis:
-    build: ./docker/redis
-  db:
-    image: datagov/catalog-db:latest
-    env_file: '.env'
+  # fgdc2iso:
+  #   image: datagov/catalog-fgdc2iso:latest
+  #   environment:
+  #     SIGNATURE:
   # pycsw:
   #   image: datagov/catalog-pycsw:latest
   #   links:
@@ -41,6 +35,12 @@ services:
   #     - app
   #     - pycsw
   #   command: /entrypoint.sh --wait-for-dependencies
+  scheduler:
+    # build: ./docker/catalog-scheduler
+    image: datagov/catalog-scheduler:latest
+    volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock"
+    - "./docker-compose.yml:/docker-compose.yml"
 volumes:
   .:
     driver: local
