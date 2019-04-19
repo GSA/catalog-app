@@ -8,10 +8,10 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-python_home=/usr/local/lib/python2.7.10
+venv="${1:-/usr/lib/ckan}"
+python_home=${2:-/usr/local/lib/python2.7.10}
 export LD_LIBRARY_PATH="$python_home/lib"
 
-venv="${1:-/usr/lib/ckan}"
 pip="$venv/bin/pip"
 
 # create virtual_env
