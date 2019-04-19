@@ -8,6 +8,10 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+# Default umask with hardening is 0027 which causes all kinds of headaches.
+# Make sure files are installed world readable.
+umask 0022
+
 venv="${1:-/usr/lib/ckan}"
 python_home=${2:-/usr/local/lib/python2.7.10}
 export LD_LIBRARY_PATH="$python_home/lib"
