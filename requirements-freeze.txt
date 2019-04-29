@@ -7,9 +7,9 @@ boto==2.48.0
 celery==2.4.2
 certifi==2018.10.15
 chardet==2.3.0
--e git+https://github.com/GSA/ckan.git@3ef06a35dfe51ec8ecb1a56fa6c372568e3f039a#egg=ckan
+-e git+https://github.com/GSA/ckan.git@be5f5939e6223a6d1a9803107aac1cb14ad5dbcd#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@bb4d85b5db628cd2a6d576c3fde79ddc0d9b5952#egg=ckanext_archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@4eea2c54bed9d1e3e679411bbc5b0730eb1a03c9#egg=ckanext_datagovtheme
+-e git+https://github.com/GSA/ckanext-datagovtheme@bded3f59dfbf7a244d1eeb25216b8d63c9247e82#egg=ckanext_datagovtheme
 -e git+https://github.com/GSA/ckanext-datajson@3205ba3f9af9c37fb0adaed3023c701c23c5cc21#egg=ckanext_datajson
 -e git+https://github.com/GSA/ckanext-extlink@69629853f6c7aa4f94c105c5efd76380d70f0843#egg=ckanext_extlink
 -e git+https://github.com/GSA/ckanext-ga-report@7d32eac6db1bc68dd8f3f96f14c6fd3aeec902a9#egg=ckanext_ga_report
