@@ -25,7 +25,7 @@ chardet==2.3.0
 
 decorator==3.4.0
 fanstatic==0.12
-Flask==0.8
+Flask==1.0
 FormEncode==1.2.6
 Genshi==0.6
 GeoAlchemy==0.7.2
