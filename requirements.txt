@@ -5,7 +5,6 @@ Beaker==1.6.4
 boto==2.48.0
 celery==2.4.2
 certifi # we always want the latest ssl certificate bundle
-chardet==2.3.0
 
 #ckan core and extensions
 -e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
