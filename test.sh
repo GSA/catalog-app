@@ -10,10 +10,8 @@ host="$APP_PORT_80_TCP_ADDR"
 port="$APP_PORT_80_TCP_PORT"
 
 function test_setup () {
-  echo waiting for app to startup...
-  while ! nc -w 1 -z "$host" "$port"; do
-    sleep 1
-  done
+  echo waiting 60 seconds app to startup...
+  nc -w 60 -z "$host" "$port"
 }
 
 function test_http () {
