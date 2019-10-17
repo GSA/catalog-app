@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 ARG PYTHON_VERSION=2.7.16
 
@@ -22,8 +22,9 @@ RUN apt-get -q -y update && apt-get -q -y install \
   htop \
   lib32z1-dev \
   libapache2-mod-wsgi \
-  libgeos-c1 \
+  libgeos-dev \
   libpq-dev \
+  libssl-dev \
   libxml2-dev \
   libxslt1-dev \
   memcached \
@@ -35,7 +36,7 @@ RUN apt-get -q -y update && apt-get -q -y install \
   ruby \
   ruby-dev \
   swig \
-  tomcat6 \
+  tomcat8 \
   wget \
   xmlsec1
 

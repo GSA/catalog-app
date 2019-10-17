@@ -15,7 +15,7 @@ app:
     - ckan:/user/lib/ckan
     - /tmp/ckan/csv:/tmp/ckan/csv
   ports:
-    - "5000:5000"
+    - "5001:5000"
     - "8080:80"
 harvester-fetch-consumer:
   build: .
