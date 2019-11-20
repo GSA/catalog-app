@@ -60,14 +60,6 @@ pycsw:
     - app
     - db
   command: start-pycsw --wait-for-dependencies
-nginx:
-  image: datagov/catalog-nginx:latest
-  ports:
-    - "80:80"
-  links:
-    - app
-    - pycsw
-  command: /entrypoint.sh --wait-for-dependencies
 scheduler:
   image: datagov/catalog-scheduler:latest
   links:
