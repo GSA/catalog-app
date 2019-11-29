@@ -58,8 +58,8 @@ COPY docker/webserver/apache/wsgi.conf /etc/apache2/mods-available/
 RUN a2enmod rewrite headers
 
 # Install & Configure CKAN app
-COPY install.sh /
 COPY requirements-freeze.txt /
+# TODO dropping files in a volume is no good...
 COPY docker/webserver/config/ckan_config.sh $CKAN_HOME/bin/
 
 # Config CKAN app
@@ -69,6 +69,7 @@ RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
 RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 
 # Install ckan app
+COPY install.sh /
 RUN cd / && ./install.sh
 
 # auth_tkt (and ckan) requires repoze.who 2.0. ckanext-saml, used for

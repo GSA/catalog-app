@@ -11,7 +11,7 @@ local:
 	docker-compose -f docker-compose.yml -f docker-compose.local.yml up
 
 requirements:
-	docker-compose -f docker-compose.yml -f docker-compose.local.yml run --rm -T app pip --quiet freeze > requirements-freeze.txt
+	docker-compose run --rm -T app pip --quiet freeze > requirements-freeze.txt
 
 update-dependencies:
 	docker-compose run --rm app ./install-dev.sh

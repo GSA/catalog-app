@@ -26,9 +26,9 @@ if [ "$1" = 'app' ]; then
 
     # wait for all services to start-up
     if [ "$2" = '--wait-for-dependencies' ]; then
-        wait-for-dependencies $DB_PORT_5432_TCP_ADDR $DB_PORT_5432_TCP_PORT
-        wait-for-dependencies $SOLR_PORT_8983_TCP_ADDR $SOLR_PORT_8983_TCP_PORT
-        wait-for-dependencies $REDIS_PORT_6379_TCP_ADDR $REDIS_PORT_6379_TCP_PORT
+        wait-for-dependencies db 5432
+        wait-for-dependencies solr 8983
+        wait-for-dependencies redis 6379
     fi
 
     # initialize DB
@@ -46,7 +46,7 @@ elif [ "$1" = 'fetch-consumer' ]; then
     
     # wait for the app to start-up 
     if [ "$2" = '--wait-for-dependencies' ]; then
-        wait-for-dependencies $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT
+        wait-for-dependencies app 80
     fi
 
     #ckan harvester initdb
@@ -56,7 +56,7 @@ elif [ "$1" = 'gather-consumer' ]; then
 
     # wait for the app to start-up 
     if [ "$2" = '--wait-for-dependencies' ]; then
-        wait-for-dependencies $APP_PORT_80_TCP_ADDR $APP_PORT_80_TCP_PORT
+        wait-for-dependencies app 80
     fi
 
     #ckan harvester initdb
