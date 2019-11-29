@@ -1,4 +1,4 @@
-.PHONY: all build copy-src local requirements setup test update-dependencies
+.PHONY: all build clean copy-src local requirements setup test update-dependencies
 
 CKAN_HOME := /usr/lib/ckan
 
@@ -6,6 +6,9 @@ all: build
 
 build:
 	docker-compose build
+
+clean:
+	docker-compose down -v
 
 local:
 	docker-compose -f docker-compose.yml -f docker-compose.local.yml up
