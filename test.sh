@@ -6,12 +6,20 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-host="$APP_PORT_80_TCP_ADDR"
-port="$APP_PORT_80_TCP_PORT"
+host="app"
+port="80"
 
 function test_setup () {
-  echo waiting 60 seconds app to startup...
-  nc -w 60 -z "$host" "$port"
+  local retries=5
+  while ! nc -w 60 -z "$host" "$port"; do
+    if [ "$retries" -le 0 ]; then
+      echo "app did not start" >&2
+      return 1
+    fi
+
+    retries=$(( $retries - 1 ))
+    sleep 5
+  done
 }
 
 function test_http () {

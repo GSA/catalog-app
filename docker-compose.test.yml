@@ -1,8 +1,10 @@
 # extends docker-compose.yml
 # run with docker-compose -f docker-compose.yml,docker-compose.test.yml
-
-test:
-  build: .
-  dockerfile: Dockerfile.test
-  links:
-    - app
+version: '3.7'
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    depends_on:
+      - app
