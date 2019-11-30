@@ -1,5 +1,7 @@
 FROM ubuntu:14.04
 
+ARG PYTHON_VERSION=2.7.10
+
 ENV CKAN_HOME /usr/lib/ckan
 ENV CKAN_CONFIG /etc/ckan/
 ENV CKAN_ENV docker
@@ -8,7 +10,7 @@ WORKDIR /opt/catalog-app
 
 # TODO compile python to /usr/local to avoid this
 # https://github.com/GSA/datagov-deploy/issues/390
-ENV LD_LIBRARY_PATH /usr/local/lib/python2.7.10/lib
+ENV LD_LIBRARY_PATH /usr/local/lib/python$PYTHON_VERSION/lib
 
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \
@@ -40,11 +42,11 @@ RUN apt-get -q -y update && apt-get -q -y install \
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
 
-# Get python 2.7.10 for virtualenv
-RUN wget http://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
-RUN tar -zxvf Python-2.7.10.tgz
-RUN cd Python-2.7.10 && \
-    ./configure --prefix=/usr/local/lib/python2.7.10/ --enable-ipv6 --enable-unicode=ucs4 --enable-shared && \
+# Get custom python version for virtualenv
+RUN wget http://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz
+RUN tar -zxvf Python-$PYTHON_VERSION.tgz
+RUN cd Python-$PYTHON_VERSION && \
+    ./configure --prefix=/usr/local/lib/python$PYTHON_VERSION/ --enable-ipv6 --enable-unicode=ucs4 --enable-shared && \
     make && make install
 
 # Upgrade pip & install virtualenv
