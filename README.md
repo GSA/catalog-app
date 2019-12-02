@@ -85,7 +85,7 @@ _Note: We assume your user is already added to the docker group (`sudo useradd
 
 ### Getting Started
 This first thing you will need to do is create a new CKAN sysadmin so you can create datasets/organizations:
-`ckan sysadmin add {{ name }}` for example `docker exec -it {{ container }} /bin/bash` then `ckan sysadmin add admin` it should then prompt you to enter/confirm a new password. **You can now login to through your web browser where the site will likely be running @ http://localhost or http://127.0.0.1. At the very bottom of the site click 'login' and enter the newly minted credentials you just created!**
+`ckan sysadmin add {{ name }}` for example `docker exec -it {{ container }} /bin/bash` then `ckan sysadmin add admin` it should then prompt you to enter/confirm a new password. **You can now login to through your web browser where the site will likely be running @ http://localhost:8080 or http://127.0.0.1:8080. At the very bottom of the site click 'login' and enter the newly minted credentials you just created!**
 
 To use CKAN's harvester you first need to create an "organization", once created click the "admin" button. You should now see "Harvest Sources" next to Datasets and Members. Click "Add Harvest Source", this CKAN already packages a number of harvesters ready to use include data.json and spatial harvesters.
 
