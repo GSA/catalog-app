@@ -8,7 +8,7 @@ build:
 	docker-compose build
 
 clean:
-	docker-compose down -v
+	docker-compose down -v --remove-orphans
 
 local:
 	docker-compose -f docker-compose.yml -f docker-compose.local.yml up
