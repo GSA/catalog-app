@@ -26,7 +26,7 @@ write_config () {
       "sqlalchemy.url = ${DATABASE_URL}" \
       "solr_url = ${SOLR_URL}" \
       "ckan.site_url = ${CKAN_SITE_URL}" \
-      "ckan.harvest.mq.hostname = ${REDIS_PORT_6379_TCP_ADDR}" \
+      "ckan.harvest.mq.hostname = ${REDIS_URL}" \
       "ckanext.geodatagov.fgdc2iso_service = ${FGDC2ISO_URL}"
 }
 

@@ -1,4 +1,4 @@
-.PHONY: all build copy-src local requirements setup test update-dependencies
+.PHONY: all build clean copy-src local requirements setup test update-dependencies
 
 CKAN_HOME := /usr/lib/ckan
 
@@ -7,11 +7,14 @@ all: build
 build:
 	docker-compose build
 
+clean:
+	docker-compose down -v --remove-orphans
+
 local:
 	docker-compose -f docker-compose.yml -f docker-compose.local.yml up
 
 requirements:
-	docker-compose -f docker-compose.yml -f docker-compose.local.yml run --rm -T app pip --quiet freeze > requirements-freeze.txt
+	docker-compose run --rm -T app pip --quiet freeze > requirements-freeze.txt
 
 update-dependencies:
 	docker-compose run --rm app ./install-dev.sh

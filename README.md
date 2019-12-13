@@ -1,104 +1,36 @@
----
-name: catalog-app
-full_name: catalog.data.gov
-type: app
-owner_type: project
-status: active
-stage: beta
-testable: true
-description: >
-  Docker Build for catalog.data.gov
-stack:
-- Docker
-- Python
-- Java
-licenses:
-  .about.yml:
-    name: CC0
-    url: https://github.com/GSA/catalog-app/blob/master/LICENSE.md
-tasks: https://github.com/GSA/catalog-app/issues
-contact:
-- url: mailto:john.jediny@gsa.gov
-  text: John Jediny
-- url: mailto:philip.ashlock@gsa.gov
-  text: Phil Ashlock
-team:
-- github: jjediny
-- github: philipashlock
-- github: dano-reisys
-- github: FuhuXia
-- github: alex-perfilov-reisys
----
-# catalog-app
-[![Build Status](http://drone.datagov.us/api/badges/GSA/catalog-app/status.svg)](http://drone.datagov.us/GSA/catalog-app)
-
-[![codecov](https://codecov.io/gh/GSA/catalog-app/branch/master/graph/badge.svg)](https://codecov.io/gh/GSA/catalog-app)
-
 [![CircleCI](https://circleci.com/gh/GSA/catalog-app.svg?style=svg)](https://circleci.com/gh/GSA/catalog-app)
 
-This is the main Dockerfile for the "Catalog" other repos include:
-
-| Containers | Build Status |
-| --- | --- |
-| [**catalog-app**](https://github.com/GSA/catalog-app)|<a href="http://drone.datagov.us/GSA/catalog-app"><img src="http://drone.datagov.us/api/badges/GSA/catalog-app/status.svg" /></a>|
-| [catalog-nginx](https://github.com/GSA/catalog-nginx)|<a href="http://drone.datagov.us/GSA/catalog-nginx"><img src="http://drone.datagov.us/api/badges/GSA/catalog-nginx/status.svg" /></a>|
-|[catalog-pycsw](https://github.com/GSA/catalog-pycsw)|<a href="http://drone.datagov.us/GSA/catalog-pycsw"><img src="http://drone.datagov.us/api/badges/GSA/catalog-pycsw/status.svg" /></a>|
-|[catalog-solr](https://github.com/GSA/catalog-solr)|<a href="http://drone.datagov.us/GSA/catalog-solr"><img src="http://drone.datagov.us/api/badges/GSA/catalog-solr/status.svg" /></a>|
-|[catalog-db](https://github.com/GSA/catalog-db)|<a href="http://drone.datagov.us/GSA/catalog-db"><img src="http://drone.datagov.us/api/badges/GSA/catalog-db/status.svg" /></a>|
-|[catalog-fgdc2iso](https://github.com/GSA/catalog-fgdc2iso)|<a href="http://drone.datagov.us/GSA/catalog-fgdc2iso"><img src="http://drone.datagov.us/api/badges/GSA/catalog-fgdc2iso/status.svg" /></a>| 
-|[catalog-scheduler](https://github.com/GSA/catalog-scheduler)|<a href="http://drone.datagov.us/GSA/catalog-scheduler"><img src="http://drone.datagov.us/api/badges/GSA/catalog-scheduler/status.svg" /></a>|
+# catalog-app
 
 Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN is used by Data.gov @ http://catalog.data.gov
 
-**This repository is beta, and is under continuous development**
 
->NOTE: Instructions below use {{ example }} to denote where to replace content with your own.
+## Development
 
-## Installation:
-The application is deployed using [docker-compose](https://docs.docker.com/compose/overview/) and [docker](https://docs.docker.com/), please follow the official documentation to install and setup for [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/).
+### Requirements
 
-**System Requirements:**
->Docker needs access to a minimum of 2 CPU and 4 GB of Memory, if you are using [Docker Toolbox](https://www.docker.com/products/docker-toolbox) or [Docker Machine](https://docs.docker.com/machine/) you will need to first completely power down the [virtualbox](https://www.virtualbox.org/) image (not pause or suspend). Once this is done go to the images settings and under "Hardware" move the slider from 1 to 2 CPU. Failure to do this will cause docker to hang @ [installing ca-certificates](https://github.com/GSA/catalog-app/issues/11).
+We assume your environment is already setup with these tools.
 
-### Quick Start
-After docker-compose installs check to make sure docker daemon running: `sudo service docker status` if not `sudo service docker start`
-
-```
-git clone https://github.com/GSA/catalog-app
-cd catalog-app
-docker-compose up
-```
-
-_Note: We assume your user is already added to the docker group (`sudo useradd
--G ${user} docker`). Alternatively, you can run docker-compose with `sudo`._
+- [Docker Engine](https://docs.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/overview/)
 
 
-### catalog-app stack:
-* solr
-* postgres *(w postgis extension for spatial harvester)*
-* redis
-* catalogapp (CKAN)
-  * harvester-fetch
-  * harvester-gather
-  * fgdc2iso
-* [pycsw *(in progress)*](http://pycsw.org)
+### Setup
 
-### Getting Started
-This first thing you will need to do is create a new CKAN sysadmin so you can create datasets/organizations:
-`ckan sysadmin add {{ name }}` for example `docker exec -it {{ container }} /bin/bash` then `ckan sysadmin add admin` it should then prompt you to enter/confirm a new password. **You can now login to through your web browser where the site will likely be running @ http://localhost:8080 or http://127.0.0.1:8080. At the very bottom of the site click 'login' and enter the newly minted credentials you just created!**
+Build and start the docker containers.
+
+    $ docker-compose up
+
+Create an admin user.
+
+    $ docker-compose run --rm app ckan sysadmin add admin
+
+Open your web browser to [localhost:8080](http://localhost:8080/).
+
+
+### Harvesters
 
 To use CKAN's harvester you first need to create an "organization", once created click the "admin" button. You should now see "Harvest Sources" next to Datasets and Members. Click "Add Harvest Source", this CKAN already packages a number of harvesters ready to use include data.json and spatial harvesters.
-
-Currently supported harvest sources include:
-* CKAN
-* CSW Server
-* Web Accessible Folder (WAF)
-* Single spatial metadata document
-* Geoportal Server
-* Web Accessible Folder (WAF) Homogeneous Collection
-* Z39.50
-* ArcGIS REST API
-* /data.json
 
 For testing you can try out the data.json harvester by pointing it at any US Federal Agency Website adding /data.json. Example `http://gsa.gov/data.json` in the URL field.
 
@@ -106,38 +38,34 @@ Enter the URL to the appropriate endpoint to the "Source type" used, enter a tit
 
 >NOTE: The harvester won't do anything until you click "Reharvest" to start the harvester. Feel free to refresh the page periodically and watch the datasets get registered :)
 
->You can speed up the harvest process with this command `docker-compose scale harvester-fetch-consumer=3` which adds 3 new harvester containers to distribute the workload.
+Queue any scheduled harvest jobs.
+
+    $ docker-compose run --rm app ckan harvest harvest_run
+
+Start the gather consumer.
+
+    $ docker-compose run --rm app ckan harvest gather-consumer
+
+Start the fetch consumer.
+
+    $ docker-compose run --rm app ckan harvest fetch-consumer
+
+Mark any completed jobs as finished.
+
+    $ docker-compose run --rm app ckan harvest harvest_run
 
 
-## Other Useful Commands
-Once running you can use either/both [docker commands](https://docs.docker.com/engine/reference/commandline/cli/) or [docker-compose commands](https://docs.docker.com/compose/reference/) to manage running containers. This needs to be performed atleast once to create a CKAN sysadmin. *If you are running docker as root you may need to ADD `sudo` before these commands*
+#### fgdc2iso
 
->NOTE: docker and docker-compose have different synthax for their commands - even though some commands do functionally the same thing. As a general rule use `--help` (ex. `docker --help` or `docker-compose --help` after any proposed command to see it's expected format.
+TODO: complete this section.
 
->IMPORTANT:
-* `docker` commands use "CONTAINERID" to target which container(s) to run the command to/on. Use `docker ps` to find "CONTAINERID"
-* `docker-compose ` commands use "Name" of the application in the docker-compose.yml file in the root of this repository. So catalog-app === app
+For some harvest source types, you must have fgdc2iso properly configured with
+a SaxonPE license. See the [GSA/datagov-deploy] and the Ansible vaullt.
 
-### Docker commands
->to enter into the container in interactive mode as root:
 
-* `docker exec -it {{containerid}} /bin/bash`
-  * use `exit` to exit container
+### CKAN/catalog-app commands
 
->to run a one off command inside the container:
-
-* `docker exec {{containerid}} {{command}}`
-
-### Docker-compose commands
->to enter into the container in interactive mode as root:
-* `docker-compose run app /bin/bash`
-
->to run a one off command inside the container:
-
-* `docker-compose run app {{command}}`
-
-## CKAN/catalog-app commands
-**This commands are run from *within* the catalog-app container using either `docker exec it` or `docker-compose run` as described above**
+These commands are run from within the `app` container with `docker-compose run`.
 
 `ckan --plugin=ckanext-harvest harvester run`
 >Start any pending harvesting jobs
@@ -163,7 +91,7 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 `ckan --plugin=ckanext-geodatagov geodatagov db_solr_sync`
 >Over time solr can get out of sync from db due to all kind of glitches. This brings them back in sync.
 
-`ckan --plugin=ckanext-spatial ckan-pycsw set_keywords -p` /etc/ckan/pycsw-collection.cfg*
+`ckan --plugin=ckanext-spatial ckan-pycsw set_keywords -p` /etc/ckan/pycsw-collection.cfg
 >This grabs top 20 tags from CKAN and put them into /etc/ckan/pycsw-collection.cfg as CSW service metadata keywords.
 
 `ckan --plugin=ckanext-spatial ckan-pycsw set_keywords -p /etc/ckan/pycsw-all.cfg`
@@ -185,17 +113,9 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 >This keeps records of all datasets that are tagged with Topic and Topic Categories, and generates /csv/topic_datasets.csv
 
 
-
-## Developing on OSX
-
-### Prerequisites:
-1. Install **brew**: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-2. Install **docker tool box**: `brew cask install dockertoolbox`
-3. Create a **docker machine**: `docker-machine create --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "2048" default`
-
-
 ### Source Code Folder (**src**):
-**Note:** follow these steps only if your src folder is empty or you need the latest code
+
+Follow these steps only if your `src` folder is empty or you need the latest code
 
 1. Start the app, from root folder.
 
@@ -230,13 +150,6 @@ Once running you can use either/both [docker commands](https://docs.docker.com/e
 
 see: https://blog.engineyard.com/2014/composer-its-all-about-the-lock-file
 the same concepts apply to pip.
-
-
-### Troubleshooting:
- "Cannot connect to the Docker daemon. Is the docker daemon running on this host?"
-run:
-
-    eval $(docker-machine env)
 
 
 ## Tests
