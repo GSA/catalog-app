@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+# TODO remove this file after next release. datagov-deploy should install from requirements-freeze.txt
+#
 # Install script used in production environments. This initializes the virtual
 # environment and then installs frozen package versions from
 # requirements-freeze.txt

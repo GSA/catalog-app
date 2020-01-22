@@ -11,7 +11,7 @@ if [[ ! -t 0 ]]; then
 fi
 
 # configure /etc/ckan/production.ini
-/bin/sh /usr/lib/ckan/bin/ckan_config.sh > $fd
+ckan_config.sh > $fd
 
 function wait-for-dependencies () {
   local address="$1"
