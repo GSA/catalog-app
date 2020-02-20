@@ -45,7 +45,7 @@ RUN cd Python-$PYTHON_VERSION && \
     make && make install
 
 # Upgrade pip & install virtualenv
-RUN pip install -U pip virtualenv
+RUN pip install -U pip 'virtualenv<20'
 
 # Create virtualenv
 RUN virtualenv -p /usr/local/lib/python$PYTHON_VERSION/bin/python $CKAN_HOME
