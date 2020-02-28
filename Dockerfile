@@ -85,6 +85,8 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
+COPY docker/webserver/ckanext-datagovtheme/menu.json /var/tmp/ckan/dynamic_menu/menu.json
+
 # apache
 EXPOSE 80
 
