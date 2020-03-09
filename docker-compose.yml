@@ -7,7 +7,7 @@ services:
       DATABASE_URL: postgresql://ckan:ckan@db/ckan
       SOLR_URL: http://solr:8983/solr/ckan
       FGDC2ISO_URL: http://fgdc2iso:8080/fgdc2iso
-      REDIS_URL: redis:6379
+      REDIS_URL: redis
     depends_on:
       - redis
       - db
