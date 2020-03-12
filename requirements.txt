@@ -14,6 +14,7 @@
 -e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-ga-report
 
 # ckan requirements.txt
+amqp~=1.4.9
 Babel>=0.9.6,<1.0.0  # newer versions cause problems with when switching languages
 Jinja2==2.6  # newer version causes problem in CkanInternationalizationExtension.parse
                          # when creating a new dataset
@@ -35,9 +36,9 @@ repoze.who==1.0.18
 requests~=2.20.0
 Routes==1.13
 solrpy==0.9.5
-sqlalchemy-migrate==0.9.1
-SQLAlchemy==0.9.6
-vdm==0.13
+sqlalchemy-migrate~=0.9.8
+SQLAlchemy~=0.9.10
+vdm==0.14
 sqlparse==0.1.11
 WebHelpers==1.3
 WebOb==1.0.8
@@ -46,10 +47,9 @@ unicodecsv>=0.9
 
 
 # ckanext-archiver
-celery==2.4.2
-kombu==2.5
+celery~=3.1.2
+kombu~=3.0.37
 progressbar==2.3
-SQLAlchemy==0.9.6
 
 
 # ckanext-datajson
@@ -76,7 +76,6 @@ redis==2.10.1
 
 
 # ckanext-qa
-SQLAlchemy==0.9.6
 xlrd==1.0.0
 python-magic==0.4.12
 messytables==0.15.2

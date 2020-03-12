@@ -1,9 +1,10 @@
-amqp==1.0.13
+amqp==1.4.9
 anyjson==0.3.3
 Babel==0.9.6
 Beaker==1.11.0
+billiard==3.3.0.23
 boto==2.49.0
-celery==2.4.2
+celery==3.1.26.post2
 certifi==2019.11.28
 chardet==3.0.4
 -e git+https://github.com/GSA/ckan.git@8318177b5276ad4980239a8738b63a42eea03322#egg=ckan
@@ -34,7 +35,7 @@ idna==2.7
 Jinja2==2.6
 json-table-schema==0.2.1
 jsonschema==2.4.0
-kombu==2.5.0
+kombu==3.0.37
 LEPL==5.1.3
 lxml==4.5.0
 M2Crypto==0.35.2
@@ -50,7 +51,7 @@ passlib==1.6.2
 Paste==1.7.5.1
 PasteDeploy==2.1.0
 PasteScript==1.7.5
-pbr==0.11.1
+pbr==1.10.0
 pika==0.9.8
 ply==3.4
 progressbar==2.3
@@ -80,15 +81,15 @@ Shapely==1.3.1
 simplejson==3.17.0
 six==1.14.0
 solrpy==0.9.5
-SQLAlchemy==0.9.6
-sqlalchemy-migrate==0.9.1
+SQLAlchemy==0.9.10
+sqlalchemy-migrate==0.9.8
 sqlparse==0.1.11
 Tempita==0.5.2
 typing==3.7.4.1
 unicodecsv==0.14.1
 uritemplate==3.0.1
 urllib3==1.24.3
-vdm==0.13
+vdm==0.14
 webencodings==0.5.1
 WebError==0.13.1
 WebHelpers==1.3
