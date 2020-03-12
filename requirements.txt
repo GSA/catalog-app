@@ -7,7 +7,7 @@
 -e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext-geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
 -e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext-harvest
--e git+https://github.com/GSA/ckanext-saml2@max#egg=ckanext-saml2
+-e git+https://github.com/GSA/ckanext-saml2@bionic-m2crypto#egg=ckanext-saml2
 -e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext-qa
 -e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext-report
 -e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext-spatial
@@ -26,7 +26,7 @@ Pairtree==0.7.1-T
 Paste==1.7.5.1
 PasteScript~=1.7.5
 passlib==1.6.2
-psycopg2==2.4.5
+psycopg2~=2.8.4
 python-dateutil>=1.5.0,<2.0.0
 pyutilib.component.core==4.5.3
 repoze.who-friendlyform==1.0.8
@@ -84,7 +84,8 @@ progressbar==2.3
 
 
 # ckanext-saml2
--e git+https://github.com/GSA/pysaml2.git@max#egg=pysaml2
+-e git+https://github.com/GSA/pysaml2.git@datagov/max-bionic#egg=pysaml2
+M2Crypto==0.35.2
 
 
 # ckanext-spatial
