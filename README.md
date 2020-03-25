@@ -160,7 +160,38 @@ Tests are run from a special `test` docker container defined in
     $ make test
 
 
+## Cloud.gov
+
+Copy `vars.yml.template` to `vars.yml`, and customize the values in that file. Then, assuming you're logged in for the Cloud Foundry CLI:
+
+Update and cache all the Python package requirements
+
+```sh
+./vendor_requirements.sh
+```
+
+Create the database used by CKAN itself. You have to wait a bit for
+the datastore DB to be available. (See [the cloud.gov instructions on
+how to know when it's
+up](https://cloud.gov/docs/services/relational-database/#instance-creation-time).)
+
+```sh
+$ cf create-service aws-rds shared-psql ((app_name))-db
+```
+
+Create the Redis instance:
+
+```sh
+$ cf create-service redis32 standard-ha ((app_name))-redis
+```
+
+Ensure the catalog app can reach the Solr app.
+```sh
+$ cf add-network-policy ((app_name)) --destination-app ((app_name))-solr --protocol tcp --port 8983
+```
+
 ## License and Contributing
-We're so glad you're thinking about re-using and/or contributing to Data.gov!
+We're so glad you're thinking about re-using and/or contributing to
+Data.gov!
 
 Before contributing to Data.gov we encourage you to read our [CONTRIBUTING](https://github.com/GSA/catalog-app/blob/master/CONTRIBUTING.md) guide, our [LICENSE](https://github.com/GSA/catalog-app/blob/master/LICENSE.md), and our README (you are here), all of which should be in this repository. If you have any questions, you can email the Data.gov team at [datagov@gsa.gov](mailto:datagov@gsa.gov).

@@ -1,3 +1,4 @@
 rancher-compose
 src
 .env
+vendor/
