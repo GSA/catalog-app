@@ -44,15 +44,15 @@ Queue any scheduled harvest jobs.
 
 Start the gather consumer.
 
-    $ docker-compose run -d --no-deps app ckan --plugin=ckanext-harvest harvester gather_consumer
+    $ docker-compose run --rm app ckan --plugin=ckanext-harvest harvester gather_consumer
 
 Start the fetch consumer.
 
-    $ docker-compose run -d --no-deps app ckan --plugin=ckanext-harvest harvester fetch_consumer
+    $ docker-compose run --rm app ckan --plugin=ckanext-harvest harvester fetch_consumer
 
 Mark any completed jobs as finished.
 
-    $ docker-compose run -d --no-deps app ckan --plugin=ckanext-harvest harvester run
+    $ docker-compose run --rm app ckan --plugin=ckanext-harvest harvester run
 
 
 #### fgdc2iso
