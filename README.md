@@ -40,7 +40,7 @@ Enter the URL to the appropriate endpoint to the "Source type" used, enter a tit
 
 Queue any scheduled harvest jobs.
 
-    $ docker-compose run -d --no-deps app ckan --plugin=ckanext-harvest harvester run
+    $ docker-compose run --rm app ckan --plugin=ckanext-harvest harvester run
 
 Start the gather consumer.
 
