@@ -40,19 +40,19 @@ Enter the URL to the appropriate endpoint to the "Source type" used, enter a tit
 
 Queue any scheduled harvest jobs.
 
-    $ docker-compose run --rm app ckan harvest harvest_run
+    $ docker-compose run --rm app ckan --plugin=ckanext-harvest harvester run
 
 Start the gather consumer.
 
-    $ docker-compose run --rm app ckan harvest gather-consumer
+    $ docker-compose run --rm app ckan --plugin=ckanext-harvest harvester gather_consumer
 
 Start the fetch consumer.
 
-    $ docker-compose run --rm app ckan harvest fetch-consumer
+    $ docker-compose run --rm app ckan --plugin=ckanext-harvest harvester fetch_consumer
 
 Mark any completed jobs as finished.
 
-    $ docker-compose run --rm app ckan harvest harvest_run
+    $ docker-compose run --rm app ckan --plugin=ckanext-harvest harvester run
 
 
 #### fgdc2iso
