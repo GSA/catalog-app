@@ -1,8 +1,10 @@
 [![CircleCI](https://circleci.com/gh/GSA/catalog-app.svg?style=svg)](https://circleci.com/gh/GSA/catalog-app)
 
+
 # catalog-app
 
-Is a [Docker](http://docker.io)-based [CKAN](http://ckan.org) deployment. CKAN is used by Data.gov @ http://catalog.data.gov
+Local development environment and configuration for [CKAN](https://ckan.org/)
+and Data.gov extensions powering [catalog.data.gov](https://catalog.data.gov/)
 
 
 ## Development
@@ -57,10 +59,10 @@ Mark any completed jobs as finished.
 
 #### fgdc2iso
 
-TODO: complete this section.
+_TODO: complete this section._
 
 For some harvest source types, you must have fgdc2iso properly configured with
-a SaxonPE license. See the [GSA/datagov-deploy] and the Ansible vaullt.
+a SaxonPE license. See the [GSA/datagov-deploy] and the Ansible vault.
 
 
 ### CKAN/catalog-app commands
@@ -163,4 +165,4 @@ Tests are run from a special `test` docker container defined in
 ## License and Contributing
 We're so glad you're thinking about re-using and/or contributing to Data.gov!
 
-Before contributing to Data.gov we encourage you to read our [CONTRIBUTING](https://github.com/GSA/catalog-app/blob/master/CONTRIBUTING.md) guide, our [LICENSE](https://github.com/GSA/catalog-app/blob/master/LICENSE.md), and our README (you are here), all of which should be in this repository. If you have any questions, you can email the Data.gov team at [datagov@gsa.gov](mailto:datagov@gsa.gov).
+Before contributing to Data.gov we encourage you to read our [CONTRIBUTING](https://github.com/GSA/catalog-app/blob/master/CONTRIBUTING.md) guide, our [LICENSE](https://github.com/GSA/catalog-app/blob/master/LICENSE.md), and our README (you are here), all of which should be in this repository. If you have any questions, you can email the Data.gov team at [datagov@gsa.gov](mailto:datagoV@GSA.gov).
