@@ -35,9 +35,13 @@ services:
     build: ./docker/redis
 
   solr:
-    image: datagov/catalog-solr:latest
+    build:
+      context: docker/solr/
+    volumes:
+      - solr_data:/opt/solr/server/solr/ckan/data/index
 
 
 volumes:
   ckan:
   ckan_storage:
+  solr_data:
