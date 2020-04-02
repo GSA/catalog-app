@@ -1,3 +1,0 @@
-db:
-  environment:
-    DB_PORT_5432_TCP_ADDR: #rds endpoint goes here
