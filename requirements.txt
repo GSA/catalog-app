@@ -1,17 +1,5 @@
 #ckan core and extensions
--e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
--e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext-archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext-datagovtheme
--e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext-datajson
--e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext-extlink
--e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext-geodatagov
--e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
--e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext-harvest
--e git+https://github.com/GSA/ckanext-saml2@bionic-m2crypto#egg=ckanext-saml2
--e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext-qa
--e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext-report
--e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext-spatial
--e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-ga-report
+--find-links vendor
 
 # ckan requirements.txt
 amqp~=1.4.9
@@ -90,7 +78,7 @@ M2Crypto==0.35.2
 # ckanext-spatial
 GeoAlchemy>=0.6
 GeoAlchemy2>=0.2.4
-Shapely==1.3.1
+Shapely==1.7.0
 -e git+https://github.com/GSA/OWSLib.git@catalog-0.8.6#egg=owslib
 lxml>=2.3
 argparse
@@ -100,3 +88,17 @@ Jinja2==2.6
 
 # OWSLib
 pytz
+
+-e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
+-e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext-archiver
+-e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext-datagovtheme
+-e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext-datajson
+-e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext-extlink
+-e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext-geodatagov
+-e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
+-e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext-harvest
+-e git+https://github.com/GSA/ckanext-saml2@bionic-m2crypto#egg=ckanext-saml2
+-e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext-qa
+-e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext-report
+-e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext-spatial
+-e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-ga-report

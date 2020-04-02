@@ -7,7 +7,7 @@ boto==2.49.0
 celery==3.1.26.post2
 certifi==2019.11.28
 chardet==3.0.4
--e git+https://github.com/GSA/ckan.git@8318177b5276ad4980239a8738b63a42eea03322#egg=ckan
+-e git+https://github.com/GSA/ckan.git@fcfb75b4525f0b7585750c83722614fa83aa1cf0#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@bb4d85b5db628cd2a6d576c3fde79ddc0d9b5952#egg=ckanext_archiver
 -e git+https://github.com/GSA/ckanext-datagovtheme@873dc70135d4ed313517010fb2b3c208b72c2913#egg=ckanext_datagovtheme
 -e git+https://github.com/GSA/ckanext-datajson@6dfe7a908a8da6d38ae5da86179a21f558a5344a#egg=ckanext_datajson
@@ -15,7 +15,7 @@ chardet==3.0.4
 -e git+https://github.com/GSA/ckanext-ga-report@7d32eac6db1bc68dd8f3f96f14c6fd3aeec902a9#egg=ckanext_ga_report
 -e git+https://github.com/GSA/ckanext-geodatagov@d82eb45067f9b8335b6d767499f218431fb6c215#egg=ckanext_geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@0b90194d77938e59ecb7d6937c201bd6815447f8#egg=ckanext_googleanalyticsbasic
--e git+https://github.com/GSA/ckanext-harvest@beabcd5a9a69189226f00767ce595e7ddda06e99#egg=ckanext_harvest
+-e git+https://github.com/GSA/ckanext-harvest@da527bc38f2fa8fdc7e5ec1fbf35682ca55ba0f5#egg=ckanext_harvest
 -e git+https://github.com/GSA/ckanext-qa@2b3353cb3a36e021de448b7d280165a3dbfcf728#egg=ckanext_qa
 -e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
 -e git+https://github.com/GSA/ckanext-saml2@1b2fd655084ff92678cd190613c7b5df087428f7#egg=ckanext_saml2
@@ -27,7 +27,7 @@ funcsigs==1.0.2
 gdata==2.0.18
 Genshi==0.6
 GeoAlchemy==0.7.2
-GeoAlchemy2==0.6.3
+GeoAlchemy2==0.7.0
 google-api-python-client==1.4.1
 html5lib==1.0.1
 httplib2==0.17.0
@@ -67,7 +67,7 @@ python-magic==0.4.12
 python-memcached==1.48
 pytz==2019.3
 pyutilib.component.core==4.5.3
-PyYAML==5.3
+PyYAML==5.3.1
 -e git+https://github.com/asl2/PyZ3950@c2282c73182cef2beca0f65b1eb7699c9b24512e#egg=PyZ3950
 redis==2.10.1
 repoze.lru==0.7

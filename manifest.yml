@@ -8,6 +8,15 @@ applications:
     - route: ((app_name))-solr.apps.internal
     memory: 256M
     
+  # - name: ((app_name))-fgdc2iso
+  #   docker:
+  #     image: datagov/catalog-fgdc2iso:latest
+  #   routes:
+  #   - route: ((app_name))-fgdc2iso.apps.internal
+  #   memory: 200M
+  #   env:
+  #     SIGNATURE:
+
   - name: ((app_name))
     buildpacks:
       - https://github.com/cloudfoundry/python-buildpack#v1.7.6
@@ -17,4 +26,5 @@ applications:
     - ((app_name))-redis
     env:
       SOLR_URL: http://((app_name))-solr.apps.internal:8983/solr/ckan2_3
-    memory: 256M
+      FGDC2ISO_URL: http://((app_name))-fgdc2iso.apps.internal:8983/fgdc2iso
+    memory: 128M
