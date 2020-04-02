@@ -1,5 +1,4 @@
-#ckan core and extensions
--e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
+#ckan extensions
 -e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext-archiver
 -e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext-datagovtheme
 -e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext-datajson
