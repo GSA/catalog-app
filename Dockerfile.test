@@ -1,7 +1,8 @@
-FROM ubuntu:14.04
+FROM bats/bats
 
-RUN export DEBIAN_FRONTEND=noninteractive; apt-get update && apt-get install -y curl
+RUN apk add curl jq
 
-ADD ./test.sh /usr/local/bin/test.sh
+COPY tests/ /tests/
 
-CMD ["test.sh"]
+# bats/bats uses bats as the entrypoint
+CMD ["-r", "/tests"]
