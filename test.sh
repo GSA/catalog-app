@@ -6,14 +6,14 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-host="app"
-port="80"
+host="ckan"
+port="5000"
 
 function test_setup () {
   local retries=5
   while ! nc -w 60 -z "$host" "$port"; do
     if [ "$retries" -le 0 ]; then
-      echo "app did not start" >&2
+      echo "CKAN did not start" >&2
       return 1
     fi
 
