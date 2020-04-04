@@ -10,7 +10,7 @@ host="app"
 port="80"
 
 function test_setup () {
-  local retries=5
+  local retries=10
   while ! nc -w 60 -z "$host" "$port"; do
     if [ "$retries" -le 0 ]; then
       echo "app did not start" >&2
