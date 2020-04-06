@@ -146,14 +146,9 @@ Follow these steps only if your `src` folder is empty or you need the latest cod
 
     $ make update-dependencies
 
-1. Update the pinned requirements in `requirements-freeze.txt`. **Because of a version conflict for
-repoze.who, special care should be taken to make sure that repoze.who==1.0.18 is
-shipped to production in order to be compatible with ckanext-saml2. After
-generating the requirements-freeze.txt, manually review the file to make sure
-the versions are correct. See https://github.com/GSA/catalog-app/issues/78 for
-more details.**
+1. Update the pinned requirements in `requirements-freeze.txt`. **Because of a version conflict for repoze.who, special care should be taken to make sure that repoze.who==1.0.18 is shipped to production in order to be compatible with ckanext-saml2. After generating the requirements-freeze.txt, manually review the file to make sure the versions are correct. See https://github.com/GSA/catalog-app/issues/78 for more details.** An initialized container will have the repoze.who version overwritten by the workaround script in entrypoint script, so we add `clean`, `build` to make sure the container is fresh. 
 
-    $ make requirements
+    $ make clean build requirements
 
 see: https://blog.engineyard.com/2014/composer-its-all-about-the-lock-file
 the same concepts apply to pip.
