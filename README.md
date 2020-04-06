@@ -175,8 +175,11 @@ the datastore DB to be available. (See [the cloud.gov instructions on
 how to know when it's
 up](https://cloud.gov/docs/services/relational-database/#instance-creation-time).)
 
+Note that a *medium-psql* instance is required in order to install
+the PostGis extension.
+
 ```sh
-$ cf create-service aws-rds shared-psql ((app_name))-db
+$ cf create-service aws-rds medium-psql ((app_name))-db
 ```
 
 Create the Redis instance:
@@ -185,9 +188,10 @@ Create the Redis instance:
 $ cf create-service redis32 standard-ha ((app_name))-redis
 ```
 
-Ensure the catalog app can reach the Solr app.
+Ensure the catalog app can reach the Solr app and FGDC2ISO
 ```sh
 $ cf add-network-policy ((app_name)) --destination-app ((app_name))-solr --protocol tcp --port 8983
+$ cf add-network-policy ((app_name)) --destination-app ((app_name))-fgdc2iso --protocol tcp --port 8080
 ```
 
 ## License and Contributing

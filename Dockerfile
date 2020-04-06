@@ -1,5 +1,7 @@
 FROM ubuntu:bionic
 
+# Match the version of python on cloud.gov
+
 ARG PYTHON_VERSION=2.7.17
 
 ENV CKAN_HOME /usr/lib/ckan
@@ -8,48 +10,50 @@ ENV CKAN_ENV docker
 
 # TODO compile python to /usr/local to avoid this
 # https://github.com/GSA/datagov-deploy/issues/390
-ENV LD_LIBRARY_PATH /usr/local/lib/python$PYTHON_VERSION/lib
+# ENV LD_LIBRARY_PATH /usr/local/lib/python$PYTHON_VERSION/lib
 
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \
   apache2 \
   atool \
   bison \
-  default-jdk \
+  build-essential \
   git \
   htop \
   lib32z1-dev \
-  libapache2-mod-wsgi \
+  libgdbm-dev \
   libgeos-dev \
   libpq-dev \
+  libreadline-dev \
   libssl-dev \
   libxml2-dev \
   libxslt1-dev \
-  memcached \
   postgresql-client \
-  python-dev \
-  python-pip \
-  python-setuptools \
-  python-virtualenv \
-  ruby \
-  ruby-dev \
   swig \
-  tomcat8 \
   wget \
   xmlsec1
 
-# Get custom python version for virtualenv
-RUN wget http://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz
-RUN tar -zxvf Python-$PYTHON_VERSION.tgz
-RUN cd Python-$PYTHON_VERSION && \
-    ./configure --prefix=/usr/local/lib/python$PYTHON_VERSION/ --enable-ipv6 --enable-unicode=ucs4 --enable-shared && \
-    make && make install
+RUN ls -l /usr/local/lib
 
-# Upgrade pip & install virtualenv
-RUN pip install -U pip 'virtualenv<20'
+# Get custom python version for virtualenv
+RUN wget -O- https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz | tar -zxv -C /tmp
+
+RUN cd /tmp/Python-$PYTHON_VERSION && \
+    ./configure \
+        --prefix=/usr/local \
+        --enable-ipv6 \
+        --enable-unicode=ucs4 \
+        --enable-shared \
+        --with-ensurepip=install && \
+    make && make install && \
+    ldconfig
+
+RUN /usr/local/bin/pip install -U pip  && \
+    /usr/local/bin/pip install virtualenv
 
 # Create virtualenv
-RUN virtualenv -p /usr/local/lib/python$PYTHON_VERSION/bin/python $CKAN_HOME
+RUN mkdir -p $CKAN_HOME && \
+   /usr/local/bin/virtualenv -p /usr/local/bin/python $CKAN_HOME
 
 # Configure apache
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf
@@ -71,6 +75,8 @@ RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 COPY . /opt/catalog-app
 WORKDIR /opt/catalog-app
 RUN $CKAN_HOME/bin/pip install -r requirements.txt
+RUN $CKAN_HOME/bin/pip list
+RUN $CKAN_HOME/bin/pip freeze
 
 # auth_tkt (and ckan) requires repoze.who 2.0. ckanext-saml, used for
 # production requires repoze.who==1.0.18
@@ -82,7 +88,7 @@ RUN $CKAN_HOME/bin/pip install -U repoze.who==2.0 Paste==1.7.5.1
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
 
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 

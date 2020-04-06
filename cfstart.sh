@@ -57,14 +57,15 @@ paster --plugin=ckan config-tool $CKAN_INI ckan.plugins=
 echo "Initializing db"
 paster --plugin=ckan db init -c $CKAN_INI
 
+#     "ckan.plugins=stats text_view image_view recline_view datagov_harvest ckan_harvester z3950_harvester resource_proxy recline_preview datagovtheme datajson_harvest datajson archiver qa googleanalyticsbasic extlink saml2 report broken_link_report"
 #
 # REMIND: this list depends on PostGIS
 #
-#"ckan.plugins=stats text_view image_view recline_view geodatagov datagov_harvest ckan_harvester geodatagov_geoportal_harvester z3950_harvester arcgis_harvester waf_harvester_collection geodatagov_csw_harvester geodatagov_doc_harvester geodatagov_waf_harvester spatial_metadata spatial_query resource_proxy spatial_harvest_metadata_api recline_preview datagovtheme datajson_harvest datajson archiver qa googleanalyticsbasic extlink saml2 report broken_link_report"
+
 
 echo "Restoring plugins"
 paster --plugin=ckan config-tool $CKAN_INI \
-     "ckan.plugins=stats text_view image_view recline_view datagov_harvest ckan_harvester z3950_harvester resource_proxy recline_preview datagovtheme datajson_harvest datajson archiver qa googleanalyticsbasic extlink saml2 report broken_link_report"
+       "ckan.plugins=stats text_view image_view recline_view geodatagov datagov_harvest ckan_harvester geodatagov_geoportal_harvester z3950_harvester arcgis_harvester waf_harvester_collection geodatagov_csw_harvester geodatagov_doc_harvester geodatagov_waf_harvester spatial_metadata spatial_query resource_proxy spatial_harvest_metadata_api recline_preview datagovtheme datajson_harvest datajson archiver qa googleanalyticsbasic extlink saml2 report broken_link_report"
 
 # Run migrations
 echo "Running migrations"

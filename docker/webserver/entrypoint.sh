@@ -10,6 +10,9 @@ if [[ ! -t 0 ]]; then
   fd=/dev/null
 fi
 
+# activate the virtual environment
+source /usr/lib/ckan/bin/activate
+
 # configure /etc/ckan/production.ini
 ckan_config.sh > $fd
 
@@ -63,8 +66,6 @@ elif [ "$1" = 'gather-consumer' ]; then
     ckan --plugin=ckanext-harvest harvester gather_consumer
 fi
 
-# activate the virutal environment
-source /usr/lib/ckan/bin/activate
 
 # execute any other command
 exec "$@"

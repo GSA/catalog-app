@@ -1,0 +1,32 @@
+#-*- mode: org -*-
+#+ STARTUP: showall
+
+* Questions
+** DONE Which version of SOLR does catalog use?
+   CLOSED: [2020-03-28 Sat 12:40]
+** DONE FGDC2ISO ?
+   CLOSED: [2020-04-01 Wed 21:56]
+** DONE Redis?
+   CLOSED: [2020-03-28 Sat 12:39]
+** DONE How to update requirements-freeze.txt?
+   CLOSED: [2020-03-28 Sat 12:40]
+** DONE psycopg2 error during vendor-requirements.sh
+   CLOSED: [2020-03-30 Mon 10:52]
+Collecting psycopg2==2.4.5
+  Downloading psycopg2-2.4.5.tar.gz (719 kB)
+    ERROR: Command errored out with exit status 1:
+     command: /usr/bin/python -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'/tmp/pip-wheel-jPelku/psycopg2/setup.py'"'"'; __file__='"'"'/tmp/pip-wheel-jPelku/psycopg2/setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);code=f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' egg_info --egg-base /tmp/pip-wheel-jPelku/psycopg2/pip-egg-info
+         cwd: /tmp/pip-wheel-jPelku/psycopg2/
+    Complete output (7 lines):
+    running egg_info
+    creating /tmp/pip-wheel-jPelku/psycopg2/pip-egg-info/psycopg2.egg-info
+    writing /tmp/pip-wheel-jPelku/psycopg2/pip-egg-info/psycopg2.egg-info/PKG-INFO
+    writing top-level names to /tmp/pip-wheel-jPelku/psycopg2/pip-egg-info/psycopg2.egg-info/top_level.txt
+    writing dependency_links to /tmp/pip-wheel-jPelku/psycopg2/pip-egg-info/psycopg2.egg-info/dependency_links.txt
+    writing manifest file '/tmp/pip-wheel-jPelku/psycopg2/pip-egg-info/psycopg2.egg-info/SOURCES.txt'
+    Error: could not determine PostgreSQL version from '10.12'
+    ----------------------------------------
+** TODO How to test fgdc2iso?
+** DONE How to get PostGIS installed?
+   CLOSED: [2020-04-06 Mon 10:19]
+
