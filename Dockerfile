@@ -88,7 +88,7 @@ RUN $CKAN_HOME/bin/pip install -U repoze.who==2.0 Paste==1.7.5.1
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
 
 RUN chmod +x /entrypoint.sh
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
