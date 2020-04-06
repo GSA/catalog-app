@@ -18,7 +18,9 @@ jobs:
             cf -v
             cf api https://api.fr.cloud.gov            
             cf auth
-            
+            cf target -o gsa-datagov -s development
+            cf push --vars-file vars.ci.yaml
+
 workflows:
   version: 2
   main:
