@@ -16,6 +16,7 @@ jobs:
       - cf -v
 
 workflows:
+  version: 2
   main:
     jobs:
       - build
