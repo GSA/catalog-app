@@ -11,13 +11,15 @@ jobs:
   deploy_cloud_gov:
     machine: true
     steps:
-      - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-      - sudo dpkg -i cf-cli_amd64.deb
-      - cf -v
+      - run:
+          command: |
+            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+            sudo dpkg -i cf-cli_amd64.deb
+            cf -v
 
 workflows:
   version: 2
   main:
     jobs:
-      - build
       - deploy_cloud_gov
+#      - build
