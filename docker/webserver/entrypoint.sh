@@ -24,6 +24,13 @@ function wait-for-dependencies () {
 
 if [ "$1" = 'app' ]; then
 
+    # Work around https://github.com/GSA/catalog-app/issues/78
+    # auth_tkt (and ckan) requires repoze.who 2.0. ckanext-saml, used for
+    # production requires repoze.who==1.0.18
+    # installing the one-off repoze.who will upgrade Paste if no version is
+    # specified. ckanext-geodatagov is not compatible with Paste>=2.0
+    /usr/lib/ckan/bin/pip install -U repoze.who==2.0 Paste==1.7.5.1
+
     # wait for all services to start-up
     if [ "$2" = '--wait-for-dependencies' ]; then
         wait-for-dependencies db 5432
