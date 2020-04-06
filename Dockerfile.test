@@ -1,6 +1,6 @@
-FROM ubuntu:14.04
+FROM ubuntu:bionic
 
-RUN export DEBIAN_FRONTEND=noninteractive; apt-get update && apt-get install -y curl
+RUN export DEBIAN_FRONTEND=noninteractive; apt-get update && apt-get install -y curl netcat
 
 ADD ./test.sh /usr/local/bin/test.sh
 

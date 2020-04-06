@@ -28,6 +28,7 @@ RUN apt-get -q -y update && apt-get -q -y install \
   libssl-dev \
   libxml2-dev \
   libxslt1-dev \
+  netcat \
   postgresql-client \
   swig \
   wget \
