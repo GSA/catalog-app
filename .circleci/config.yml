@@ -8,6 +8,22 @@ jobs:
           name: Run tests
           command: make test
 
+  vendor_requirements:
+    image: cloudfoundry/cflinuxfs3
+    steps:
+      - checkout
+      - run:
+          command: |
+            apt-get -y update
+            apt-get -y install swig build-essential python-dev libssl-dev libgeos-dev
+            curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+            python /tmp/get-pip.py
+            pip wheel -r requirements-freeze.txt -w vendor
+      - save_cache:
+          key: vendor-{{ checksum "requirements-freeze.txt" }}
+          paths:
+            - vendor
+            
   deploy_cloud_gov:
     machine: true
     steps:
@@ -16,16 +32,22 @@ jobs:
           command: |
             curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
             sudo dpkg -i cf-cli_amd64.deb
-            cf -v
+      - restore_cache:
+          keys: 
+            - vendor-{{ checksum "requirements-freeze.txt" }}
+      - run:
+          command: |
             cf api https://api.fr.cloud.gov            
             cf auth
             cf target -o gsa-datagov -s development
-            ./vendor-requirements.sh
             cf push --vars-file vars.ci.yaml
 
 workflows:
   version: 2
   main:
     jobs:
-      - deploy_cloud_gov
+      - vendor_requirements
+      - deploy_cloud_gov:
+          requires:
+            - vendor_requirements
 #      - build
