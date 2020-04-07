@@ -65,6 +65,7 @@ function test_create_org () {
   if [ "$success" = '"success": true' ]; then
     return 0;
   else
+    echo "Failed to create org. API KEY $api_key. RND $RNDCODE OUTPUT: $output" >&3
     return 1;
   fi
 }
@@ -169,6 +170,7 @@ function test_create_dataset () {
   if [ "$success" = '"success": true' ]; then
     return 0;
   else
+    echo "Failed to create dataset. API KEY $api_key. RND: $RNDCODE OUTPUT: $output" >&3
     return 1;
   fi
 }
