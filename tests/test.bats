@@ -26,7 +26,6 @@ function wait_for_app () {
   done
 
   echo "# Check datastore" >&3
-  ensure_datastore
   echo "# Waiting for ADMIN USER DB" >&3
   retries=10
   local len_api_key=0
