@@ -8,10 +8,7 @@
 docker pull cloudfoundry/cflinuxfs3
 
 # The bind mount here enables us to write back to the host filesystem
-docker run --mount type=bind,source="$(pwd)",target=/home/vcap/app --name cf_bash --rm -i cloudfoundry/cflinuxfs3  /bin/bash <<EOF
-
-# Go where the app files are
-cd ~vcap/app
+docker run --mount type=bind,source="$(pwd)",target=/tmp/app --name cf_bash --rm -i cloudfoundry/cflinuxfs3  /bin/bash <<EOF
 
 # Install any packaged dependencies for our vendored packages
 apt-get -y update
@@ -22,5 +19,7 @@ curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
 python /tmp/get-pip.py
 
 # As the VCAP user, cache .whls based on the frozen requirements for vendoring
-su - vcap -c 'cd app && pip wheel -r requirements-freeze.txt -w vendor'
+cd /tmp/app 
+mkdir vendor
+pip wheel -r requirements-freeze.txt -w vendor
 EOF
