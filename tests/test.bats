@@ -25,6 +25,8 @@ function wait_for_app () {
     sleep 5
   done
 
+  echo "# Check datastore" >&3
+  ensure_datastore
   echo "# Waiting for ADMIN USER DB" >&3
   retries=10
   local len_api_key=0
@@ -39,7 +41,7 @@ function wait_for_app () {
     fi
 
     retries=$(( $retries - 1 ))
-    sleep 5
+    sleep 10
   done
 
   echo "# Waiting for CKAN $HOST:$PORT" >&3
