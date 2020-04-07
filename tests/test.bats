@@ -6,13 +6,44 @@ HOST="ckan"
 PORT="5000"
 CKAN_DB="ckan"
 CKAN_USER_ADMIN="ckan_admin"
+DB_HOST='db'
+DB_PORT='5432'
 
 function wait_for_app () {
   # The app takes quite a while to startup (solr initialization and
   # migrations), close to a minute. Make sure to give it enough time before
   # starting the tests.
-  echo "# - Waiting for $HOST:$PORT" >&3
+  
+  echo "# Waiting for DB $DB_HOST:$DB_PORT" >&3
   local retries=10
+  while ! nc -z -w 30 "$DB_HOST" "$DB_PORT" ; do
+    if [ "$retries" -le 0 ]; then
+      return 1
+    fi
+
+    retries=$(( $retries - 1 ))
+    sleep 5
+  done
+
+  echo "# Waiting for ADMIN USER DB" >&3
+  retries=10
+  local len_api_key=0
+  while [ $len_api_key -le 10 ]; do
+    run psql -h db -U postgres $CKAN_DB -c "select apikey from public.user where name='$CKAN_USER_ADMIN';"
+    local api_key=$(echo ${lines[2]} | xargs)
+    echo "# API KEY $api_key" >&3
+    len_api_key=${#api_key} 
+    # api_key could be "(0 rows)" or "xxxxxx-a-real-api-key"
+    if [ "$retries" -le 0 ]; then
+      return 1
+    fi
+
+    retries=$(( $retries - 1 ))
+    sleep 5
+  done
+
+  echo "# Waiting for CKAN $HOST:$PORT" >&3
+  retries=10
   while ! nc -z -w 30 "$HOST" "$PORT" ; do
     if [ "$retries" -le 0 ]; then
       return 1
@@ -151,7 +182,7 @@ function test_create_dataset () {
           "isopen": false,
           "url": null,
           "notes": "The description of the test dataset",
-          "owner_org": "test-organization",
+          "owner_org": "test-organization-'$RNDCODE'",
           "bureau_code": "010:00",
           "contact_email": "tester@fake.com",
           "contact_name": "Tester",
