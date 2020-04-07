@@ -37,7 +37,9 @@ jobs:
             cf auth
             cf target -o gsa-datagov -s development
             cf push --vars-file vars.ci.yaml
-
+            cf logs catalog-ci-fgdc2iso --recent
+            cf logs catalog-ci-solr --recent
+            cf logs catalog-ci --recent
 workflows:
   version: 2
   main:
