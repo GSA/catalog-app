@@ -60,7 +60,7 @@ function test_create_org () {
     -d '{"description": "Test organization","title": "Test Organization '$RNDCODE'","approval_status": "approved","state": "active","name": "test-organization-'$RNDCODE'"}'
 
   # echo "Create ORG $output" >&3
-  success=$(echo $output | grep -o '"success": true')
+  local success=$(echo $output | grep -o '"success": true')
 
   if [ "$success" = '"success": true' ]; then
     return 0;
@@ -165,7 +165,7 @@ function test_create_dataset () {
         }'
 
   # echo "Create DATASET $output" >&3
-  success=$(echo $output | grep -o '"success": true')
+  local success=$(echo $output | grep -o '"success": true')
 
   if [ "$success" = '"success": true' ]; then
     return 0;
@@ -235,10 +235,10 @@ function check_google_id () {
   local url="http://$HOST:$PORT/dataset/test-dataset-$RNDCODE"
   
   run curl --silent --fail "$url" --cookie ./cookie-jar
-  if [ "$status" -eq 22 ]; then
+  if [ "$status" -eq 0 ]; then
     return 0;
   else
-    echo "# Failed URL $url" >&2
+    echo "# Failed URL $url: $status" >&3
     return 1;
   fi
 }
