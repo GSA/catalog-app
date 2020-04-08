@@ -8,18 +8,6 @@ jobs:
           name: Run tests
           command: make test
 
-  vendor_requirements:
-    machine: true
-    steps:
-      - checkout
-      - run:
-          command: |
-            ./vendor-requirements.sh
-      - save_cache:
-          key: vendor-{{ checksum "requirements-freeze.txt" }}
-          paths:
-            - vendor
-            
   deploy_cloud_gov:
     machine: true
     steps:
@@ -28,9 +16,9 @@ jobs:
           command: |
             curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
             sudo dpkg -i cf-cli_amd64.deb
-      - restore_cache:
-          keys: 
-            - vendor-{{ checksum "requirements-freeze.txt" }}
+      - run:
+          command: |
+            ./vendor-requirements.sh
       - run:
           command: |
             cf api https://api.fr.cloud.gov            
@@ -40,6 +28,12 @@ jobs:
             cf logs catalog-ci-fgdc2iso --recent
             cf logs catalog-ci-solr --recent
             cf logs catalog-ci --recent
+      - run:
+          command: |
+            guid=$(cf curl /v3/apps?names=catalog-ci | jq -r '.resources[].guid')
+            uri=$(cf curl/v3/apps/$guid/env | jq -r .application_env_json.VCAP_APPLICATION.uris[0])
+            curl https://$uri
+
 workflows:
   version: 2
   main:
