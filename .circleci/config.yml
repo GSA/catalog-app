@@ -28,11 +28,11 @@ jobs:
             cf logs catalog-ci-fgdc2iso --recent
             cf logs catalog-ci-solr --recent
             cf logs catalog-ci --recent
-      - run:
-          command: |
-            guid=`cf curl /v3/apps?names=catalog-ci | jq -r '.resources[].guid'`
-            uri=`cf curl/v3/apps/$guid/env | jq -r '.application_env_json.VCAP_APPLICATION.uris[0]'`
-            curl https://$uri
+      # - run:
+      #     command: |
+      #       guid=`cf curl /v3/apps?names=catalog-ci | jq -r '.resources[].guid'`
+      #       uri=`cf curl/v3/apps/$guid/env | jq -r '.application_env_json.VCAP_APPLICATION.uris[0]'`
+      #      curl https://$uri
 
 workflows:
   version: 2
