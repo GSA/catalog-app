@@ -31,7 +31,7 @@ jobs:
       - run:
           command: |
             guid=$(cf curl /v3/apps?names=catalog-ci | jq -r '.resources[].guid')
-            uri=$(cf curl/v3/apps/$guid/env | jq -r .application_env_json.VCAP_APPLICATION.uris[0])
+            uri=$(cf curl/v3/apps/$guid/env | jq -r '.application_env_json.VCAP_APPLICATION.uris[0]')
             curl https://$uri
 
 workflows:
