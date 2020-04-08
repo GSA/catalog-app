@@ -13,7 +13,7 @@ applications:
       image: datagov/catalog-fgdc2iso:latest
     routes:
     - route: ((app_name))-fgdc2iso.apps.internal
-    memory: 384MM
+    memory: 384M
     env:
       SIGNATURE:
 
