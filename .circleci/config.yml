@@ -32,6 +32,7 @@ jobs:
           command: |
             guid=$(cf curl /v3/apps?names=catalog-ci | jq -r '.resources[].guid')
             uri=$(cf curl /v3/apps/$guid/env | jq -r '.application_env_json.VCAP_APPLICATION.uris[0]')
+            echo "Checking https://$uri"
             curl https://$uri
 
 workflows:
