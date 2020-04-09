@@ -1,101 +1,10 @@
-#ckan extensions
--e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext-archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext-datagovtheme
--e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext-datajson
--e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext-extlink
--e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext-geodatagov
--e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
--e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext-harvest
--e git+https://github.com/GSA/ckanext-saml2@max#egg=ckanext-saml2
--e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext-qa
--e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext-report
--e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext-spatial
--e git+https://github.com/GSA/ckanext-ga-report@datagov#egg=ckanext-ga-report
-
-# ckan requirements.txt
-Babel>=0.9.6,<1.0.0  # newer versions cause problems with when switching languages
-Jinja2==2.6  # newer version causes problem in CkanInternationalizationExtension.parse
-                         # when creating a new dataset
-Pylons==0.9.7
-Genshi==0.6
-WebTest==1.4.3  # need to pin this so that Pylons does not install a newer version that conflicts with WebOb==1.0.8
-fanstatic==0.12
-ofs==0.4.1
-Pairtree==0.7.1-T
-Paste==1.7.5.1
-PasteScript~=1.7.5
-passlib==1.6.2
-psycopg2==2.4.5
-python-dateutil>=1.5.0,<2.0.0
-pyutilib.component.core==4.5.3
-repoze.who-friendlyform==1.0.8
-# CKAN requires 2.0 but ckanext-saml2 requires 1.0.18
-repoze.who==1.0.18
-requests~=2.20.0
-Routes==1.13
-solrpy==0.9.5
-sqlalchemy-migrate==0.9.1
-SQLAlchemy==0.9.6
-vdm==0.13
-sqlparse==0.1.11
-WebHelpers==1.3
-WebOb==1.0.8
-zope.interface==4.1.1
-unicodecsv>=0.9
-
-
-# ckanext-archiver
-celery==2.4.2
-kombu==2.5
-progressbar==2.3
-SQLAlchemy==0.9.6
-
-
-# ckanext-datajson
-pyyaml
-lepl
-jsonschema~=2.4.0
-rfc3987
-
-
-# ckanext-ga-report
-google-api-python-client==1.4.1
-oauth2client==1.4.12
-
-
-# ckanext-geodatagov
--e git+https://github.com/asl2/PyZ3950@master#egg=PyZ3950
-ply==3.4
-boto
 
 
 # ckanext-harvest
-pika==0.9.8
-redis==2.10.1
-
-
-# ckanext-qa
-SQLAlchemy==0.9.6
-xlrd==1.0.0
-python-magic==0.4.12
-messytables==0.15.2
-progressbar==2.3
-
-
-# ckanext-saml2
--e git+https://github.com/GSA/pysaml2.git@max#egg=pysaml2
-
-
-# ckanext-spatial
-GeoAlchemy>=0.6
-GeoAlchemy2>=0.2.4
-Shapely==1.3.1
--e git+https://github.com/GSA/OWSLib.git@catalog-0.8.6#egg=owslib
-lxml>=2.3
-argparse
-pyparsing==1.5.6
-Jinja2==2.6
-
-
-# OWSLib
-pytz
+-e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages
+# https://github.com/ckan/ckanext-harvest/blob/master/pip-requirements.txt
+pika>=1.1.0
+redis>=3.3.0
+requests==2.20.0
+pyOpenSSL==18.0.0
+ckantoolkit==0.0.3
