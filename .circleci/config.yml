@@ -16,6 +16,8 @@ jobs:
           command: |
             curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
             sudo dpkg -i cf-cli_amd64.deb
+            git clone https://github.com/bats-core/bats-core.git
+            ./bats-core/install.sh /usr/local
       - run:
           command: |
             ./vendor-requirements.sh
@@ -33,8 +35,8 @@ jobs:
             guid=$(cf curl /v3/apps?names=catalog-ci | jq -r '.resources[].guid')
             uri=$(cf curl /v3/apps/$guid/env | jq -r '.application_env_json.VCAP_APPLICATION.uris[0]')
             echo "Checking https://$uri"
-            curl https://$uri
-
+            TARGET_URL=$uri bats tests/smoke.bats
+            
 workflows:
   version: 2
   main:

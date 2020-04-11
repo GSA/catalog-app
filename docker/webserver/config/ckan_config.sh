@@ -14,6 +14,10 @@
 
 set -eu
 
+# activate the virtual environment
+
+. /usr/lib/ckan/bin/activate
+
 CONFIG="${CKAN_CONFIG}/production.ini"
 
 abort () {
@@ -22,7 +26,7 @@ abort () {
 }
 
 write_config () {
-  "$CKAN_HOME"/bin/paster --plugin=ckan config-tool "$CONFIG" -e \
+  paster --plugin=ckan config-tool "$CONFIG" -e \
       "sqlalchemy.url = ${DATABASE_URL}" \
       "solr_url = ${SOLR_URL}" \
       "ckan.site_url = ${CKAN_SITE_URL}" \
