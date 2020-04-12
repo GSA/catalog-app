@@ -42,6 +42,7 @@ DATABASE_URL=$DATABASE_URL ./configure-postgis.py
 # Edit the config file to use our values
 paster --plugin=ckan config-tool $CKAN_INI -s server:main -e port=${PORT}
 paster --plugin=ckan config-tool $CKAN_INI \
+    "ckan.site_title=Data.gov" \
     "sqlalchemy.url=${DATABASE_URL}" \
     "solr_url=${SOLR_URL}" \
     "ckanext.geodatagov.fgdc2iso_service=${FGDC2ISO_URL}" \
