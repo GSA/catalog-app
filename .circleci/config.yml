@@ -42,4 +42,4 @@ workflows:
   main:
     jobs:
       - deploy_cloud_gov
-#      - build
+      - build

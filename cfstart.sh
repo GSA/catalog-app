@@ -6,11 +6,8 @@ set -o pipefail
 
 # At this point we expect that you've already done:
 #   cf set-env <appname> DS_RO_USER <datastore_username>
-#   cf set-env <appname> DS_RO_PASSWORD <datastore_password>
 #   cf set-env <appname> SOLR_URL <solr_url>
 
-echo "VCAP_APPLICATION = $(echo $VCAP_APPLICATION | jq .)"
-echo "VCAP_SERVICES = $(echo $VCAP_SERVICES | jq .)"
 
 mkdir -p /var/tmp/ckan/dynamic_menu
 touch /var/tmp/ckan/dynamic_menu/menu.json

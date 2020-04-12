@@ -8,10 +8,6 @@ ENV CKAN_HOME /usr/lib/ckan
 ENV CKAN_CONFIG /etc/ckan/
 ENV CKAN_ENV docker
 
-# TODO compile python to /usr/local to avoid this
-# https://github.com/GSA/datagov-deploy/issues/390
-# ENV LD_LIBRARY_PATH /usr/local/lib/python$PYTHON_VERSION/lib
-
 # Install required packages
 RUN apt-get -q -y update && apt-get -q -y install \
   apache2 \
@@ -33,8 +29,6 @@ RUN apt-get -q -y update && apt-get -q -y install \
   swig \
   wget \
   xmlsec1
-
-RUN ls -l /usr/local/lib
 
 # Get custom python version for virtualenv
 RUN wget -O- https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz | tar -zxv -C /tmp

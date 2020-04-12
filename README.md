@@ -194,6 +194,27 @@ $ cf add-network-policy ((app_name)) --destination-app ((app_name))-solr --proto
 $ cf add-network-policy ((app_name)) --destination-app ((app_name))-fgdc2iso --protocol tcp --port 8080
 ```
 
+### CI/CD configuration
+
+The CircleCI pipeline will deploy and smoke test an instance of the
+catalog app named `ci-catalog` to the `development` space of the GSA
+Cloud.gov sandbox.
+
+Before running the pipeline for the first time, you must:
+
+* create a deployment service account and deployment key (see
+  https://cloud.gov/docs/services/cloud-gov-service-account/)
+* add the password and username to CircleCI as environment variables
+  `CF_PASSWORD` and `F_USERNAME` respectively
+* create redis and database services (TODO: can this be automated?)
+
+```sh
+$ cf create-service aws-rds medium-psql catalog-ci-db
+$ cf create-service redis32 standard-ha catalog-ci-redis
+$ cf add-network-policy catalog-ci --destination-app catalog-ci-solr --protocol tcp --port 8983
+$ cf add-network-policy catalog-ci --destination-app catalog-ci-fgdc2iso --protocol tcp --port 8080
+```
+
 ## License and Contributing
 We're so glad you're thinking about re-using and/or contributing to
 Data.gov!
