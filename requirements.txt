@@ -1,7 +1,7 @@
 
 
 # ckanext-harvest
--e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages
+-e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest
 # https://github.com/ckan/ckanext-harvest/blob/master/pip-requirements.txt
 pika>=1.1.0
 redis>=3.3.0
