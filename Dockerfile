@@ -24,7 +24,6 @@ RUN apt-get -q -y update && apt-get -q -y install \
   libpq-dev \
   libxml2-dev \
   libxslt1-dev \
-  libmagic-dev \
   libgdbm-dev \
   memcached \
   postgresql-client \
