@@ -9,7 +9,7 @@ chardet==3.0.4
 -e git+https://github.com/GSA/ckan.git@fcfb75b4525f0b7585750c83722614fa83aa1cf0#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@bb4d85b5db628cd2a6d576c3fde79ddc0d9b5952#egg=ckanext_archiver
 -e git+https://github.com/GSA/ckanext-datagovtheme@873dc70135d4ed313517010fb2b3c208b72c2913#egg=ckanext_datagovtheme
--e git+https://github.com/GSA/ckanext-datajson@6dfe7a908a8da6d38ae5da86179a21f558a5344a#egg=ckanext_datajson
+-e git+https://github.com/GSA/ckanext-datajson@46ed53e6bfa3ad1f60bda06daba8fdf77138b254#egg=ckanext_datajson
 -e git+https://github.com/GSA/ckanext-extlink@69629853f6c7aa4f94c105c5efd76380d70f0843#egg=ckanext_extlink
 -e git+https://github.com/GSA/ckanext-ga-report@7d32eac6db1bc68dd8f3f96f14c6fd3aeec902a9#egg=ckanext_ga_report
 -e git+https://github.com/GSA/ckanext-geodatagov@d82eb45067f9b8335b6d767499f218431fb6c215#egg=ckanext_geodatagov
@@ -29,7 +29,7 @@ GeoAlchemy==0.7.2
 GeoAlchemy2==0.7.0
 google-api-python-client==1.4.1
 html5lib==1.0.1
-httplib2==0.17.1
+httplib2==0.17.2
 idna==2.7
 Jinja2==2.6
 json-table-schema==0.2.1
