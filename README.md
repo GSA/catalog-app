@@ -205,7 +205,7 @@ Before running the pipeline for the first time, you must:
 * create a deployment service account and deployment key (see
   https://cloud.gov/docs/services/cloud-gov-service-account/)
 * add the password and username to CircleCI as environment variables
-  `CF_PASSWORD` and `F_USERNAME` respectively
+  `CF_PASSWORD` and `CF_USERNAME` respectively
 * create redis and database services (TODO: can this be automated?)
 
 ```sh
