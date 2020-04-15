@@ -2,7 +2,7 @@
 -e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext-archiver
 -e git+https://github.com/GSA/ckanext-datagovtheme@master#egg=ckanext-datagovtheme
--e git+https://github.com/GSA/ckanext-datajson@datagov#egg=ckanext-datajson
+-e git+https://github.com/GSA/ckanext-datajson@master#egg=ckanext-datajson
 -e git+https://github.com/GSA/ckanext-extlink@master#egg=ckanext-extlink
 -e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext-geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
