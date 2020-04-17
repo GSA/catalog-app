@@ -34,7 +34,7 @@ services:
       SIGNATURE:
 
   redis:
-    build: ./docker/redis
+    image: redis:latest
 
   solr:
     image:  datagov/catalog-solr:ckan_2.8
