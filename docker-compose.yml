@@ -18,13 +18,15 @@ services:
       - "8080:80"
 
   db:
-    image: datagov/catalog-db:latest
+    image: datagov/catalog-db:ckan_2.8
     environment:
       POSTGRES_USER: postgres
       DB_CKAN_USER: ckan
       DB_CKAN_PASSWORD: ckan
       DB_CKAN_DB: ckan
-      DB_PYCSW_DB: pycsw
+      DB_DATASTORE: datastore
+      DB_DATASTORE_RO_USER: datastore_ro
+      DB_DATASTORE_RO_PASS: datastore
 
   fgdc2iso:
     image: datagov/catalog-fgdc2iso:latest

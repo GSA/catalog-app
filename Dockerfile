@@ -9,6 +9,9 @@ RUN cp /usr/share/zoneinfo/$TZ /etc/localtime
 
 COPY docker/ckan-entrypoint.d/* /docker-entrypoint.d/
 
+RUN mkdir -p /var/lib/ckan/storage/uploads
+RUN chown -R ckan:ckan /var/lib/ckan/storage
+
 # TODO start ainstalling reqs
 # COPY requirements.txt .
 # RUN pip install -r requirements.txt
