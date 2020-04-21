@@ -14,5 +14,6 @@ COPY docker/ckan-entrypoint.d/* /docker-entrypoint.d/
 RUN mkdir -p /var/lib/ckan/storage/uploads
 RUN chown -R ckan:ckan /var/lib/ckan/storage
 
+RUN pip install --upgrade pip
 COPY requirements.txt .
 RUN pip install -r requirements.txt
