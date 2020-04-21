@@ -8,22 +8,31 @@ jobs:
           name: Run tests
           command: make test
 
-  deploy_cloud_gov:
-    machine: true
+  vendor:
+    docker:
+      image: circleci/python:2.7
+    steps:
+     - run:
+         name: Vendor requirements
+         command: ./vendor-requirements.sh
+      
+  deploy:
+    docker:
+      - image: 18fgsa/cloud-foundry-cli
+        environment:
+          CF_API: https://api.fr.cloud.gov
     steps:
       - checkout
+      - attach_workspace:
+            at: .
       - run:
+          name: Installing bats
           command: |
-            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-            sudo dpkg -i cf-cli_amd64.deb
             git clone https://github.com/bats-core/bats-core.git
             ./bats-core/install.sh ~
       - run:
+          name: Deploying
           command: |
-            ./vendor-requirements.sh
-      - run:
-          command: |
-            cf api https://api.fr.cloud.gov            
             cf auth
             cf target -o gsa-datagov -s development
             cf push --vars-file vars.ci.yaml
@@ -31,6 +40,7 @@ jobs:
             cf logs catalog-ci-solr --recent
             cf logs catalog-ci --recent
       - run:
+          name: Smoke test
           command: |
             guid=$(cf curl /v3/apps?names=catalog-ci | jq -r '.resources[].guid')
             uri=$(cf curl /v3/apps/$guid/env | jq -r '.application_env_json.VCAP_APPLICATION.uris[0]')
@@ -41,5 +51,8 @@ workflows:
   version: 2
   main:
     jobs:
-      - deploy_cloud_gov
+      - vendor
+      - deploy
+          requires:
+            - vendor
       - build
