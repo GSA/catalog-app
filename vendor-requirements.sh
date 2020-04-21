@@ -1,14 +1,7 @@
 #!/bin/bash 
 
 # This script installs some necessary .deb dependencies and then installs binary .whls for the packages
-# specified in vendor-requirements.txt into the "vendor" directory. The actual process runs inside a Docker
-# container; Docker is the only local prerequisite.
-
-# Get the latest version of the cflinuxfs3 image
-docker pull cloudfoundry/cflinuxfs3
-
-# The bind mount here enables us to write back to the host filesystem
-docker run --mount type=bind,source="$(pwd)",target=/tmp/app --name cf_bash --rm -i cloudfoundry/cflinuxfs3  /bin/bash <<EOF
+# specified in vendor-requirements.txt into the "vendor" directory.
 
 # Install any packaged dependencies for our vendored packages
 apt-get -y update
@@ -22,4 +15,3 @@ python /tmp/get-pip.py
 cd /tmp/app 
 mkdir vendor
 pip wheel -r requirements-freeze.txt -w vendor
-EOF

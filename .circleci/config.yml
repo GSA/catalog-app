@@ -16,7 +16,10 @@ jobs:
       - run:
           name: Vendor requirements
           command: ./vendor-requirements.sh
-      
+      - persist_to_workspace:
+          root: .
+          paths:
+            - vendor
   deploy:
     docker:
       - image: 18fgsa/cloud-foundry-cli
