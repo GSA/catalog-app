@@ -20,6 +20,20 @@ jobs:
           root: .
           paths:
             - vendor
+
+  install_bats:
+    steps:
+      - run:
+          name: Installing bats
+          command: |
+            git clone https://github.com/bats-core/bats-core.git
+            ./bats-core/install.sh ~
+      - persist_to_workspace:
+          root: .
+          paths:
+            - bin
+            - libexec
+
   deploy:
     docker:
       - image: 18fgsa/cloud-foundry-cli
@@ -29,11 +43,6 @@ jobs:
       - checkout
       - attach_workspace:
             at: .
-      - run:
-          name: Installing bats
-          command: |
-            git clone https://github.com/bats-core/bats-core.git
-            ./bats-core/install.sh ~
       - run:
           name: Deploying
           command: |
@@ -56,7 +65,9 @@ workflows:
   main:
     jobs:
       - vendor
+      - install_bats
       - deploy:
           requires:
+            - install_bats
             - vendor
       - build
