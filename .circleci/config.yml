@@ -22,6 +22,8 @@ jobs:
             - vendor
 
   install_bats:
+    docker:
+      - image: cimg/base:2020.01
     steps:
       - run:
           name: Installing bats
