@@ -16,6 +16,9 @@ jobs:
       - run:
           name: Vendor requirements
           command: ./vendor-requirements.sh
+      - run:
+          name: Check what we vendored
+          command: ls -l vendor
       - persist_to_workspace:
           root: .
           paths:
@@ -43,6 +46,9 @@ jobs:
       - checkout
       - attach_workspace:
             at: .
+      - run:
+          name: Check what we vendored
+          command: ls -l vendor
       - run:
           name: Deploying
           command: |
