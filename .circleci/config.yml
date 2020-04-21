@@ -52,7 +52,7 @@ workflows:
   main:
     jobs:
       - vendor
-      - deploy
+      - deploy:
           requires:
             - vendor
       - build
