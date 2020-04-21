@@ -46,7 +46,7 @@ jobs:
       - checkout
       - run:
           name: Install jq
-          command: apt-get install jq
+          command: apt-get install -y jq
       - attach_workspace:
             at: .
       - run:
