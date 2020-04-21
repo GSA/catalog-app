@@ -44,11 +44,11 @@ jobs:
       - image: 18fgsa/cloud-foundry-cli
     steps:
       - checkout
+      - run:
+          name: Install jq
+          command: sudo apt-get install jq
       - attach_workspace:
             at: .
-      - run:
-          name: Check what we vendored
-          command: ls -l vendor
       - run:
           name: Deploying
           command: |

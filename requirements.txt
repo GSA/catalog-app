@@ -89,6 +89,9 @@ Jinja2==2.6
 # OWSLib
 pytz
 
+# Putting these lines last ensures that we catch problems with pip finding 
+# vendor packages early in our deployment process, rather than after installing
+# these packages from git first, enabling an earlier out in the process.
 
 -e git+https://github.com/GSA/ckan.git@datagov#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@datagov#egg=ckanext-archiver
