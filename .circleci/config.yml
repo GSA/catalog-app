@@ -12,9 +12,10 @@ jobs:
     docker:
       - image: circleci/python:2.7
     steps:
-     - run:
-         name: Vendor requirements
-         command: ./vendor-requirements.sh
+      - checkout
+      - run:
+          name: Vendor requirements
+          command: ./vendor-requirements.sh
       
   deploy:
     docker:
