@@ -10,7 +10,7 @@ jobs:
 
   vendor:
     docker:
-      image: circleci/python:2.7
+      - image: circleci/python:2.7
     steps:
      - run:
          name: Vendor requirements
