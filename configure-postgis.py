@@ -16,8 +16,6 @@ def identifier(s):
     """
     return u'"' + s.replace(u'"', u'""').replace(u'\0', '') + u'"'
 
-    return """
-
 def postgis_sql(user):
     """
     Return some SQL to configure the PostGIS extension.

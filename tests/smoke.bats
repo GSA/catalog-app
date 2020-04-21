@@ -1,17 +1,17 @@
 @test "Test home page is served" {
-    run curl -o /dev/null -L -s -w "%{http_code}\n" $TARGET_URL
+    run curl --output /dev/null --location --silent --write-out "%{http_code}\n" $TARGET_URL
     [ "$status" -eq 0 ]
     [ "$output" = "200" ]
 }
 
 @test "Test status API is functioning" {
-    run curl -o /dev/null -L -s -w "%{http_code}\n" $TARGET_URL/api/3/action/status_show
+    run curl --output /dev/null --location --silent --write-out "%{http_code}\n" $TARGET_URL/api/3/action/status_show
     [ "$status" -eq 0 ]
     [ "$output" = "200" ]
 }
 
 @test "Test status API returns expected CKAN version 2.3" {
-    run curl -L -s $TARGET_URL/api/3/action/status_show
+    run curl --location --silent $TARGET_URL/api/3/action/status_show
     [ "$status" -eq 0 ]
     success=$(echo $output | jq -r .success)
     ckan_version=$(echo $output | jq -r .result.ckan_version)
@@ -20,7 +20,7 @@
 }
 
 @test "Test status API returns expected site title Data.gov" {
-    run curl -L -s $TARGET_URL/api/3/action/status_show
+    run curl --location --silent $TARGET_URL/api/3/action/status_show
     [ "$status" -eq 0 ]
     success=$(echo $output | jq -r .success)
     site_title=$(echo $output | jq -r .result.site_title)
@@ -29,7 +29,7 @@
 }
 
 @test "Test datagovtheme is loaded" {
-    run curl -L -s $TARGET_URL/api/3/action/status_show
+    run curl --location --silent $TARGET_URL/api/3/action/status_show
     [ "$status" -eq 0 ]
     success=$(echo $output | jq -r .success)
     datagovtheme=$(echo $output | jq -r '.result.extensions[] | select(.=="datagovtheme")')

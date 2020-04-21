@@ -14,10 +14,6 @@
 
 set -eu
 
-# activate the virtual environment
-
-. /usr/lib/ckan/bin/activate
-
 CONFIG="${CKAN_CONFIG}/production.ini"
 
 abort () {
