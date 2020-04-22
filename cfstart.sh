@@ -9,6 +9,10 @@ set -o pipefail
 #   cf set-env <appname> SOLR_URL <solr_url>
 
 
+# ckanext-geodatagov depends on finding a category menu from data.gov,
+# which we don't have, so create an empty one.
+# see https://github.com/GSA/datagov-deploy/issues/1257
+
 mkdir -p /var/tmp/ckan/dynamic_menu
 touch /var/tmp/ckan/dynamic_menu/menu.json
 
@@ -20,12 +24,12 @@ APP_NAME=$(echo $VCAP_APPLICATION | jq -r '.application_name')
 
 # ... from which we can guess the service names
 
-SVC_DATABASE="${APP_NAME}-db"
+# SVC_DATABASE="${APP_NAME}-db"
 SVC_REDIS="${APP_NAME}-redis"
 
 # Grab database url from the VCAP_SERVICES env var provided by the platform
 
-DATABASE_URL=$(echo $VCAP_SERVICES | jq -r --arg SVC_DATABASE $SVC_DATABASE '.["aws-rds"][] | select(.name == $SVC_DATABASE) | .credentials.uri')
+#DATABASE_URL=$(echo $VCAP_SERVICES | jq -r --arg SVC_DATABASE $SVC_DATABASE '.["aws-rds"][] | select(.name == $SVC_DATABASE) | .credentials.uri')
 
 # Grab redis settings
 
