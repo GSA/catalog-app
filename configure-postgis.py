@@ -6,17 +6,19 @@
 
 import os
 import psycopg2
+from psycopg2.sql import Identifier
 import re
 import sys
 from urlparse import urlparse
 
-def identifier(s):
+def identifier(s, connection):
     """
     Return s as a double-quoted string (good for psql identifiers)
     """
-    return u'"' + s.replace(u'"', u'""').replace(u'\0', '') + u'"'
+    return Identifier(s).as_string(connection)
+#    return u'"' + s.replace(u'"', u'""').replace(u'\0', '') + u'"'
 
-def postgis_sql(user):
+def postgis_sql(user, connnection):
     """
     Return some SQL to configure the PostGIS extension.
     """
@@ -24,7 +26,7 @@ def postgis_sql(user):
     template_filename = 'configure-postgis.sql'
     with open(template_filename) as fp:
         template = fp.read()
-    return template.format(user=identifier(user))
+    return template.format(user=identifier(user, connection))
 
 def get_env(name):
     if name not in os.environ:
@@ -39,14 +41,12 @@ def main():
     database = urlparse(database_url)
     user = database.username
     
-    sql = postgis_sql(user)
-
-    print "<SQL>"
-    print sql
-    print "</SQL>"
-
     try:
         with psycopg2.connect(database_url) as conn:
+            sql = postgis_sql(user, conn)
+            print "<SQL>"
+            print sql
+            print "</SQL>"
             try:
                 with conn.cursor() as cur:
                     cur.execute(sql)
