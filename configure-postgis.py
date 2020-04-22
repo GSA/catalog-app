@@ -16,7 +16,6 @@ def identifier(s, connection):
     Return s as a double-quoted string (good for psql identifiers)
     """
     return Identifier(s).as_string(connection)
-#    return u'"' + s.replace(u'"', u'""').replace(u'\0', '') + u'"'
 
 def postgis_sql(user, connection):
     """
