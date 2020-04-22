@@ -18,7 +18,7 @@ def identifier(s, connection):
     return Identifier(s).as_string(connection)
 #    return u'"' + s.replace(u'"', u'""').replace(u'\0', '') + u'"'
 
-def postgis_sql(user, connnection):
+def postgis_sql(user, connection):
     """
     Return some SQL to configure the PostGIS extension.
     """
