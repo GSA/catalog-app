@@ -20,7 +20,7 @@ chardet==3.0.4
 -e git+https://github.com/GSA/ckanext-report@f16607e700db67645734257a0c3ac74f4cbdb718#egg=ckanext_report
 -e git+https://github.com/GSA/ckanext-saml2@005f32b7b0a3ec4924b0117781a79b34360e6685#egg=ckanext_saml2
 -e git+https://github.com/GSA/ckanext-spatial@2a25f8d60c31add77e155c4136f2c0d4e3b86385#egg=ckanext_spatial
-cryptography==2.9
+cryptography==2.9.1
 decorator==4.4.2
 defusedxml==0.6.0
 enum34==1.1.10
@@ -33,7 +33,7 @@ GeoAlchemy==0.7.2
 GeoAlchemy2==0.7.0
 google-api-python-client==1.4.1
 html5lib==1.0.1
-httplib2==0.17.2
+httplib2==0.17.3
 idna==2.7
 ipaddress==1.0.23
 Jinja2==2.6
@@ -67,7 +67,7 @@ Pygments==2.5.2
 Pylons==0.9.7
 pyOpenSSL==19.1.0
 pyparsing==1.5.6
--e git+https://github.com/GSA/pysaml2@d78e1c5b23d8dce1d81796aa24f7f5806902d30f#egg=pysaml2
+-e git+https://github.com/GSA/pysaml2@6f87a25369ccca615652251cb40422e3c7fe8cc4#egg=pysaml2
 python-dateutil==1.5
 python-magic==0.4.12
 python-memcached==1.48
