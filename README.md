@@ -160,7 +160,63 @@ Tests are run from a special `test` docker container defined in
     $ make test
 
 
+## Cloud.gov
+
+Copy `vars.yml.template` to `vars.yml`, and customize the values in that file. Then, assuming you're logged in for the Cloud Foundry CLI:
+
+Update and cache all the Python package requirements
+
+```sh
+./vendor_requirements.sh
+```
+
+Create the database used by CKAN itself. You have to wait a bit for
+the datastore DB to be available. (See [the cloud.gov instructions on
+how to know when it's
+up](https://cloud.gov/docs/services/relational-database/#instance-creation-time).)
+
+Note that a *medium-psql* instance is required in order to install
+the PostGis extension.
+
+```sh
+$ cf create-service aws-rds medium-psql ((app_name))-db
+```
+
+Create the Redis instance:
+
+```sh
+$ cf create-service redis32 standard-ha ((app_name))-redis
+```
+
+Ensure the catalog app can reach the Solr app and FGDC2ISO
+```sh
+$ cf add-network-policy ((app_name)) --destination-app ((app_name))-solr --protocol tcp --port 8983
+$ cf add-network-policy ((app_name)) --destination-app ((app_name))-fgdc2iso --protocol tcp --port 8080
+```
+
+### CI/CD configuration
+
+The CircleCI pipeline will deploy and smoke test an instance of the
+catalog app named `ci-catalog` to the `development` space of the GSA
+Cloud.gov sandbox.
+
+Before running the pipeline for the first time, you must:
+
+* create a deployment service account and deployment key (see
+  https://cloud.gov/docs/services/cloud-gov-service-account/)
+* add the password and username to CircleCI as environment variables
+  `CF_PASSWORD` and `CF_USERNAME` respectively
+* create redis and database services (TODO: can this be automated?)
+
+```sh
+$ cf create-service aws-rds medium-psql catalog-ci-db
+$ cf create-service redis32 standard-ha catalog-ci-redis
+$ cf add-network-policy catalog-ci --destination-app catalog-ci-solr --protocol tcp --port 8983
+$ cf add-network-policy catalog-ci --destination-app catalog-ci-fgdc2iso --protocol tcp --port 8080
+```
+
 ## License and Contributing
-We're so glad you're thinking about re-using and/or contributing to Data.gov!
+We're so glad you're thinking about re-using and/or contributing to
+Data.gov!
 
 Before contributing to Data.gov we encourage you to read our [CONTRIBUTING](https://github.com/GSA/catalog-app/blob/master/CONTRIBUTING.md) guide, our [LICENSE](https://github.com/GSA/catalog-app/blob/master/LICENSE.md), and our README (you are here), all of which should be in this repository. If you have any questions, you can email the Data.gov team at [datagov@gsa.gov](mailto:datagov@gsa.gov).

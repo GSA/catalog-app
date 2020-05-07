@@ -7,3 +7,77 @@ jobs:
       - run:
           name: Run tests
           command: make test
+
+  vendor:
+    docker:
+      - image: circleci/python:2.7
+    steps:
+      - checkout
+      - run:
+          name: Vendor requirements
+          command: ./vendor-requirements.sh
+      - run:
+          name: Check what we vendored
+          command: ls -l vendor
+      - persist_to_workspace:
+          root: .
+          paths:
+            - vendor
+
+  install_bats:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - run:
+          name: Installing bats
+          command: |
+            git clone https://github.com/bats-core/bats-core.git
+            ./bats-core/install.sh ~
+      - persist_to_workspace:
+          root: /home/circleci
+          paths:
+            - bin
+            - libexec
+
+  deploy:
+    docker:
+      - image: 18fgsa/cloud-foundry-cli
+    steps:
+      - checkout
+      - run:
+          name: Install jq
+          command: apt-get install -y jq
+      - attach_workspace:
+            at: .
+      - run:
+          name: Checking bin
+          command: ls -l ./bin
+      - run:
+          name: Deploying
+          command: |
+            cf api https://api.fr.cloud.gov
+            cf auth
+            cf target -o gsa-datagov -s development
+            cf push --vars-file vars.ci.yaml
+            cf logs catalog-ci-fgdc2iso --recent
+            cf logs catalog-ci-solr --recent
+            cf logs catalog-ci --recent
+      - run:
+          name: Smoke test
+          command: |
+            guid=$(cf curl /v3/apps?names=catalog-ci | jq -r '.resources[].guid')
+            uri=$(cf curl /v3/apps/$guid/env | jq -r '.application_env_json.VCAP_APPLICATION.uris[0]')
+            echo "Checking https://$uri"
+            TARGET_URL=$uri ./bin/bats tests/smoke.bats
+            
+workflows:
+  version: 2
+  main:
+    jobs:
+      - vendor
+      - install_bats
+      - deploy:
+          requires:
+            - install_bats
+            - vendor
+      - build
