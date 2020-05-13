@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  environment {
+    INVENTORY = 'inventories/sandbox'
+    PLAYBOOK = 'catalog.yml'
+  }
   stages {
     stage('deploy') {
       when { anyOf { branch 'master' } }
@@ -9,9 +13,15 @@ pipeline {
       }
       steps {
         ansiColor('xterm') {
-          sh 'docker run --rm -v $SSH_KEY_FILE:$SSH_KEY_FILE -v $ANSIBLE_VAULT_FILE:$ANSIBLE_VAULT_FILE -u $(id -u) datagov/datagov-deploy:latest pipenv run ansible-playbook --key-file=$SSH_KEY_FILE --vault-password-file=$ANSIBLE_VAULT_FILE --inventory inventories/ci --skip-tags database catalog.yml'
+          echo 'Deploying with Ansible'
+          sh 'docker run --rm -v $SSH_KEY_FILE:$SSH_KEY_FILE -v $ANSIBLE_VAULT_FILE:$ANSIBLE_VAULT_FILE -u $(id -u) datagov/datagov-deploy:latest pipenv run ansible-playbook --key-file=$SSH_KEY_FILE --vault-password-file=$ANSIBLE_VAULT_FILE --inventory $INVENTORY $PLAYBOOK --limit v1'
         }
       }
+    }
+  }
+  post {
+    failure {
+      step([$class: 'GitHubIssueNotifier', issueAppend: true])
     }
   }
 }
