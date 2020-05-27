@@ -31,12 +31,13 @@ jobs:
       - run:
           name: Installing bats
           command: |
-            git clone https://github.com/bats-core/bats-core.git
+            git clone --branch v1.2.0 https://github.com/bats-core/bats-core.git
             ./bats-core/install.sh ~
       - persist_to_workspace:
           root: /home/circleci
           paths:
             - bin
+            - lib
             - libexec
 
   deploy:
