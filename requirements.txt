@@ -7,7 +7,7 @@
 -e git+https://github.com/GSA/ckanext-geodatagov@master#egg=ckanext-geodatagov
 -e git+https://github.com/GSA/ckanext-googleanalyticsbasic@master#egg=ckanext-googleanalyticsbasic
 -e git+https://github.com/GSA/ckanext-harvest@datagov#egg=ckanext-harvest
--e git+https://github.com/GSA/ckanext-saml2@max#egg=ckanext-saml2
+-e git+https://github.com/datopian/ckanext-saml2@datagov-0.4.0-config#egg=ckanext-saml2
 -e git+https://github.com/GSA/ckanext-qa@datagov#egg=ckanext-qa
 -e git+https://github.com/GSA/ckanext-report@datagov#egg=ckanext-report
 -e git+https://github.com/GSA/ckanext-spatial@datagov#egg=ckanext-spatial
@@ -84,7 +84,7 @@ progressbar==2.3
 
 
 # ckanext-saml2
--e git+https://github.com/GSA/pysaml2.git@max#egg=pysaml2
+-e git+https://github.com/datopian/pysaml2.git@datagov/v4.9.0#egg=pysaml2
 M2Crypto==0.23.0
 
 
