@@ -101,3 +101,6 @@ Jinja2==2.6
 
 # OWSLib
 pytz
+
+# To avoid https://app.snyk.io/vuln/SNYK-PYTHON-RSA-570831
+rsa>=4.1
