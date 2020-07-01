@@ -20,6 +20,7 @@ RUN apt-get -q -y update && apt-get -q -y install \
   htop \
   lib32z1-dev \
   libapache2-mod-wsgi \
+  libgdbm-dev \
   libgeos-c1 \
   libpq-dev \
   libxml2-dev \
@@ -34,6 +35,7 @@ RUN apt-get -q -y update && apt-get -q -y install \
   ruby-dev \
   swig \
   tomcat6 \
+  vim \
   wget \
   xmlsec1
 
@@ -63,7 +65,7 @@ COPY docker/webserver/config/ckan_config.sh /usr/local/bin/
 # Config CKAN app
 COPY config/environments/$CKAN_ENV/production.ini $CKAN_CONFIG
 COPY docker/webserver/entrypoint.sh /entrypoint.sh
-RUN ln -s $CKAN_HOME/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini
+COPY config/environments/$CKAN_ENV/who.ini $CKAN_CONFIG
 RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 
 # Install ckan app
