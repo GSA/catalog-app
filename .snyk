@@ -7,4 +7,34 @@ ignore:
         reason: >-
           No remediation available yet; Not affecting us since the storage is not accessible to any other client
         expires: 2021-01-10T06:00:00.000Z
+  SNYK-PYTHON-JINJA2-455616:
+    - '*':
+        reason: >-
+          Must wait until CKAN2.8 ready for deployment
+          expires: 2020-09-01T06:00:00.000Z
+  SNYK-PYTHON-SQLALCHEMY-173678:
+    - '*':
+        reason: >-
+          Must wait until CKAN2.8 ready for deployment
+          expires: 2020-09-01T06:00:00.000Z
+  SNYK-PYTHON-JINJA2-40028
+    - '*':
+        reason: >-
+          Must wait until CKAN2.8 ready for deployment
+          expires: 2020-09-01T06:00:00.000Z
+  SNYK-PYTHON-JINJA2-174126
+    - '*':
+        reason: >-
+          Must wait until CKAN2.8 ready for deployment
+          expires: 2020-09-01T06:00:00.000Z
+  SNYK-PYTHON-PASSLIB-569603
+    - '*':
+        reason: >-
+          No remediation path available
+          expires: 2020-09-01T06:00:00.000Z
+  SNYK-PYTHON-WEBOB-40490
+    - '*':
+        reason: >-
+          Must wait until CKAN2.8 ready for deployment
+          expires: 2020-09-01T06:00:00.000Z
 patch: {}
