@@ -7,34 +7,39 @@ ignore:
         reason: >-
           No remediation available yet; Not affecting us since the storage is not accessible to any other client
         expires: 2021-01-10T06:00:00.000Z
-  SNYK-PYTHON-JINJA2-455616:
-    - '*':
-        reason: >-
-          Must wait until CKAN2.8 ready for deployment
-        expires: 2020-09-01T06:00:00.000Z
   SNYK-PYTHON-SQLALCHEMY-173678:
     - '*':
         reason: >-
-          Must wait until CKAN2.8 ready for deployment
+          No remediation path available for CKAN2.3 (not compatible with SQLALCHEMY > 2.7.x). Need to resolve moving to
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
+        expires: 2020-09-01T06:00:00.000Z
+  SNYK-PYTHON-JINJA2-455616:
+    - '*':
+        reason: >-
+          No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298).
         expires: 2020-09-01T06:00:00.000Z
   SNYK-PYTHON-JINJA2-40028:
     - '*':
         reason: >-
-          Must wait until CKAN2.8 ready for deployment
+          No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
         expires: 2020-09-01T06:00:00.000Z
   SNYK-PYTHON-JINJA2-174126:
     - '*':
         reason: >-
-          Must wait until CKAN2.8 ready for deployment
+          No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
         expires: 2020-09-01T06:00:00.000Z
   SNYK-PYTHON-PASSLIB-569603:
     - '*':
         reason: >-
-          No remediation path available
+          Fix is created but not yet published
         expires: 2020-09-01T06:00:00.000Z
   SNYK-PYTHON-WEBOB-40490:
     - '*':
         reason: >-
-          Must wait until CKAN2.8 ready for deployment
+          No remediation path available for CKAN2.3 (not compatible with webob > 1.0.8). Need to resolve moving to
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
         expires: 2020-09-01T06:00:00.000Z
 patch: {}
