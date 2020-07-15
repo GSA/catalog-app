@@ -142,6 +142,8 @@ Follow these steps only if your `src` folder is empty or you need the latest cod
     $ docker-compose exec app service apache2 restart
 
 1. Commit the changes, and push extensions to GitHub.
+
+### Update Dependencies
 1. (optional) Pull in the latest dependencies, including nested dependencies.
 
     $ make update-dependencies
