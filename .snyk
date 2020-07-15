@@ -18,19 +18,22 @@ ignore:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
-          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298).
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Forms for data.gov only 
+          accessible to government users, risk is acceptable.
         expires: 2020-09-01T06:00:00.000Z
   SNYK-PYTHON-JINJA2-40028:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
-          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Local user needed to exploit
+          this issue, current user security enough to make risk acceptable.
         expires: 2020-09-01T06:00:00.000Z
   SNYK-PYTHON-JINJA2-174126:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
-          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Forms for data.gov only 
+          accessible to government users, risk is acceptable.
         expires: 2020-09-01T06:00:00.000Z
   SNYK-PYTHON-PASSLIB-569603:
     - '*':
