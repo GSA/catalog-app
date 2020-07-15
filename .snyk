@@ -11,7 +11,8 @@ ignore:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with SQLALCHEMY > 2.7.x). Need to resolve moving to
-          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Reviewed group_by and order_by
+          usage manually, all user input sanitized.
         expires: 2020-09-01T06:00:00.000Z
   SNYK-PYTHON-JINJA2-455616:
     - '*':
