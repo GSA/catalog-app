@@ -46,7 +46,7 @@ unicodecsv>=0.9
 
 
 # ckanext-archiver
-celery==2.4.2
+celery==2.4.4
 kombu==2.5
 progressbar==2.3
 SQLAlchemy==0.9.6
