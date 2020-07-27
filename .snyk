@@ -46,10 +46,10 @@ ignore:
           No remediation path available for CKAN2.3 (not compatible with webob > 1.0.8). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
         expires: 2020-09-01T06:00:00.000Z
-        SNYK-PYTHON-PYYAML-590151:
-        - '*':
-            reason: >-
-              There is no fix for PyYaml at this time. Only trusted operators are allowed to run yaml files on our services.
-              These operators should only be using trusted sources as well.
-            expires: 2020-09-17T06:00:00.000Z
+  SNYK-PYTHON-PYYAML-590151:
+  - '*':
+      reason: >-
+        There is no fix for PyYaml at this time. Only trusted operators are allowed to run yaml files on our services.
+        These operators should only be using trusted sources as well.
+      expires: 2020-08-27T06:00:00.000Z
 patch: {}
