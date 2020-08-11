@@ -23,8 +23,8 @@ test:
 	docker-compose -f docker-compose.yml -f docker-compose.test.yml build
 	docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit test
 
-update-dependencies:
-	docker-compose run --rm -T app pip install -r requirements.txt
+update-dependencies: 
+	docker-compose run --rm -T app pip install -r requirements.txt --no-input --exists-action w
 
 up:
 	docker-compose up
