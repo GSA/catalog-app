@@ -84,7 +84,7 @@ progressbar==2.3
 
 
 # ckanext-saml2
--e git+https://github.com/datopian/pysaml2.git@datagov/v4.9.0#egg=pysaml2
+-e git+https://github.com/GSA/pysaml2.git@datagov/v4.9.0#egg=pysaml2
 M2Crypto==0.23.0
 
 
