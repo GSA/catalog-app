@@ -37,8 +37,7 @@ harvest-gather-local:
 harvets-fetch-local:
 	docker-compose -f docker-compose.yml \
 		-f docker-compose.local.yml \
-		exec app bash -c "source /usr/lib/ckan/bin/activate && \
-			paster --plugin=ckanext-harvest harvester fetch_consumer -c /etc/ckan/production.ini"
+		exec app ckan --plugin=ckanext-harvest harvester fetch_consumer
 
 harvest-run-local:
 	docker-compose -f docker-compose.yml \
