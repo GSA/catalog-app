@@ -28,3 +28,18 @@ update-dependencies:
 
 up:
 	docker-compose up
+
+harvest-gather-local:
+	docker-compose -f docker-compose.yml \
+		-f docker-compose.local.yml \
+		exec app ckan --plugin=ckanext-harvest harvester gather_consumer
+
+harvets-fetch-local:
+	docker-compose -f docker-compose.yml \
+		-f docker-compose.local.yml \
+		exec app ckan --plugin=ckanext-harvest harvester fetch_consumer
+
+harvest-run-local:
+	docker-compose -f docker-compose.yml \
+		-f docker-compose.local.yml \
+		exec app ckan --plugin=ckanext-harvest harvester run
