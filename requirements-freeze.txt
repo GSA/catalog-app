@@ -8,7 +8,7 @@ certifi==2020.6.20
 chardet==3.0.4
 -e git+https://github.com/GSA/ckan.git@fcfb75b4525f0b7585750c83722614fa83aa1cf0#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@bb4d85b5db628cd2a6d576c3fde79ddc0d9b5952#egg=ckanext_archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@ad0ede863138267367c57df06604184fe48687d6#egg=ckanext_datagovtheme
+-e git+https://github.com/GSA/ckanext-datagovtheme@bc84ccaf626bdf6936fb7079d386bc9e2a3a40e4#egg=ckanext_datagovtheme
 -e git+https://github.com/GSA/ckanext-datajson@214ec53c9071d18bc7f7a241a28f6d7f0038276e#egg=ckanext_datajson
 -e git+https://github.com/GSA/ckanext-extlink@69629853f6c7aa4f94c105c5efd76380d70f0843#egg=ckanext_extlink
 -e git+https://github.com/GSA/ckanext-ga-report@7d32eac6db1bc68dd8f3f96f14c6fd3aeec902a9#egg=ckanext_ga_report
