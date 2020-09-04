@@ -13,7 +13,7 @@ ignore:
           No remediation path available for CKAN2.3 (not compatible with SQLALCHEMY > 2.7.x). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Reviewed group_by and order_by
           usage manually, all user input sanitized.
-        expires: 2020-09-01T06:00:00.000Z
+        expires: 2020-10-01T06:00:00.000Z
   SNYK-PYTHON-SQLALCHEMY-590109:
   - '*':
       reason: >-
@@ -27,32 +27,32 @@ ignore:
           No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Forms for data.gov only
           accessible to government users, risk is acceptable.
-        expires: 2020-09-01T06:00:00.000Z
+        expires: 2020-10-01T06:00:00.000Z
   SNYK-PYTHON-JINJA2-40028:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Local user needed to exploit
           this issue, current user security enough to make risk acceptable.
-        expires: 2020-09-01T06:00:00.000Z
+        expires: 2020-12-01T06:00:00.000Z
   SNYK-PYTHON-JINJA2-174126:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Forms for data.gov only
           accessible to government users, risk is acceptable.
-        expires: 2020-09-01T06:00:00.000Z
+        expires: 2020-12-01T06:00:00.000Z
   SNYK-PYTHON-PASSLIB-569603:
     - '*':
         reason: >-
           Fix is created but not yet published
-        expires: 2020-09-01T06:00:00.000Z
+        expires: 2020-12-01T06:00:00.000Z
   SNYK-PYTHON-WEBOB-40490:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with webob > 1.0.8). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
-        expires: 2020-09-01T06:00:00.000Z
+        expires: 2020-12-01T06:00:00.000Z
   SNYK-PYTHON-PYYAML-590151:
     - '*':
         reason: >-
