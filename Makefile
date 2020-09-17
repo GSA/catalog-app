@@ -5,7 +5,7 @@ CKAN_HOME := /usr/lib/ckan
 all: build
 
 build:
-	docker-compose build
+	docker-compose build --build-arg REQUIREMENTS_FILE app
 
 clean:
 	docker-compose down -v --remove-orphans
@@ -20,7 +20,7 @@ requirements:
 	docker-compose run --rm -T app pip --quiet freeze > requirements-freeze.txt
 
 test:
-	docker-compose -f docker-compose.yml -f docker-compose.test.yml build
+	docker-compose -f docker-compose.yml -f docker-compose.test.yml build --build-arg REQUIREMENTS_FILE app
 	docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit test
 
 update-dependencies:

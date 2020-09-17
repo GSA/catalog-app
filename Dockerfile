@@ -1,6 +1,7 @@
 FROM ubuntu:14.04
 
 ARG PYTHON_VERSION=2.7.10
+ARG REQUIREMENTS_FILE=requirements.txt
 
 ENV CKAN_HOME /usr/lib/ckan
 ENV CKAN_CONFIG /etc/ckan/
@@ -69,7 +70,7 @@ RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 # Install ckan app
 COPY . /opt/catalog-app
 WORKDIR /opt/catalog-app
-RUN $CKAN_HOME/bin/pip install -r requirements.txt
+RUN $CKAN_HOME/bin/pip install -r $REQUIREMENTS_FILE
 
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
