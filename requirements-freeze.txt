@@ -52,6 +52,7 @@ PasteDeploy==2.1.0
 PasteScript==1.7.5
 pbr==0.11.1
 pika==0.9.8
+pip>=19.2
 ply==3.4
 progressbar==2.3
 psycopg2==2.4.5
@@ -95,5 +96,3 @@ WebOb==1.0.8
 WebTest==1.4.3
 xlrd==1.0.0
 zope.interface==4.1.1
-
-pip>=19.2 # not directly required, pinned by Snyk to avoid a vulnerability
