@@ -70,7 +70,7 @@ RUN mkdir /var/tmp/ckan && chown www-data:www-data /var/tmp/ckan
 # Install ckan app
 COPY . /opt/catalog-app
 WORKDIR /opt/catalog-app
-RUN $CKAN_HOME/bin/pip install -r REQUIREMENTS_FILE
+RUN $CKAN_HOME/bin/pip install -r $REQUIREMENTS_FILE
 
 # copy ckan script to /usr/bin/
 COPY docker/webserver/common/usr/bin/ckan /usr/bin/ckan
