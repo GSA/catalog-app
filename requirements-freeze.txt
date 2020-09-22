@@ -6,10 +6,10 @@ boto==2.49.0
 celery==2.4.4
 certifi==2020.6.20
 chardet==3.0.4
--e git+https://github.com/GSA/ckan.git@fcfb75b4525f0b7585750c83722614fa83aa1cf0#egg=ckan
+-e git+https://github.com/GSA/ckan.git@c50a23245ec70c024cd2f884b25cbf0c5a8963e5#egg=ckan
 -e git+https://github.com/GSA/ckanext-archiver@bb4d85b5db628cd2a6d576c3fde79ddc0d9b5952#egg=ckanext_archiver
--e git+https://github.com/GSA/ckanext-datagovtheme@4b42e2e8477f2b023f91089a73486950ea3b872e#egg=ckanext_datagovtheme
--e git+https://github.com/GSA/ckanext-datajson@214ec53c9071d18bc7f7a241a28f6d7f0038276e#egg=ckanext_datajson
+-e git+https://github.com/GSA/ckanext-datagovtheme@3d3c0af4e010a4d85b1dd89986d86b4d783d35a2#egg=ckanext_datagovtheme
+-e git+https://github.com/GSA/ckanext-datajson@b331695e47a2d467f9f557811066fefbce056824#egg=ckanext_datajson
 -e git+https://github.com/GSA/ckanext-extlink@69629853f6c7aa4f94c105c5efd76380d70f0843#egg=ckanext_extlink
 -e git+https://github.com/GSA/ckanext-ga-report@7d32eac6db1bc68dd8f3f96f14c6fd3aeec902a9#egg=ckanext_ga_report
 -e git+https://github.com/GSA/ckanext-geodatagov@c52faf3ead543f64c105b6ab3c54b3d31bc48b46#egg=ckanext_geodatagov
@@ -52,7 +52,6 @@ PasteDeploy==2.1.0
 PasteScript==1.7.5
 pbr==0.11.1
 pika==0.9.8
-pip>=19.2
 ply==3.4
 progressbar==2.3
 psycopg2==2.4.5
