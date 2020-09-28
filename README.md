@@ -59,10 +59,9 @@ Mark any completed jobs as finished.
 
 #### fgdc2iso
 
-_TODO: complete this section._
-
-For some harvest source types, you must have fgdc2iso properly configured with
-a SaxonPE license. See the [GSA/datagov-deploy] and the Ansible vault.
+For some harvest sources with [CSDGM](https://www.fgdc.gov/metadata/csdgm-standard) metadata records, you must have fgdc2iso properly configured with
+a SaxonPE license. See the [GSA/catalog-fgdc2iso](https://github.com/GSA/catalog-fgdc2iso) for building the fgdc2iso WAR file. 
+See [GSA/datagov-deploy-fgdc2iso](https://github.com/GSA/datagov-deployfgdc2iso) and [GSA/datagov-deploy](https://github.com/GSA/datagov-deploy) for deploying the the fgdc2iso application.
 
 
 ### CKAN/catalog-app commands
