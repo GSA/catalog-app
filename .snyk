@@ -70,4 +70,11 @@ ignore:
           No remediation path available, and eval function is not used. Upstream uses pysolr, which will resolve 
           the issue.
         expires: 2020-11-17T06:00:00.000Z
+  SNYK-PYTHON-URLLIB3-1014645:
+    - '*':
+        reason: >-
+          No remediation path available for CKAN2.3 (not compatible with urllib3 > 1.24). Need to resolve moving to
+          CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). `method` parameter is not
+          utilized for any user input value, risk is acceptable.
+        expires: 2020-11-17T06:00:00.000Z
 patch: {}
