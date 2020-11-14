@@ -31,7 +31,7 @@ google-api-python-client==1.4.1
 html5lib==1.1
 httplib2==0.18.1
 idna==2.7
-Jinja2==2.6
+Jinja2==2.8.1
 json-table-schema==0.2.1
 jsonschema==2.4.0
 kombu==2.5.0
@@ -80,7 +80,7 @@ Shapely==1.3.1
 simplejson==3.17.2
 six==1.15.0
 solrpy==0.9.5
-SQLAlchemy==0.9.6
+SQLAlchemy==1.2.18
 sqlalchemy-migrate==0.9.1
 sqlparse==0.1.11
 Tempita==0.5.2
