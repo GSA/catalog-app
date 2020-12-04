@@ -20,8 +20,8 @@ requirements:
 	docker-compose run --rm -T app pip --quiet freeze > requirements-freeze.txt
 
 test:
-	docker-compose -f docker-compose.yml -f docker-compose.test.yml build --build-arg REQUIREMENTS_FILE app
-	docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit test
+	docker-compose -f docker-compose.yml -f docker-compose.test.yml build python-test
+	docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit python-test
 
 update-dependencies:
 	docker-compose run --rm -T app pip install -r requirements.txt

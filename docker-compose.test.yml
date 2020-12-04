@@ -8,3 +8,8 @@ services:
       dockerfile: Dockerfile.test
     depends_on:
       - app
+  python-test:
+    build:
+      context: test
+    depends_on:
+      - app
