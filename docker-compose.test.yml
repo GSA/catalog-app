@@ -13,3 +13,5 @@ services:
       context: test
     depends_on:
       - app
+    environment:
+      BROWSER: "${BROWSER}"
