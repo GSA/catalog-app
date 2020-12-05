@@ -1,11 +1,13 @@
 FROM ubuntu:bionic
 
 RUN apt-get update && apt-get install -y python-dev python-virtualenv xvfb sudo firefox-geckodriver chromium-chromedriver
+RUN apt-get install -y fonts-ipafont-gothic xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
+RUN apt-get install -y supervisor
 
 # chromedriver does not like to run as root.
-RUN useradd --create-home --home /app --groups audio,video,sudo app
+RUN useradd --create-home --home /app --groups audio,video app
 
-RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/sudo.conf
+RUN echo 'app ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/app
 
 USER app
 WORKDIR /app
