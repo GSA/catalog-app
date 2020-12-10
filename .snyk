@@ -34,25 +34,20 @@ ignore:
           No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Local user needed to exploit
           this issue, current user security enough to make risk acceptable.
-        expires: 2020-12-01T06:00:00.000Z
+        expires: 2021-03-01T06:00:00.000Z
   SNYK-PYTHON-JINJA2-174126:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Forms for data.gov only
           accessible to government users, risk is acceptable.
-        expires: 2020-12-01T06:00:00.000Z
-  SNYK-PYTHON-PASSLIB-569603:
-    - '*':
-        reason: >-
-          Fix is created but not yet published
-        expires: 2020-12-01T06:00:00.000Z
+        expires: 2021-03-01T06:00:00.000Z
   SNYK-PYTHON-WEBOB-40490:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with webob > 1.0.8). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
-        expires: 2020-12-01T06:00:00.000Z
+        expires: 2021-03-01T06:00:00.000Z
   SNYK-PYTHON-PYYAML-590151:
     - '*':
         reason: >-
@@ -83,12 +78,12 @@ ignore:
           Vulnerable code functions are not utilized in CKAN code base (RSA decrypt functionality).
           No fix for M2Crypto (RSA module) at this time.
           Community believes this to be a medium severity vulnerability.
-        expires: 2020-02-03T06:00:00.000Z
+        expires: 2021-02-03T06:00:00.000Z
   SNYK-PYTHON-M2CRYPTO-1040426:
     - '*':
         reason: >-
           Vulnerable code functions are not utilized in CKAN code base (RSA decrypt functionality).
           No fix for M2Crypto (RSA module) at this time.
           Community believes this to be a medium severity vulnerability.
-        expires: 2020-02-03T06:00:00.000Z
+        expires: 2021-02-03T06:00:00.000Z
 patch: {}
