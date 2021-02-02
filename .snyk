@@ -6,28 +6,28 @@ ignore:
     - '*':
         reason: >-
           No remediation available yet; Not affecting us since the storage is not accessible to any other client
-        expires: 2021-01-10T06:00:00.000Z
+        expires: 2021-02-10T06:00:00.000Z
   SNYK-PYTHON-SQLALCHEMY-173678:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with SQLALCHEMY > 2.7.x). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Reviewed group_by and order_by
           usage manually, all user input sanitized.
-        expires: 2020-12-23T06:00:00.000Z
+        expires: 2021-02-23T06:00:00.000Z
   SNYK-PYTHON-SQLALCHEMY-590109:
   - '*':
       reason: >-
         No remediation path available for CKAN2.3 (not compatible with SQLALCHEMY > 2.7.x). Need to resolve moving to
         CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Reviewed group_by and order_by
         usage manually, all user input sanitized.
-      expires: 2020-12-23T06:00:00.000Z
+      expires: 2021-02-23T06:00:00.000Z
   SNYK-PYTHON-JINJA2-455616:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with Jinja > 2.6.0). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). Forms for data.gov only
           accessible to government users, risk is acceptable.
-        expires: 2020-12-23T06:00:00.000Z
+        expires: 2021-02-23T06:00:00.000Z
   SNYK-PYTHON-JINJA2-40028:
     - '*':
         reason: >-
@@ -48,12 +48,6 @@ ignore:
           No remediation path available for CKAN2.3 (not compatible with webob > 1.0.8). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298)
         expires: 2021-03-01T06:00:00.000Z
-  SNYK-PYTHON-PYYAML-590151:
-    - '*':
-        reason: >-
-          There is no fix for PyYaml at this time. Currently, all uses for pyyaml call the safe_load or 
-          safe_load_all functions.
-        expires: 2020-12-23T06:00:00.000Z
   SNYK-PYTHON-PIP-609855:
     - '*':
         reason: >-
@@ -64,26 +58,12 @@ ignore:
         reason: >-
           No remediation path available, and eval function is not used. Upstream uses pysolr, which will resolve 
           the issue.
-        expires: 2020-12-23T06:00:00.000Z
+        expires: 2021-02-23T06:00:00.000Z
   SNYK-PYTHON-URLLIB3-1014645:
     - '*':
         reason: >-
           No remediation path available for CKAN2.3 (not compatible with urllib3 > 1.24). Need to resolve moving to
           CKAN2.8 for catalog (https://github.com/GSA/datagov-ckan-multi/issues/298). `method` parameter is not
           utilized for any user input value, risk is acceptable.
-        expires: 2020-12-23T06:00:00.000Z
-  SNYK-PYTHON-RSA-1038401:
-    - '*':
-        reason: >-
-          Vulnerable code functions are not utilized in CKAN code base (RSA decrypt functionality).
-          No fix for M2Crypto (RSA module) at this time.
-          Community believes this to be a medium severity vulnerability.
-        expires: 2021-02-03T06:00:00.000Z
-  SNYK-PYTHON-M2CRYPTO-1040426:
-    - '*':
-        reason: >-
-          Vulnerable code functions are not utilized in CKAN code base (RSA decrypt functionality).
-          No fix for M2Crypto (RSA module) at this time.
-          Community believes this to be a medium severity vulnerability.
-        expires: 2021-02-03T06:00:00.000Z
+        expires: 2021-02-23T06:00:00.000Z
 patch: {}
