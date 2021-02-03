@@ -26,8 +26,6 @@ workflows:
     jobs:
       - build
       - deploy-sandbox:
-          requires:
-            - build
           filters:
             branches:
-              only: master
+              only: adborden/ci-test
