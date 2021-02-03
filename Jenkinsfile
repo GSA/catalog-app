@@ -12,11 +12,11 @@ pipeline {
       }
       stages {
         stage('deploy:sandbox') {
-          when { anyOf { branch 'master' } }
+          when { anyOf { branch 'adborden/ci-test' } }
           steps {
             ansiColor('xterm') {
               echo 'Deploying with Ansible'
-              copyArtifacts parameters: "branch_name=master", projectName: 'adborden-deploy-ci-platform', selector: lastSuccessful(), target: 'deploy'
+              copyArtifacts parameters: "branch_name=bugfix/jenkins-branch", projectName: 'adborden-deploy-ci-platform', selector: lastSuccessful(), target: 'deploy'
               dir('deploy') {
                 sh 'bin/jenkins-deploy deploy sandbox catalog.yml --limit v1'
               }
