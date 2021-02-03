@@ -1,20 +1,49 @@
 pipeline {
   agent any
   environment {
-    INVENTORY = 'inventories/sandbox'
     PLAYBOOK = 'catalog.yml'
   }
   stages {
-    stage('deploy') {
-      when { anyOf { branch 'master' } }
+    stage('workflow:sandbox') {
+      when { anyOf { environment name: 'DATAGOV_WORKFLOW', value: 'sandbox' } }
       environment {
         ANSIBLE_VAULT_FILE = credentials('ansible-vault-secret')
         SSH_KEY_FILE = credentials('datagov-sandbox')
       }
-      steps {
-        ansiColor('xterm') {
-          echo 'Deploying with Ansible'
-          sh 'docker run --rm -v $SSH_KEY_FILE:$SSH_KEY_FILE -v $ANSIBLE_VAULT_FILE:$ANSIBLE_VAULT_FILE -u $(id -u) datagov/datagov-deploy:latest pipenv run ansible-playbook --key-file=$SSH_KEY_FILE --vault-password-file=$ANSIBLE_VAULT_FILE --inventory $INVENTORY $PLAYBOOK --limit v1'
+      stages {
+        stage('deploy:sandbox') {
+          when { anyOf { branch 'master' } }
+          steps {
+            ansiColor('xterm') {
+              echo 'Deploying with Ansible'
+              copyArtifacts parameters: "branch_name=master", projectName: 'adborden-deploy-ci-platform', selector: lastSuccessful(), target: 'deploy'
+              dir('deploy') {
+                sh 'bin/jenkins-deploy deploy sandbox catalog.yml --limit v1'
+              }
+            }
+          }
+        }
+      }
+    }
+    stage('workflow:production') {
+      when { anyOf { environment name: 'DATAGOV_WORKFLOW', value: 'production' } }
+      environment {
+        ANSIBLE_VAULT_FILE = credentials('ansible-vault-secret')
+        SSH_KEY_FILE = credentials('datagov-sandbox')
+      }
+      stages {
+        stage('deploy') {
+          when { anyOf { branch 'master' } }
+          steps {
+            ansiColor('xterm') {
+              echo 'Deploying with Ansible'
+              copyArtifacts parameters: 'branch_name=master', projectName: 'adborden-deploy-ci-platform', selector: lastSuccessful(), target: 'deploy'
+              dir('deploy') {
+                sh 'bin/jenkins-deploy deploy staging catalog.yml --limit v1'
+                sh 'bin/jenkins-deploy deploy production catalog.yml --limit v1'
+              }
+            }
+          }
         }
       }
     }

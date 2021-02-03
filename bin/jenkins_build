@@ -33,25 +33,11 @@ function jenkins_curl () {
   curl --silent --fail --user "$JENKINS_USER:$JENKINS_API_TOKEN" "$@" "${JENKINS_URL}${url}"
 }
 
-function crumb_header () {
-  # Get a CRSF token (crumb) from Jenkins
-  local crumb_response crumb_header crumb_value
-
-  # Create a temp file for processing the response
-  crumb_response=$(mktemp)
-
-  jenkins_curl /crumbIssuer/api/json > "$crumb_response"
-  crumb_header=$(jq --raw-output .crumbRequestField "$crumb_response")
-  crumb_value=$(jq --raw-output .crumb "$crumb_response")
-  rm -rf "$crumb_response"
-  echo -n "$crumb_header:$crumb_value"
-}
-
 function build_job () {
   local job_name
   job_name=$1
 
-  jenkins_curl "/job/${job_name}/build?token=$JENKINS_JOB_TOKEN" -X POST -H "$(crumb_header)"
+  jenkins_curl "/job/${job_name}/build?token=$JENKINS_JOB_TOKEN" -X POST
   echo "$job_name" started.
 }
 
