@@ -51,7 +51,6 @@ pipeline {
   }
   post {
     always {
-      step([$class: 'GitHubIssueNotifier', issueAppend: true])
       cleanWs()
     }
   }
