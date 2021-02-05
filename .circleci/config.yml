@@ -17,7 +17,7 @@ jobs:
       - checkout
       - deploy:
           name: jenkins
-          command: bin/jenkins_build deploy-ci-app-catalog
+          command: bin/jenkins_build deploy-ci-app-catalog-fcs
 
 
 workflows:
@@ -30,4 +30,4 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: fcs
