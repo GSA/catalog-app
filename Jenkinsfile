@@ -16,7 +16,7 @@ pipeline {
           steps {
             ansiColor('xterm') {
               echo 'Deploying with Ansible'
-              copyArtifacts parameters: "branch_name=feature/jenkins-artifact", projectName: 'deploy-ci-platform', selector: lastSuccessful()
+              copyArtifacts parameters: "branch_name=feature/jenkins-artifact", projectName: 'adb-deploy-ci-platform', selector: lastSuccessful()
               unzip zipFile: 'datagov-deploy.zip', dir: 'deploy', quiet: true
               dir('deploy') {
                 sh 'bin/jenkins-deploy deploy sandbox catalog.yml --limit v1'
