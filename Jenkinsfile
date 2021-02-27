@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  environment {
-    PLAYBOOK = 'catalog.yml'
-  }
   stages {
     stage('workflow:sandbox') {
       when { anyOf { environment name: 'DATAGOV_WORKFLOW', value: 'sandbox' } }
@@ -50,7 +47,7 @@ pipeline {
         }
         stage('deploy:staging') {
           environment {
-            SSH_KEY_FILE = credentials('datagov-stage')
+            SSH_KEY_FILE = credentials('datagov-prod-ssh')
           }
           steps {
             ansiColor('xterm') {
@@ -62,7 +59,7 @@ pipeline {
         }
         stage('deploy:production') {
           environment {
-            SSH_KEY_FILE = credentials('datagov-prod')
+            SSH_KEY_FILE = credentials('datagov-prod-ssh')
           }
           steps {
             ansiColor('xterm') {
