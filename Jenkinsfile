@@ -2,18 +2,24 @@ pipeline {
   agent any
   stages {
     stage('workflow:sandbox') {
-      when { anyOf { environment name: 'DATAGOV_WORKFLOW', value: 'sandbox' } }
+      when {
+        anyOf {
+          environment name: 'DATAGOV_WORKFLOW', value: 'sandbox'
+          anyOf {
+            branch 'master'
+          }
+        }
+      }
       environment {
         ANSIBLE_VAULT_FILE = credentials('ansible-vault-secret')
         SSH_KEY_FILE = credentials('datagov-sandbox')
       }
       stages {
         stage('deploy:sandbox') {
-          when { anyOf { branch 'master' } }
           steps {
             ansiColor('xterm') {
               echo 'Deploying with Ansible'
-              copyArtifacts parameters: "branch_name=develop", projectName: 'deploy-ci-platform', selector: lastSuccessful()
+              copyArtifacts projectName: 'deploy-ci-platform-mb/develop', selector: lastSuccessful()
               sh 'mkdir deploy && tar xzf datagov-deploy.tar.gz -C deploy'
               dir('deploy') {
                 sh 'bin/jenkins-deploy init'
@@ -25,9 +31,12 @@ pipeline {
       }
     }
     stage('workflow:production') {
-      when { allOf {
+      when {
+        anyOf {
           environment name: 'DATAGOV_WORKFLOW', value: 'production'
-          branch 'master'
+          anyOf {
+            branch 'master'
+          }
         }
       }
       environment {
@@ -37,7 +46,7 @@ pipeline {
         stage('deploy:init') {
           steps {
             ansiColor('xterm') {
-              copyArtifacts parameters: 'branch_name=master', projectName: 'deploy-ci-platform', selector: lastSuccessful()
+              copyArtifacts projectName: 'deploy-ci-platform-mb/master', selector: lastSuccessful()
               sh 'mkdir deploy && tar xzf datagov-deploy.tar.gz -C deploy'
               dir('deploy') {
                 sh 'bin/jenkins-deploy init'
@@ -74,7 +83,7 @@ pipeline {
   }
   post {
     always {
-      step([$class: 'GitHubIssueNotifier', issueAppend: true])
+      step([$class: 'GitHubIssueNotifier', issueAppend: true, issueRepo: 'http://github.com/GSA/datagov-deploy.git'])
       cleanWs()
     }
   }
