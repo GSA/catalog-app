@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('workflow:sandbox') {
       when {
-        anyOf {
+        allOf {
           environment name: 'DATAGOV_WORKFLOW', value: 'sandbox'
           anyOf {
             branch 'master'
