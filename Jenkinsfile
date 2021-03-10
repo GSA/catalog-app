@@ -6,7 +6,7 @@ pipeline {
         allOf {
           environment name: 'DATAGOV_WORKFLOW', value: 'sandbox'
           anyOf {
-            branch 'master'
+            branch 'fcs'
           }
         }
       }
@@ -35,7 +35,7 @@ pipeline {
         allOf {
           environment name: 'DATAGOV_WORKFLOW', value: 'production'
           anyOf {
-            branch 'master'
+            branch 'fcs'
           }
         }
       }
