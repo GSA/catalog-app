@@ -32,7 +32,7 @@ pipeline {
     }
     stage('workflow:production') {
       when {
-        anyOf {
+        allOf {
           environment name: 'DATAGOV_WORKFLOW', value: 'production'
           anyOf {
             branch 'master'
