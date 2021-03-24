@@ -106,3 +106,4 @@ pytz
 rsa>=4.1
 
 pip>=19.2 # not directly required, pinned by Snyk to avoid a vulnerability
+pygments>=2.7.4 # not directly required, pinned by Snyk to avoid a vulnerability
