@@ -57,7 +57,7 @@ progressbar==2.3
 psycopg2==2.4.5
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-Pygments==2.5.2
+Pygments==2.7.4
 Pylons==0.9.7
 pyparsing==1.5.6
 -e git+https://github.com/GSA/pysaml2.git@8b605c824ff1d042e9040a9971c28f369197cac2#egg=pysaml2
