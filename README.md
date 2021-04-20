@@ -1,3 +1,5 @@
+_This repository is no longer used, see https://github.com/GSA/catalog.data.gov._
+
 [![CircleCI](https://circleci.com/gh/GSA/catalog-app.svg?style=svg)](https://circleci.com/gh/GSA/catalog-app)
 
 
